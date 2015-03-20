@@ -34,4 +34,42 @@ defmodule ResponseTest do
     assert response.status == 200
     assert response.body["cool"] == "a cool response"
   end
+
+  # =====================
+  # extract_identifier_from_location_header tests
+
+  test "extract_identifier_from_location_header - absolute path" do
+    api_response = {:ok, %{status_code: 201, headers: [{'location', 'https://cloudos-mgr.host.co/messsaging/brokers/1'}], body: ""}}
+    response = Response.process(fn -> api_response end)
+
+    assert Response.extract_identifier_from_location_header(response) == "1"
+  end
+
+  test "extract_identifier_from_location_header - relative path" do
+    api_response = {:ok, %{status_code: 201, headers: [{'location', '/messsaging/brokers/1'}], body: ""}}
+    response = Response.process(fn -> api_response end)
+
+    assert Response.extract_identifier_from_location_header(response) == "1"
+  end  
+
+  test "extract_identifier_from_location_header - relative path with ending slash" do
+    api_response = {:ok, %{status_code: 201, headers: [{'location', '/messsaging/brokers/1/'}], body: ""}}
+    response = Response.process(fn -> api_response end)
+
+    assert Response.extract_identifier_from_location_header(response) == "1"
+  end
+
+  test "extract_identifier_from_location_header - no location header" do
+    api_response = {:ok, %{status_code: 201, headers: [{'cont', '[]'}], body: ""}}
+    response = Response.process(fn -> api_response end)
+
+    assert Response.extract_identifier_from_location_header(response) == ""
+  end
+
+  test "extract_identifier_from_location_header - empty location header" do
+    api_response = {:ok, %{status_code: 201, headers: [{'location', ''}], body: ""}}
+    response = Response.process(fn -> api_response end)
+
+    assert Response.extract_identifier_from_location_header(response) == ""
+  end  
 end

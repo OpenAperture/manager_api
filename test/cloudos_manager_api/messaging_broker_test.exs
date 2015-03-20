@@ -2,6 +2,8 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
+  alias CloudOS.ManagerAPI.Response
+
   setup do
     api = CloudOS.ManagerAPI.create!(%{url: "https://cloudos-mgr.host.co", client_id: "id", client_secret: "secret"})
 
@@ -9,6 +11,9 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
       api: api
     ]}
   end    
+
+  # =============================
+  # list tests
 
   test "supervised list - success", context do
     use_cassette "list_brokers", custom: true do
@@ -69,6 +74,9 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
     end
   end
 
+  # =============================
+  # list! tests
+
   test "list! - success", context do
     use_cassette "list_brokers", custom: true do
       brokers = CloudOS.ManagerAPI.MessagingBroker.list!(context[:api])
@@ -96,5 +104,112 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
     end
   end
 
-  
+  # =============================
+  # get_broker tests
+
+  test "supervised get_broker - success", context do
+    use_cassette "get_broker", custom: true do
+      response = CloudOS.ManagerAPI.MessagingBroker.get_broker(1)
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 200
+
+      broker = response.body
+      assert broker != nil
+      assert broker["id"] == 1 
+      assert broker["name"] == "test broker"
+    end
+  end
+
+  test "get_broker - success", context do
+    use_cassette "get_broker", custom: true do
+      response = CloudOS.ManagerAPI.MessagingBroker.get_broker(context[:api], 1)
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 200
+
+      broker = response.body
+      assert broker != nil
+      assert broker["id"] == 1 
+      assert broker["name"] == "test broker"
+    end
+  end
+
+  test "get_broker - failure", context do
+    use_cassette "get_broker_failure", custom: true do
+      response = CloudOS.ManagerAPI.MessagingBroker.get_broker(context[:api], 1)
+      assert response != nil
+      assert response.success? == false
+      assert response.status == 401
+    end
+  end
+
+  # =============================
+  # get_broker! tests
+
+  test "get_broker! - success", context do
+    use_cassette "get_broker", custom: true do
+      broker = CloudOS.ManagerAPI.MessagingBroker.get_broker!(context[:api], 1)
+      assert broker != nil
+      assert broker["id"] == 1 
+      assert broker["name"] == "test broker"
+    end
+  end
+
+  test "get_broker! - failure", context do
+    use_cassette "get_broker_failure", custom: true do
+      broker = CloudOS.ManagerAPI.MessagingBroker.get_broker!(context[:api], 1)
+      assert broker == nil
+    end
+  end
+
+  # =============================
+  # create_broker tests
+
+  test "supervised create_broker - success", context do
+    use_cassette "create_broker", custom: true do
+      response = CloudOS.ManagerAPI.MessagingBroker.create_broker(%{name: "test broker"})
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 201
+      assert Response.extract_identifier_from_location_header(response) == "1"
+    end
+  end
+
+  test "create_broker - success", context do
+    use_cassette "create_broker", custom: true do
+      response = CloudOS.ManagerAPI.MessagingBroker.create_broker(context[:api], %{name: "test broker"})
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 201
+      assert Response.extract_identifier_from_location_header(response) == "1"
+    end
+  end
+
+  test "create_broker - failure", context do
+    use_cassette "create_broker_failure", custom: true do
+      response = CloudOS.ManagerAPI.MessagingBroker.create_broker(context[:api], %{name: "test broker"})
+      assert response != nil
+      assert response.success? == false
+      assert response.status == 400
+    end
+  end
+
+  # =============================
+  # create_broker! tests
+
+  test "create_broker! - success", context do
+    use_cassette "create_broker", custom: true do
+      broker_id = CloudOS.ManagerAPI.MessagingBroker.create_broker!(context[:api], %{name: "test broker"})
+      assert broker_id != nil
+      assert broker_id == "1"
+    end
+  end
+
+  test "create_broker! - failure", context do
+    use_cassette "create_broker_failure", custom: true do
+      broker_id = CloudOS.ManagerAPI.MessagingBroker.create_broker!(context[:api], %{name: "test broker"})
+      assert broker_id == nil
+    end
+  end
 end
