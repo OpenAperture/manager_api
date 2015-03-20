@@ -95,4 +95,6 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
       assert brokers == nil
     end
   end
+
+  
 end

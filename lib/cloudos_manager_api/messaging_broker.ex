@@ -1,3 +1,8 @@
+#
+# == messaging_broker.ex
+#
+# This module contains the resources for managing MessagingBrokers
+#
 defmodule CloudOS.ManagerAPI.MessagingBroker do
   import CloudOS.ManagerAPI.Resource
 
