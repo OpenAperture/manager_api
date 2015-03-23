@@ -73,37 +73,94 @@ broker = CloudOS.ManagerAPI.MessagingBroker.get_broker!(api)
     * create_broker - returns a CloudOS.ManagerAPI.Response
     * create_broker! - returns an identifier of the new broker
 ```elixir
-broker = CloudOS.ManagerAPI.MessagingBroker.create_broker!(api, %{})
+broker_id = CloudOS.ManagerAPI.MessagingBroker.create_broker!(api, %{})
 ```
   * Update a Broker
     * update_broker - returns a CloudOS.ManagerAPI.Response
     * update_broker! - returns an identifier of the updated broker
 ```elixir
-broker = CloudOS.ManagerAPI.MessagingBroker.update_broker!(api, 1, %{})
+broker_id = CloudOS.ManagerAPI.MessagingBroker.update_broker!(api, 1, %{})
 ```
   * Delete a Broker
     * delete_broker - returns a CloudOS.ManagerAPI.Response
     * delete_broker! - returns a boolean
 ```elixir
-broker = CloudOS.ManagerAPI.MessagingBroker.delete_broker!(api, 1)
+CloudOS.ManagerAPI.MessagingBroker.delete_broker!(api, 1)
 ```
   * Create a BrokerConnection
     * create_broker_connection - returns a CloudOS.ManagerAPI.Response
-    * create_broker_connection! - returns an identifier of the broker connections
+    * create_broker_connection! - returns a boolean
 ```elixir
-broker = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection!(api, 1, %{})
+CloudOS.ManagerAPI.MessagingBroker.create_broker_connection!(api, 1, %{})
 ```
   * Get BrokerConnections
     * broker_connections - returns a CloudOS.ManagerAPI.Response
     * broker_connections! - returns a List of Maps, representing broker connections
 ```elixir
-broker = CloudOS.ManagerAPI.MessagingBroker.broker_connections!(api, 1)
+connections = CloudOS.ManagerAPI.MessagingBroker.broker_connections!(api, 1)
 ```
-  * Delete a BrokerConnection
+  * Delete BrokerConnections
     * delete_broker_connections - returns a CloudOS.ManagerAPI.Response
     * delete_broker_connections! - returns a boolean
 ```elixir
-broker = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections!(api, 1)
+CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections!(api, 1)
+```
+
+* CloudOS.ManagerAPI.MessagingExchange
+  * This module is used to interact with the MessagingExchange resource (/messaging/exchanges) and MessagingExchangeBrokers resource (/messaging/exchanges/:id/exchanges).
+  * Get All Exchanges
+    * list - returns a CloudOS.ManagerAPI.Response
+    * list! - returns a list of Maps, representing MessagingExchanges
+```elixir
+exchanges = CloudOS.ManagerAPI.MessagingExchange.list!(api)
+```
+  * Get Exchange
+    * get_exchange - returns a CloudOS.ManagerAPI.Response
+    * get_exchange! - returns a Map, representing MessagingExchange
+```elixir
+exchange = CloudOS.ManagerAPI.MessagingExchange.get_exchange!(api)
+```
+  * Create an Exchange
+    * create_exchange - returns a CloudOS.ManagerAPI.Response
+    * create_exchange! - returns an identifier of the new exchange
+```elixir
+exchange_id = CloudOS.ManagerAPI.MessagingExchange.create_exchange!(api, %{})
+```
+  * Update an Exchange
+    * update_exchange - returns a CloudOS.ManagerAPI.Response
+    * update_exchange! - returns an identifier of the updated exchange
+```elixir
+exchange_id = CloudOS.ManagerAPI.MessagingExchange.update_exchange!(api, 1, %{})
+```
+  * Delete an Exchange
+    * delete_exchange - returns a CloudOS.ManagerAPI.Response
+    * delete_exchange! - returns a boolean
+```elixir
+CloudOS.ManagerAPI.MessagingExchange.delete_exchange!(api, 1)
+```
+  * Create an ExchangeBroker
+    * create_exchange_brokers - returns a CloudOS.ManagerAPI.Response
+    * create_exchange_brokers! - returns boolean
+```elixir
+exchange = CloudOS.ManagerAPI.MessagingExchange.create_exchange_brokers!(api, 1, %{})
+```
+  * Get ExchangeBrokers
+    * exchange_brokers - returns a CloudOS.ManagerAPI.Response
+    * exchange_brokers! - returns a List of Maps, representing exchange brokers
+```elixir
+brokers = CloudOS.ManagerAPI.MessagingExchange.broker_connections!(api, 1)
+```
+  * Delete ExchangeBrokers
+    * delete_exchange_brokers - returns a CloudOS.ManagerAPI.Response
+    * delete_exchange_brokers! - returns a boolean
+```elixir
+CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers!(api, 1)
+```
+  * Get EtcdClusters associated with the MessagingExchange
+    * exchange_clusters - returns a CloudOS.ManagerAPI.Response
+    * exchange_clusters! - returns a List of Maps, representing etcd clusters
+```elixir
+clusters = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters!(api, 1)
 ```
 
 ## Building & Testing

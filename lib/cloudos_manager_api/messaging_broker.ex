@@ -319,6 +319,8 @@ defmodule CloudOS.ManagerAPI.MessagingBroker do
   ## Options
   The `api` option defines the CloudOS.ManagerAPI used for connection.
 
+  The `id` option defines the MessagingBroker id.
+
   The `queryparams` option defines the query parameters (optional).
 
   The `headers` option defines the header values (optional).
@@ -339,6 +341,8 @@ defmodule CloudOS.ManagerAPI.MessagingBroker do
 
   ## Options
   The `api` option defines the CloudOS.ManagerAPI used for connection.
+
+  The `id` option defines the MessagingBroker id.
 
   The `queryparams` option defines the query parameters (optional).
 
