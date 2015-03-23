@@ -56,13 +56,54 @@ api = CloudOS.ManagerAPI.create!(%{url: "https://cloudos-mgr.psft.co", client_id
 The following API modules are available:
 
 * CloudOS.ManagerAPI.MessagingBroker
-  * This module is used to interact with the MessagingBrokers Fleet resource (/messaging/brokers).
+  * This module is used to interact with the MessagingBroker resource (/messaging/brokers) and MessagingBrokerConnection resource (/messaging/brokers/:id/connections).
   * Get All Brokers
   	* list - returns a CloudOS.ManagerAPI.Response
   	* list! - returns a list of Maps, representing MessagingBrokers
-  	
 ```elixir
 brokers = CloudOS.ManagerAPI.MessagingBroker.list!(api)
+```
+  * Get Broker
+    * get_broker - returns a CloudOS.ManagerAPI.Response
+    * get_broker! - returns a Map, representing MessagingBroker
+```elixir
+broker = CloudOS.ManagerAPI.MessagingBroker.get_broker!(api)
+```
+  * Create a Broker
+    * create_broker - returns a CloudOS.ManagerAPI.Response
+    * create_broker! - returns an identifier of the new broker
+```elixir
+broker = CloudOS.ManagerAPI.MessagingBroker.create_broker!(api, %{})
+```
+  * Update a Broker
+    * update_broker - returns a CloudOS.ManagerAPI.Response
+    * update_broker! - returns an identifier of the updated broker
+```elixir
+broker = CloudOS.ManagerAPI.MessagingBroker.update_broker!(api, 1, %{})
+```
+  * Delete a Broker
+    * delete_broker - returns a CloudOS.ManagerAPI.Response
+    * delete_broker! - returns a boolean
+```elixir
+broker = CloudOS.ManagerAPI.MessagingBroker.delete_broker!(api, 1)
+```
+  * Create a BrokerConnection
+    * create_broker_connection - returns a CloudOS.ManagerAPI.Response
+    * create_broker_connection! - returns an identifier of the broker connections
+```elixir
+broker = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection!(api, 1, %{})
+```
+  * Get BrokerConnections
+    * broker_connections - returns a CloudOS.ManagerAPI.Response
+    * broker_connections! - returns a List of Maps, representing broker connections
+```elixir
+broker = CloudOS.ManagerAPI.MessagingBroker.broker_connections!(api, 1)
+```
+  * Delete a BrokerConnection
+    * delete_broker_connections - returns a CloudOS.ManagerAPI.Response
+    * delete_broker_connections! - returns a boolean
+```elixir
+broker = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections!(api, 1)
 ```
 
 ## Building & Testing

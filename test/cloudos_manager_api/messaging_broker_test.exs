@@ -451,8 +451,6 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
     end
   end
 
-
-
   # =============================
   # delete_broker_connections tests
 
