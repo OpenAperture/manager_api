@@ -64,27 +64,41 @@ defmodule CloudOS.ManagerAPI.Response do
   """ 
   @spec extract_identifier_from_location_header(term) :: String.t()
   def extract_identifier_from_location_header(response) do
+    case extract_location_header(response) do
+      nil -> ""
+      "" -> ""
+      location_header ->
+        url = Regex.replace(~r/\/$/, location_header, "")
+        uri = URI.parse(url)
+        uri_path = String.split(uri.path, "/")
+        List.last(uri_path)
+    end
+  end
+
+  @doc """
+  Method to extract an the Location header of a response
+
+  ## Option Values
+
+  The `response` option defines the CloudOS.ManagerAPI.Response
+
+  ## Return values
+
+  String
+  """ 
+  @spec extract_location_header(term) :: String.t()
+  def extract_location_header(response) do
     if response.headers == nil || length(response.headers) == 0 do
       ""
     else
-      location_header = Enum.reduce response.headers, nil, fn({header, value}, location_header) ->
+      Enum.reduce response.headers, nil, fn({header, value}, location_header) ->
         if header != nil && String.downcase(header) == "location" do
           value
         else
           location_header
         end
       end
-
-      case location_header do
-        nil -> ""
-        "" -> ""
-        location_header ->
-          url = Regex.replace(~r/\/$/, location_header, "")
-          uri = URI.parse(url)
-          uri_path = String.split(uri.path, "/")
-          List.last(uri_path)
-      end
-    end
+    end    
   end
 
   @doc false
