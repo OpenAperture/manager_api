@@ -163,6 +163,63 @@ CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers!(api, 1)
 clusters = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters!(api, 1)
 ```
 
+* CloudOS.ManagerAPI.EtcdCluster
+  * This module is used to interact with the EtcdCluster resource (/messaging/clusters).
+  * Get All Clusters
+    * list - returns a CloudOS.ManagerAPI.Response
+    * list! - returns a list of Maps, representing EtcdClusters
+```elixir
+clusters = CloudOS.ManagerAPI.EtcdCluster.list!(api)
+```
+  * Get Cluster
+    * get_cluster - returns a CloudOS.ManagerAPI.Response
+    * get_cluster! - returns a Map, representing EtcdCluster
+```elixir
+cluster = CloudOS.ManagerAPI.EtcdCluster.get_cluster!(api)
+```
+  * Create a Cluster
+    * create_cluster - returns a CloudOS.ManagerAPI.Response
+    * create_cluster! - returns the etcd_token of the new cluster
+```elixir
+token = CloudOS.ManagerAPI.EtcdCluster.create_cluster!(api, %{})
+```
+  * Delete a Cluster
+    * delete_cluster - returns a CloudOS.ManagerAPI.Response
+    * delete_cluster! - returns a boolean
+```elixir
+CloudOS.ManagerAPI.EtcdCluster.delete_cluster!(api, 1)
+```
+  * Get Cluster Products
+    * get_cluster_products - returns a CloudOS.ManagerAPI.Response
+    * get_cluster_products! - returns a List of Maps, each representing a product
+```elixir
+products = CloudOS.ManagerAPI.EtcdCluster.get_cluster_products!(api)
+```
+  * Get Cluster Machines
+    * get_cluster_machines - returns a CloudOS.ManagerAPI.Response
+    * get_cluster_machines! - returns a List of Maps, each representing a machine
+```elixir
+machines = CloudOS.ManagerAPI.EtcdCluster.get_cluster_machines!(api)
+```
+  * Get Cluster Units
+    * get_cluster_units - returns a CloudOS.ManagerAPI.Response
+    * get_cluster_units! - returns a List of Maps, each representing a unit
+```elixir
+units = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units!(api)
+```
+  * Get Cluster Units State
+    * get_cluster_units - returns a CloudOS.ManagerAPI.Response
+    * get_cluster_units! - returns a List of Maps, each representing a unit state
+```elixir
+states = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units!(api)
+```
+  * Get Cluster Unit Log
+    * get_cluster_unit_log - returns a CloudOS.ManagerAPI.Response
+    * get_cluster_unit_log! - returns the text of the log
+```elixir
+contents = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log!(api, "123abc", 1, "testUnit")
+```
+
 ## Building & Testing
 
 To build:

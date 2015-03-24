@@ -3,6 +3,8 @@
 #
 # This module contains the ManagerAPI response struct and reusable methods for processing responses from the cloudos_manager.
 #
+require Logger
+
 defmodule CloudOS.ManagerAPI.Response do
   defstruct body: nil, success?: nil, raw_body: nil, status: nil, headers: nil
 
@@ -114,17 +116,36 @@ defmodule CloudOS.ManagerAPI.Response do
   #
   @spec process_response({:ok, term}) :: term
   defp process_response({:ok, response}) do
-    body = response[:body]
-      |> String.strip
-      |> process_body
-
     %__MODULE__{
-      body: body,
+      body: parse_body(response),
       success?: response[:status_code] in 200..299,
       status: response[:status_code],
       headers: process_headers(response[:headers]),
       raw_body: response[:body]
     }
+  end
+
+  @doc false
+  # Method to parse out a JSON body for a CloudOS.ManagerAPI.Response
+  #
+  ## Options
+  #
+  # The `response` option represents the httpc response
+  #
+  ## Return Value
+  #
+  # String
+  #
+  @spec parse_body(term) :: term
+  defp parse_body(response) do
+    try do
+      response[:body]
+        |> String.strip
+        |> process_body
+    rescue e in _ ->
+      Logger.debug "[CloudOS.ManagerAPI] An error occurred processing response body:  #{inspect e}"
+      nil
+    end    
   end
 
   @doc false
