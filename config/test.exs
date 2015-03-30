@@ -20,3 +20,5 @@ config :cloudos_manager_api,
 	oauth_login_url: "https://auth.host.co",
 	oauth_client_id: "id",
 	oauth_client_secret: "secret"
+
+config :logger, level: :warn

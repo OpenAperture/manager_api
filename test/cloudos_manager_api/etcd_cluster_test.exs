@@ -27,7 +27,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # list tests
 
-  test "supervised list - success", context do
+  test "supervised list - success" do
     use_cassette "list_clusters", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.list
       assert response != nil
@@ -119,7 +119,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # get_cluster tests
 
-  test "supervised get_cluster - success", context do
+  test "supervised get_cluster - success" do
     use_cassette "get_cluster", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.get_cluster("123abc")
       assert response != nil
@@ -175,7 +175,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # create_cluster tests
 
-  test "supervised create_cluster - success", context do
+  test "supervised create_cluster - success" do
     use_cassette "create_cluster", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.create_cluster(%{etcd_token: "123abc"})
       assert response != nil
@@ -225,7 +225,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # delete_cluster tests
 
-  test "supervised delete_cluster - success", context do
+  test "supervised delete_cluster - success" do
     use_cassette "delete_cluster", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.delete_cluster("123abc")
       assert response != nil
@@ -273,7 +273,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # get_cluster_products tests
 
-  test "supervised get_cluster_products - success", context do
+  test "supervised get_cluster_products - success" do
     use_cassette "get_cluster_products", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_products("123abc")
       assert response != nil
@@ -365,7 +365,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # get_cluster_machines tests
 
-  test "supervised get_cluster_machines - success", context do
+  test "supervised get_cluster_machines - success" do
     use_cassette "get_cluster_machines", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_machines("123abc")
       assert response != nil
@@ -457,7 +457,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # get_cluster_units tests
 
-  test "supervised get_cluster_units - success", context do
+  test "supervised get_cluster_units - success" do
     use_cassette "get_cluster_units", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units("123abc")
       assert response != nil
@@ -549,7 +549,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # get_cluster_units_state tests
 
-  test "supervised get_cluster_units_state - success", context do
+  test "supervised get_cluster_units_state - success" do
     use_cassette "get_cluster_units_state", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units_state("123abc")
       assert response != nil
@@ -641,7 +641,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   # =============================
   # get_cluster_unit_log tests
 
-  test "supervised get_cluster_unit_log - success", context do
+  test "supervised get_cluster_unit_log - success" do
     use_cassette "get_cluster_unit_log", custom: true do
       response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log("123abc", 1, "testUnit")
       assert response != nil

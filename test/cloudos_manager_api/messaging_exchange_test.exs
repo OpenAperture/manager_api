@@ -27,7 +27,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # list tests
 
-  test "supervised list - success", context do
+  test "supervised list - success" do
     use_cassette "list_exchanges", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.list
       assert response != nil
@@ -119,7 +119,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # get_exchange tests
 
-  test "supervised get_exchange - success", context do
+  test "supervised get_exchange - success" do
     use_cassette "get_exchange", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.get_exchange(1)
       assert response != nil
@@ -178,7 +178,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # create_exchange tests
 
-  test "supervised create_exchange - success", context do
+  test "supervised create_exchange - success" do
     use_cassette "create_exchange", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.create_exchange(%{name: "test exchange"})
       assert response != nil
@@ -228,7 +228,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # update_exchange tests
 
-  test "supervised update_exchange - success", context do
+  test "supervised update_exchange - success" do
     use_cassette "update_exchange", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.update_exchange(1, %{name: "test exchange"})
       assert response != nil
@@ -278,7 +278,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # delete_exchange tests
 
-  test "supervised delete_exchange - success", context do
+  test "supervised delete_exchange - success" do
     use_cassette "delete_exchange", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange(1)
       assert response != nil
@@ -326,7 +326,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
  # =============================
   # create_broker_connection tests
 
-  test "supervised create_exchange_brokers - success", context do
+  test "supervised create_exchange_brokers - success" do
     use_cassette "create_exchange_brokers", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.create_exchange_brokers(1, %{name: "test broker"})
       assert response != nil
@@ -374,7 +374,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # exchange_brokers tests
 
-  test "supervised exchange_brokers - success", context do
+  test "supervised exchange_brokers - success" do
     use_cassette "exchange_brokers", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.exchange_brokers(1)
       assert response != nil
@@ -466,7 +466,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # delete_exchange_brokers tests
 
-  test "supervised delete_exchange_brokers - success", context do
+  test "supervised delete_exchange_brokers - success" do
     use_cassette "delete_exchange_brokers", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers(1)
       assert response != nil
@@ -514,7 +514,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   # =============================
   # exchange_clusters tests
 
-  test "supervised exchange_clusters - success", context do
+  test "supervised exchange_clusters - success" do
     use_cassette "exchange_clusters", custom: true do
       response = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters(1)
       assert response != nil

@@ -118,19 +118,19 @@ defmodule CloudOS.ManagerAPI.Resource do
       |> Response.from_httpc_response
   end
 
-  @doc """
-  Method to generate an absolute url from a relative
+  # @doc """
+  # Method to generate an absolute url from a relative
 
-  ## Option Values
+  # ## Option Values
 
-  The `api` option defines the ManagerAPI pid
+  # The `api` option defines the ManagerAPI pid
 
-  The `path` option represents the relative url path
+  # The `path` option represents the relative url path
 
-  ## Return values
+  # ## Return values
 
-  Absolute URL
-  """ 
+  # Absolute URL
+  # """ 
   @spec get_url(pid, String.t()) :: String.t()
   defp get_url(api, path) do
   	opts = ManagerAPI.get_options(api)

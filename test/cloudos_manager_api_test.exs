@@ -2,7 +2,7 @@ defmodule CloudOS.ManagerAPITest do
   use ExUnit.Case
 
   test "start - test starting with a supervisor" do
-    result = Application.ensure_started(:cloudos_manager_api)
+    Application.ensure_started(:cloudos_manager_api)
     api = CloudOS.ManagerAPI.Supervisor.get_api
     assert api != nil
 
