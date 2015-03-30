@@ -30,15 +30,19 @@ def application do
 end
 ```
 
-* URL
+* Manager URL
   * Type: String
   * Description: The url of the CloudOS Manager
   * Environment Configuration (.exs): :cloudos_manager_api, :manager_url
-* Client ID
+* OAuth Login URL
+  * Type: String
+  * Description: The login url of the OAuth2 server
+  * Environment Configuration (.exs): :cloudos_manager_api, :oauth_login_url
+* OAuth Client ID
   * Type: String
   * Description: The OAuth2 client id to be used for authenticating with the CloudOS Manager
   * Environment Configuration (.exs): :cloudos_manager_api, :oauth_client_id
-* Client Secret
+* OAuth Client Secret
   * Type: String
   * Description: The OAuth2 client secret to be used for authenticating with the CloudOS Manager
   * Environment Configuration (.exs): :cloudos_manager_api, :oauth_client_secret
