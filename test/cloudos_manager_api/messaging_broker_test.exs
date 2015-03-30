@@ -4,8 +4,20 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   alias CloudOS.ManagerAPI.Response
 
+  setup_all _context do
+    :meck.new(CloudosAuth.Client, [:passthrough])
+    :meck.expect(CloudosAuth.Client, :get_token, fn _, _, _ -> "abc" end)
+
+    on_exit _context, fn ->
+      try do
+        :meck.unload CloudosAuth.Client
+      rescue _ -> IO.puts "" end
+    end    
+    :ok
+  end
+
   setup do
-    api = CloudOS.ManagerAPI.create!(%{url: "https://cloudos-mgr.host.co", client_id: "id", client_secret: "secret"})
+    api = CloudOS.ManagerAPI.create!(%{manager_url: "https://cloudos-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
 
     {:ok, [
       api: api
@@ -15,7 +27,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # list tests
 
-  test "supervised list - success", context do
+  test "supervised list - success" do
     use_cassette "list_brokers", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.list
       assert response != nil
@@ -107,7 +119,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # get_broker tests
 
-  test "supervised get_broker - success", context do
+  test "supervised get_broker - success" do
     use_cassette "get_broker", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.get_broker(1)
       assert response != nil
@@ -166,7 +178,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # create_broker tests
 
-  test "supervised create_broker - success", context do
+  test "supervised create_broker - success" do
     use_cassette "create_broker", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.create_broker(%{name: "test broker"})
       assert response != nil
@@ -216,7 +228,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # update_broker tests
 
-  test "supervised update_broker - success", context do
+  test "supervised update_broker - success" do
     use_cassette "update_broker", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.update_broker(1, %{name: "test broker"})
       assert response != nil
@@ -266,7 +278,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # delete_broker tests
 
-  test "supervised delete_broker - success", context do
+  test "supervised delete_broker - success" do
     use_cassette "delete_broker", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.delete_broker(1)
       assert response != nil
@@ -314,7 +326,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # create_broker_connection tests
 
-  test "supervised create_broker_connection - success", context do
+  test "supervised create_broker_connection - success" do
     use_cassette "create_broker_connection", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection(1, %{name: "test broker"})
       assert response != nil
@@ -362,7 +374,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # broker_connections tests
 
-  test "supervised broker_connections - success", context do
+  test "supervised broker_connections - success" do
     use_cassette "get_broker_connections", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.broker_connections(1)
       assert response != nil
@@ -454,7 +466,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   # =============================
   # delete_broker_connections tests
 
-  test "supervised delete_broker_connections - success", context do
+  test "supervised delete_broker_connections - success" do
     use_cassette "delete_broker_connections", custom: true do
       response = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections(1)
       assert response != nil

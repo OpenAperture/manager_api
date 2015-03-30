@@ -126,6 +126,28 @@ defmodule CloudOS.ManagerAPI.Response do
   end
 
   @doc false
+  # Method to process an incoming httpc :error response into a CloudOS.ManagerAPI.Response
+  #
+  ## Options
+  #
+  # The `response` option represents the httpc response
+  #
+  ## Return Value
+  #
+  # CloudOS.ManagerAPI.Response
+  #
+  @spec process_response({:error, term}) :: term
+  defp process_response({:error, response}) do
+    %__MODULE__{
+      body: response[:reason],
+      success?: false,
+      status: 0,
+      headers: process_headers(response[:headers]),
+      raw_body: nil
+    }    
+  end
+
+  @doc false
   # Method to parse out a JSON body for a CloudOS.ManagerAPI.Response
   #
   ## Options
@@ -146,28 +168,6 @@ defmodule CloudOS.ManagerAPI.Response do
       Logger.debug "[CloudOS.ManagerAPI] An error occurred processing response body:  #{inspect e}"
       nil
     end    
-  end
-
-  @doc false
-  # Method to process an incoming httpc :error response into a CloudOS.ManagerAPI.Response
-  #
-  ## Options
-  #
-  # The `response` option represents the httpc response
-  #
-  ## Return Value
-  #
-  # CloudOS.ManagerAPI.Response
-  #
-  @spec process_response({:error, term}) :: term
-  defp process_response({:error, response}) do
-    %__MODULE__{
-      body: response[:reason],
-      success?: false,
-      status: 0,
-      headers: process_headers(response[:headers]),
-      raw_body: nil
-    }    
   end
 
   @doc false
