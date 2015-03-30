@@ -14,7 +14,7 @@ defmodule CloudOS.ManagerAPI.Mixfile do
   def application do
     [
       mod: {CloudOS.ManagerAPI, []},
-      applications: [:logger]
+      applications: [:logger, :cloudos_auth]
     ]
   end
 
@@ -31,7 +31,9 @@ defmodule CloudOS.ManagerAPI.Mixfile do
     [
       {:json, "~>0.3.0"},
       {:uuid, "~> 0.1.5" },
-
+      {:cloudos_auth, git: "https://#{System.get_env("GITHUB_OAUTH_TOKEN")}:x-oauth-basic@github.com/UmbrellaCorporation-SecretProjectLab/cloudos_auth.git",
+            ref: "1bf23fe529b67b1b7008fa76d11e28f8c93dd8ba"},
+     
       #testing dependencies
       {:exvcr, "~> 0.3.3", only: :test},
       {:meck, "0.8.2", only: :test}

@@ -46,9 +46,10 @@ defmodule CloudOS.ManagerAPI.Supervisor do
   def init([]) do
     children = [
       worker(CloudOS.ManagerAPI, [%{
-        url: Application.get_env(:cloudos_manager_api, :url, ""), 
-        client_id: Application.get_env(:cloudos_manager_api, :client_id, ""), 
-        client_secret: Application.get_env(:cloudos_manager_api, :client_secret, "")}])
+        manager_url: Application.get_env(:cloudos_manager_api, :manager_url, ""),
+        oauth_login_url: Application.get_env(:cloudos_manager_api, :oauth_login_url, ""),
+        oauth_client_id: Application.get_env(:cloudos_manager_api, :oauth_client_id, ""),
+        oauth_client_secret: Application.get_env(:cloudos_manager_api, :oauth_client_secret, "")}])
     ]
 
     supervise(children, strategy: :one_for_one)

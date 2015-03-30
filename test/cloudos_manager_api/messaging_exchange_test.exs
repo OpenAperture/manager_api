@@ -4,8 +4,20 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   alias CloudOS.ManagerAPI.Response
 
+  setup_all _context do
+    :meck.new(CloudosAuth.Client, [:passthrough])
+    :meck.expect(CloudosAuth.Client, :get_token, fn _, _, _ -> "abc" end)
+
+    on_exit _context, fn ->
+      try do
+        :meck.unload CloudosAuth.Client
+      rescue _ -> IO.puts "" end
+    end    
+    :ok
+  end
+
   setup do
-    api = CloudOS.ManagerAPI.create!(%{url: "https://cloudos-mgr.host.co", client_id: "id", client_secret: "secret"})
+    api = CloudOS.ManagerAPI.create!(%{manager_url: "https://cloudos-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
 
     {:ok, [
       api: api

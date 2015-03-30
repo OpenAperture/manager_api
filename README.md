@@ -33,15 +33,15 @@ end
 * URL
   * Type: String
   * Description: The url of the CloudOS Manager
-  * Environment Configuration (.exs): :cloudos_manager_api, :url
+  * Environment Configuration (.exs): :cloudos_manager_api, :manager_url
 * Client ID
   * Type: String
   * Description: The OAuth2 client id to be used for authenticating with the CloudOS Manager
-  * Environment Configuration (.exs): :cloudos_manager_api, :client_id
+  * Environment Configuration (.exs): :cloudos_manager_api, :oauth_client_id
 * Client Secret
   * Type: String
   * Description: The OAuth2 client secret to be used for authenticating with the CloudOS Manager
-  * Environment Configuration (.exs): :cloudos_manager_api, :client_secret
+  * Environment Configuration (.exs): :cloudos_manager_api, :oauth_client_secret
 
 When using as an application, you do not need to create or specify the API Agent (it will be populated for you).
 
@@ -49,7 +49,8 @@ When using as an application, you do not need to create or specify the API Agent
 To use on a per-instance basis, simply create an ManagerAPI process and pass it to the API modules. 
 
 ```iex
-api = CloudOS.ManagerAPI.create!(%{url: "https://cloudos-mgr.psft.co", client_id: "id", client_secret: "secret"})
+    api = CloudOS.ManagerAPI.create!(%{manager_url: "https://cloudos-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
+
 ```
 
 ### API Modules

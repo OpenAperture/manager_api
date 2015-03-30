@@ -135,7 +135,7 @@ defmodule CloudOS.ManagerAPI.Resource do
   defp get_url(api, path) do
   	opts = ManagerAPI.get_options(api)
     path = Regex.replace(~r/^\//, path, "") # strip leading slash, if present
-    opts[:url] <> "/" <> path
+    opts[:manager_url] <> "/" <> path
   end
 
   @doc """
@@ -215,7 +215,12 @@ defmodule CloudOS.ManagerAPI.Resource do
   #
   @spec default_headers() :: List
   defp default_headers do
-    [{'Accept', 'application/json'}, {'Content-Type', 'application/json'}, {'User-Agent','cloudos-manager-api'}]
+    token = CloudosAuth.Client.get_token(Application.get_env(:cloudos_manager_api, :oauth_login_url),
+                                 Application.get_env(:cloudos_manager_api, :oauth_client_id),
+                                 Application.get_env(:cloudos_manager_api, :oauth_client_secret))
+    
+    [{'Accept', 'application/json'}, {'Content-Type', 'application/json'},
+     {'User-Agent','cloudos-manager-api'}, {'Authorization', 'Bearer #{token}'}]
   end
 
   @doc false
@@ -263,7 +268,6 @@ defmodule CloudOS.ManagerAPI.Resource do
   #
   @spec execute_request(term, term, List) :: term
   defp execute_request(method, request, http_options) do
-    #http://www.erlang.org/doc/man/httpc.html#request-4
     httpc_options = []
     :httpc.request(method, request, http_options, httpc_options)
   end  
