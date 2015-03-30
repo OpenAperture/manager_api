@@ -218,9 +218,9 @@ defmodule CloudOS.ManagerAPI.Resource do
     token = CloudosAuth.Client.get_token(Application.get_env(:cloudos_manager_api, :oauth_login_url),
                                  Application.get_env(:cloudos_manager_api, :oauth_client_id),
                                  Application.get_env(:cloudos_manager_api, :oauth_client_secret))
-    
+    IO.puts token
     [{'Accept', 'application/json'}, {'Content-Type', 'application/json'},
-     {'User-Agent','cloudos-manager-api'}, {'Authorization', 'Bearer #{token}'}]
+     {'User-Agent','cloudos-manager-api'}, {'Authorization', 'Bearer access_token=#{token}'}]
   end
 
   @doc false
