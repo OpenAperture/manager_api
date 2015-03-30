@@ -164,7 +164,7 @@ clusters = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters!(api, 1)
 ```
 
 * CloudOS.ManagerAPI.EtcdCluster
-  * This module is used to interact with the EtcdCluster resource (/messaging/clusters).
+  * This module is used to interact with the EtcdCluster resource (/clusters).
   * Get All Clusters
     * list - returns a CloudOS.ManagerAPI.Response
     * list! - returns a list of Maps, representing EtcdClusters
@@ -218,6 +218,39 @@ states = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units!(api)
     * get_cluster_unit_log! - returns the text of the log
 ```elixir
 contents = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log!(api, "123abc", 1, "testUnit")
+```
+
+* CloudOS.ManagerAPI.Workflow
+  * This module is used to interact with the Workflow resource (/workflows).
+  * Get All Workflows
+    * list - returns a CloudOS.ManagerAPI.Response
+    * list! - returns a list of Maps, representing Workflow
+```elixir
+workflows = CloudOS.ManagerAPI.Workflow.list!(api)
+```
+  * Get Workflow
+    * get_workflow - returns a CloudOS.ManagerAPI.Response
+    * get_workflow! - returns a Map, representing Workflow
+```elixir
+workflow = CloudOS.ManagerAPI.Workflow.get_workflow!(api)
+```
+  * Create a Workflow
+    * create_workflow - returns a CloudOS.ManagerAPI.Response
+    * create_workflow! - returns the etcd_token of the new Workflow
+```elixir
+token = CloudOS.ManagerAPI.Workflow.create_workflow!(api, %{})
+```
+  * Update a Workflow
+    * update_workflow - returns a CloudOS.ManagerAPI.Response
+    * update_workflow! - returns an identifier of the updated Workflow
+```elixir
+CloudOS.ManagerAPI.Workflow.delete_workflow!(api, 1)
+```
+  * Delete a Workflow
+    * delete_workflow - returns a CloudOS.ManagerAPI.Response
+    * delete_workflow! - returns a boolean
+```elixir
+CloudOS.ManagerAPI.Workflow.delete_workflow!(api, 1)
 ```
 
 ## Building & Testing
