@@ -35,7 +35,7 @@ defmodule CloudOS.ManagerAPI.Resource do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] GET #{url}"
 
-    execute_request(:get, {'#{url}', merge_headers(headers)}, merge_options(options))
+    execute_request(:get, {'#{url}', merge_headers(api, headers)}, merge_options(options))
       |> Response.from_httpc_response
   end
 
@@ -62,7 +62,7 @@ defmodule CloudOS.ManagerAPI.Resource do
   def post(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] POST #{url}"
-    execute_request(:post, {'#{url}', merge_headers(headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
+    execute_request(:post, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
       |> Response.from_httpc_response
   end
 
@@ -89,7 +89,7 @@ defmodule CloudOS.ManagerAPI.Resource do
   def put(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] PUT #{url}"
-    execute_request(:put, {'#{url}', merge_headers(headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
+    execute_request(:put, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
       |> Response.from_httpc_response
   end
 
@@ -114,7 +114,7 @@ defmodule CloudOS.ManagerAPI.Resource do
   def delete(api, path, headers, options) do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] DELETE #{url}"
-    execute_request(:delete, {'#{url}', merge_headers(headers)}, merge_options(options))
+    execute_request(:delete, {'#{url}', merge_headers(api, headers)}, merge_options(options))
       |> Response.from_httpc_response
   end
 
@@ -204,39 +204,33 @@ defmodule CloudOS.ManagerAPI.Resource do
     options ++ []
   end
 
-  @doc false
   # Method to load the default headers
-  #
-  ## Options
-  #
-  ## Return Value
-  #
-  # List
-  #
-  @spec default_headers() :: List
-  defp default_headers do
-    token = CloudosAuth.Client.get_token(Application.get_env(:cloudos_manager_api, :oauth_login_url),
-                                 Application.get_env(:cloudos_manager_api, :oauth_client_id),
-                                 Application.get_env(:cloudos_manager_api, :oauth_client_secret))
+  @spec default_headers(pid) :: List
+  defp default_headers(api) do
+    opts = ManagerAPI.get_options(api)
+
+    token = cond do
+      opts[:oauth_login_url] == nil ->
+        Logger.error("[CloudOS.ManagerAPI] Unable to authenticate request - define :oauth_login_url in your options!")
+        ""
+      opts[:oauth_client_id] == nil ->
+        Logger.error("[CloudOS.ManagerAPI] Unable to authenticate request - define :oauth_client_id in your options!")
+        ""
+      opts[:oauth_client_secret] == nil ->
+        Logger.error("[CloudOS.ManagerAPI] Unable to authenticate request - define :oauth_client_secret in your options!")
+        ""
+      true -> CloudosAuth.Client.get_token(opts[:oauth_login_url], opts[:oauth_client_id], opts[:oauth_client_secret])
+    end
+    
     [{'Accept', 'application/json'}, {'Content-Type', 'application/json'},
      {'User-Agent','cloudos-manager-api'}, {'Authorization', 'Bearer access_token=#{token}'}]
   end
 
-  @doc false
   # Method to merge custom headers
-  #
-  ## Options
-  #
-  # The `headers` option represents the list of headers
-  #
-  ## Return Value
-  #
-  # List
-  #
-  @spec merge_headers(List) :: List
-  defp merge_headers(headers) do
+  @spec merge_headers(pid, List) :: List
+  defp merge_headers(api, headers) do
     if headers != nil && length(headers) > 0 do
-      default_headers_map = Enum.reduce default_headers, %{}, fn (header, default_headers_map) ->
+      default_headers_map = Enum.reduce default_headers(api), %{}, fn (header, default_headers_map) ->
         Map.put(default_headers_map, '#{elem(header, 0)}', '#{elem(header, 1)}')
       end
 
@@ -246,7 +240,7 @@ defmodule CloudOS.ManagerAPI.Resource do
 
       Map.to_list(new_headers_map)
     else
-      default_headers
+      default_headers(api)
     end
   end
 
