@@ -32,6 +32,13 @@ defmodule CloudOS.ManagerAPI.Product.Test do
     end
   end
 
+  test "list! products", context do
+    use_cassette "products/product/list_products", custom: true do
+      response = CloudOS.ManagerAPI.Product.list!(context[:api])
+      assert length(response) == 3
+    end
+  end
+
   test "create product", context do
     use_cassette "products/product/create_product", custom: true do
       product = %{name: "Test product 123"}
@@ -44,11 +51,26 @@ defmodule CloudOS.ManagerAPI.Product.Test do
     end
   end
 
+  test "create! product", context do
+    use_cassette "products/product/create_product", custom: true do
+      product = %{name: "Test product 123"}
+      response = CloudOS.ManagerAPI.Product.create_product!(context[:api], product)
+      assert response == "Test%20product%20123"
+    end
+  end
+
   test "get product", context do
     use_cassette "products/product/get_product", custom: true do
       response = CloudOS.ManagerAPI.Product.get_product(context[:api], URI.encode("Test product 123"))
       assert response.status == 200
       assert response.body["name"] == "Test product 123"
+    end
+  end
+
+  test "get! product", context do
+    use_cassette "products/product/get_product", custom: true do
+      response = CloudOS.ManagerAPI.Product.get_product!(context[:api], URI.encode("Test product 123"))
+      assert response["name"] == "Test product 123"
     end
   end
 
@@ -63,10 +85,25 @@ defmodule CloudOS.ManagerAPI.Product.Test do
     end
   end
 
+  test "update! product", context do
+    use_cassette "products/product/update_product", custom: true do
+      updated_product = %{name: "Test product 123 updated"}
+      response = CloudOS.ManagerAPI.Product.update_product!(context[:api], URI.encode("Test product 123"), updated_product)
+      assert response == "Test%20product%20123%20updated"
+    end
+  end
+
   test "delete product", context do
     use_cassette "products/product/delete_product", custom: true do
       response = CloudOS.ManagerAPI.Product.delete_product(context[:api], URI.encode("Test product 123 updated"))
       assert response.status == 204
+    end
+  end
+
+  test "delete! product", context do
+    use_cassette "products/product/delete_product", custom: true do
+      response = CloudOS.ManagerAPI.Product.delete_product!(context[:api], URI.encode("Test product 123 updated"))
+      assert response == true
     end
   end
 end

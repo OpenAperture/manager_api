@@ -21,12 +21,13 @@ defmodule CloudOS.ManagerAPI.Product do
 
   @spec get_product(pid, String.t) :: Response.t
   def get_product(api \\ ManagerAPI.get_api, product_name) do
+    path = get_path("products/#{product_name}")
     get(api, get_path("products/#{product_name}"))
   end
 
   @spec get_product!(pid, String.t) :: Map.t | nil
   def get_product!(api \\ ManagerAPI.get_api, product_name) do
-    response = get(api, product_name)
+    response = get_product(api, product_name)
     if response.success? do
       response.body
     else
