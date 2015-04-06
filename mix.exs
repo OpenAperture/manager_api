@@ -32,7 +32,7 @@ defmodule CloudOS.ManagerAPI.Mixfile do
       {:json, "~>0.3.0"},
       {:uuid, "~> 0.1.5" },
       {:cloudos_auth, git: "https://#{System.get_env("GITHUB_OAUTH_TOKEN")}:x-oauth-basic@github.com/UmbrellaCorporation-SecretProjectLab/cloudos_auth.git",
-            ref: "2251db134a153312bdc64070ed05c944ed6e4b00"},
+            ref: "984627f5a365455742ce1d74a60831e39eb23944"},
      
       #testing dependencies
       {:exvcr, "~> 0.3.3", only: :test},
