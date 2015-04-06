@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "cloudos-manager-api",
+        "Authorization": "Bearer access_token=abc"
+      },
+      "method": "get",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "http://localhost/products/jordans_test_product/environments"
+    },
+    "response": {
+      "body": "[{\"updated_at\":{\"year\":2015,\"sec\":35,\"month\":4,\"min\":28,\"hour\":14,\"day\":6},\"product_id\":2,\"name\":\"production\",\"inserted_at\":{\"year\":2015,\"sec\":35,\"month\":4,\"min\":28,\"hour\":14,\"day\":6},\"id\":3},{\"updated_at\":{\"year\":2015,\"sec\":28,\"month\":4,\"min\":28,\"hour\":14,\"day\":6},\"product_id\":2,\"name\":\"staging\",\"inserted_at\":{\"year\":2015,\"sec\":28,\"month\":4,\"min\":28,\"hour\":14,\"day\":6},\"id\":2},{\"updated_at\":{\"year\":2015,\"sec\":14,\"month\":4,\"min\":28,\"hour\":14,\"day\":6},\"product_id\":2,\"name\":\"testing\",\"inserted_at\":{\"year\":2015,\"sec\":14,\"month\":4,\"min\":28,\"hour\":14,\"day\":6},\"id\":1}]",
+      "headers": {
+        "cache-control": "max-age=0, private, must-revalidate",
+        "connection": "Keep-Alive",
+        "date": "Mon, 06 Apr 2015 14:31:02 GMT",
+        "age": "0",
+        "server": "Cowboy",
+        "content-length": "568",
+        "content-type": "application/json; charset=utf-8",
+        "x-request-id": "8UQWAHHCuPEXrxkprtgb"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        200,
+        "OK"
+      ],
+      "type": "ok"
+    }
+  }
+]

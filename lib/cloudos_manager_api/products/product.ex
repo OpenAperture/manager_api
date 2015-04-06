@@ -21,7 +21,6 @@ defmodule CloudOS.ManagerAPI.Product do
 
   @spec get_product(pid, String.t) :: Response.t
   def get_product(api \\ ManagerAPI.get_api, product_name) do
-    path = get_path("products/#{product_name}")
     get(api, get_path("products/#{product_name}"))
   end
 
@@ -40,7 +39,7 @@ defmodule CloudOS.ManagerAPI.Product do
     post(api, get_path("products"), product)
   end
 
-  @spec create_product!(pid, Map.t) :: String.t
+  @spec create_product!(pid, Map.t) :: String.t | nil
   def create_product!(api \\ ManagerAPI.get_api, product) do
     response = create_product(api, product)
     if response.success? do

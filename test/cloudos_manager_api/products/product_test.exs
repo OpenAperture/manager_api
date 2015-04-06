@@ -2,15 +2,11 @@ defmodule CloudOS.ManagerAPI.Product.Test do
   use ExUnit.Case, async: false
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
-  alias CloudOS.ManagerAPI.Response
-
   setup_all do
     :meck.new(CloudosAuth.Client, [:passthrough])
     :meck.expect(CloudosAuth.Client, :get_token, fn _, _, _ -> "abc" end)
 
-    on_exit fn ->
-      :meck.unload
-    end
+    on_exit fn -> :meck.unload end
   end
 
   setup do

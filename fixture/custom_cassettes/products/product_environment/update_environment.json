@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{\"name\":\"updated_test_environment\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "cloudos-manager-api",
+        "Authorization": "Bearer access_token=abc"
+      },
+      "method": "put",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "http://localhost/products/jordans_test_product/environments/new_test_environment"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "cache-control": "max-age=0, private, must-revalidate",
+        "connection": "Keep-Alive",
+        "date": "Mon, 06 Apr 2015 14:35:54 GMT",
+        "age": "0",
+        "location": "/products/jordans_test_product/environments/updated_test_environment",
+        "server": "Cowboy",
+        "content-length": "0",
+        "x-request-id": "Pf08yLmXkTO/XFjR+o0s"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        204,
+        "No Content"
+      ],
+      "type": "ok"
+    }
+  }
+]
