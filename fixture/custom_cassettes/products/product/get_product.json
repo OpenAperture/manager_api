@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "cloudos-manager-api",
+        "Authorization": "Bearer access_token=abc"
+      },
+      "method": "get",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "http://localhost/products/Test%20product%20123"
+    },
+    "response": {
+      "body": "{\"updated_at\":{\"year\":2015,\"sec\":35,\"month\":4,\"min\":20,\"hour\":20,\"day\":3},\"name\":\"Test product 123\",\"inserted_at\":{\"year\":2015,\"sec\":35,\"month\":4,\"min\":20,\"hour\":20,\"day\":3},\"id\":1}",
+      "headers": {
+        "cache-control": "max-age=0, private, must-revalidate",
+        "connection": "Keep-Alive",
+        "date": "Fri, 03 Apr 2015 20:23:58 GMT",
+        "age": "0",
+        "server": "Cowboy",
+        "content-length": "181",
+        "content-type": "application/json; charset=utf-8",
+        "x-request-id": "HxPRH/DOksDYbf77HMYY"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        200,
+        "OK"
+      ],
+      "type": "ok"
+    }
+  }
+]

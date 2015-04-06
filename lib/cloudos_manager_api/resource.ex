@@ -30,13 +30,18 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   CloudOS.ManagerAPI.Response
   """ 
-  @spec get(pid, String.t(), List, List) :: term
+  @spec get(pid, String.t(), List, List) :: Response.t
   def get(api, path, headers, options) do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] GET #{url}"
 
     execute_request(:get, {'#{url}', merge_headers(api, headers)}, merge_options(options))
       |> Response.from_httpc_response
+  end
+
+  @spec get(pid, String.t) :: Response.t
+  def get(api, path) do
+    get(api, path, [], [])
   end
 
   @doc """
@@ -58,12 +63,17 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   CloudOS.ManagerAPI.Response
   """ 
-  @spec post(pid, String.t(), term, List, List) :: term
+  @spec post(pid, String.t(), term, List, List) :: Response.t
   def post(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] POST #{url}"
     execute_request(:post, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
       |> Response.from_httpc_response
+  end
+
+  @spec post(pid, String.t, any) :: Response.t
+  def post(api, path, body) do
+    post(api, path, body, [], [])
   end
 
   @doc """
@@ -85,12 +95,17 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   CloudOS.ManagerAPI.Response
   """ 
-  @spec put(pid, String.t(), term, List, List) :: term
+  @spec put(pid, String.t(), term, List, List) :: Response.t
   def put(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] PUT #{url}"
     execute_request(:put, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
       |> Response.from_httpc_response
+  end
+
+  @spec put(pid, String.t, any) :: Response.t
+  def put(api, path, body) do
+    put(api, path, body, [], [])
   end
 
   @doc """
@@ -110,12 +125,17 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   CloudOS.ManagerAPI.Response
   """ 
-  @spec delete(pid, String.t(), List, List) :: term
+  @spec delete(pid, String.t(), List, List) :: Response.t
   def delete(api, path, headers, options) do
     url = get_url(api, path)
     Logger.debug "[CloudOS.ManagerAPI] DELETE #{url}"
     execute_request(:delete, {'#{url}', merge_headers(api, headers)}, merge_options(options))
       |> Response.from_httpc_response
+  end
+
+  @spec delete(pid, String.t) :: Response.t
+  def delete(api, path) do
+    delete(api, path, [], [])
   end
 
   # @doc """
@@ -159,6 +179,11 @@ defmodule CloudOS.ManagerAPI.Resource do
       querystring ->
         default_path <> querystring
     end
+  end
+
+  @spec get_path(String.t) :: String.t
+  def get_path(default_path) do
+    get_path(default_path, %{})
   end
 
   @doc """

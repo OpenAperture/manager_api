@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{\"name\":\"Test product 123 updated\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "cloudos-manager-api",
+        "Authorization": "Bearer access_token=abc"
+      },
+      "method": "put",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "http://localhost/products/Test%20product%20123"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "cache-control": "max-age=0, private, must-revalidate",
+        "connection": "Keep-Alive",
+        "date": "Fri, 03 Apr 2015 20:28:14 GMT",
+        "age": "0",
+        "location": "/products/Test%20product%20123%20updated",
+        "server": "Cowboy",
+        "content-length": "0",
+        "x-request-id": "8VD4ZvOpCiP90tZXY4lB"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        204,
+        "No Content"
+      ],
+      "type": "ok"
+    }
+  }
+]
