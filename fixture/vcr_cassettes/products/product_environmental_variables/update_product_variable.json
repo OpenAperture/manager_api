@@ -1,0 +1,78 @@
+[
+  {
+    "request": {
+      "body": "{\"grant_type\":\"client_credentials\",\"client_secret\":\"test_secret\",\"client_id\":\"test_id\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "https://localhost/oauth/token"
+    },
+    "response": {
+      "body": "{\"access_token\":\"abc\",\"token_type\":\"bearer\",\"expires_in\":7200,\"scope\":\"public\"}",
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "keep-alive",
+        "date": "Tue, 07 Apr 2015 19:53:51 GMT",
+        "pragma": "no-cache",
+        "etag": "\"0b4e42d515662d33cd3473c23b2d0c7b\"",
+        "server": "nginx/1.2.1",
+        "content-length": "140",
+        "content-type": "application/json; charset=utf-8",
+        "status": "200 OK",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-request-id": "a458e33a-d489-4b35-8c76-edc3dc4bcf2a",
+        "x-runtime": "0.009504",
+        "x-xss-protection": "1; mode=block"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        200,
+        "OK"
+      ],
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"name\":\"updated_var_a\",\"value\":\"updated_a\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "cloudos-manager-api",
+        "Authorization": "Bearer access_token=abc"
+      },
+      "method": "put",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "http://localhost/products/jordans_test_product/environmental_variables/var_a"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "cache-control": "max-age=0, private, must-revalidate",
+        "connection": "Keep-Alive",
+        "date": "Wed, 08 Apr 2015 14:29:14 GMT",
+        "age": "0",
+        "location": "/products/jordans_test_product/environmental_variables/updated_var_a",
+        "server": "Cowboy",
+        "content-length": "0",
+        "x-request-id": "ZgKGPwnQ6gerjJh2IuJ0"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        204,
+        "No Content"
+      ],
+      "type": "ok"
+    }
+  }
+]

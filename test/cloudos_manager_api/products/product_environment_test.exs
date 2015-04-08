@@ -1,6 +1,6 @@
 defmodule CloudOS.ManagerAPI.ProductEnvironment.Test do
   use ExUnit.Case, async: false
-  use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clean_mock: true]
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
   setup_all do
     :meck.new(CloudosAuth.Client, [:passthrough])
