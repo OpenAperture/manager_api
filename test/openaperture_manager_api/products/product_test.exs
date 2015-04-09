@@ -3,8 +3,8 @@ defmodule OpenAperture.ManagerApi.Product.Test do
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
   setup_all do
-    :meck.new(CloudosAuth.Client, [:passthrough])
-    :meck.expect(CloudosAuth.Client, :get_token, fn _, _, _ -> "abc" end)
+    :meck.new(OpenAperture.Auth.Client, [:passthrough])
+    :meck.expect(OpenAperture.Auth.Client, :get_token, fn _, _, _ -> "abc" end)
 
     on_exit fn -> :meck.unload end
   end

@@ -244,7 +244,7 @@ defmodule OpenAperture.ManagerApi.Resource do
       opts[:oauth_client_secret] == nil ->
         Logger.error("[OpenAperture.ManagerApi] Unable to authenticate request - define :oauth_client_secret in your options!")
         ""
-      true -> CloudosAuth.Client.get_token(opts[:oauth_login_url], opts[:oauth_client_id], opts[:oauth_client_secret])
+      true -> OpenAperture.Auth.Client.get_token(opts[:oauth_login_url], opts[:oauth_client_id], opts[:oauth_client_secret])
     end
     
     [{'Accept', 'application/json'}, {'Content-Type', 'application/json'},

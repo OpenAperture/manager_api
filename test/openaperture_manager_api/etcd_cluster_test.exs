@@ -5,12 +5,12 @@ defmodule OpenAperture.ManagerApi.EtcdClusterTest do
   alias OpenAperture.ManagerApi.Response
 
   setup_all _context do
-    :meck.new(CloudosAuth.Client, [:passthrough])
-    :meck.expect(CloudosAuth.Client, :get_token, fn _, _, _ -> "abc" end)
+    :meck.new(OpenAperture.Auth.Client, [:passthrough])
+    :meck.expect(OpenAperture.Auth.Client, :get_token, fn _, _, _ -> "abc" end)
 
     on_exit _context, fn ->
       try do
-        :meck.unload CloudosAuth.Client
+        :meck.unload OpenAperture.Auth.Client
       rescue _ -> IO.puts "" end
     end    
     :ok

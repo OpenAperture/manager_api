@@ -14,7 +14,7 @@ defmodule ManagerApi.Mixfile do
   def application do
     [
       mod: {OpenAperture.ManagerApi, []},
-      applications: [:logger, :cloudos_auth]
+      applications: [:logger, :openaperture_auth]
     ]
   end
 
@@ -31,8 +31,8 @@ defmodule ManagerApi.Mixfile do
     [
       {:json, "~>0.3.0"},
       {:uuid, "~> 0.1.5" },
-      {:cloudos_auth, git: "https://#{System.get_env("GITHUB_OAUTH_TOKEN")}:x-oauth-basic@github.com/UmbrellaCorporation-SecretProjectLab/cloudos_auth.git",
-            ref: "984627f5a365455742ce1d74a60831e39eb23944"},
+      {:openaperture_auth, git: "https://#{System.get_env("GITHUB_OAUTH_TOKEN")}:x-oauth-basic@github.com/OpenAperture/auth.git",
+            ref: "0ded31f747cb0b781838b5799acadcda88dd7953"},
      
       #testing dependencies
       {:exvcr, "~> 0.3.3", only: :test},
