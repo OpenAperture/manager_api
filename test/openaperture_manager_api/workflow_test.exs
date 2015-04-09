@@ -1,8 +1,8 @@
-defmodule CloudOS.ManagerAPI.WorkflowTest do
+defmodule OpenAperture.ManagerApi.WorkflowTest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi.Response
 
   setup_all _context do
     :meck.new(CloudosAuth.Client, [:passthrough])
@@ -17,7 +17,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
   end
 
   setup do
-    api = CloudOS.ManagerAPI.create!(%{manager_url: "https://cloudos-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
+    api = OpenAperture.ManagerApi.create!(%{manager_url: "https://openaperture-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
 
     {:ok, [
       api: api
@@ -29,7 +29,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "supervised list - success", _context do
     use_cassette "list_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.list
+      response = OpenAperture.ManagerApi.Workflow.list
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -54,7 +54,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "list - success", context do
     use_cassette "list_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.list(context[:api])
+      response = OpenAperture.ManagerApi.Workflow.list(context[:api])
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -79,7 +79,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "list - failure", context do
     use_cassette "list_workflow_failure", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.list(context[:api])
+      response = OpenAperture.ManagerApi.Workflow.list(context[:api])
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -91,7 +91,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "list! - success", context do
     use_cassette "list_workflow", custom: true do
-      workflows = CloudOS.ManagerAPI.Workflow.list!(context[:api])
+      workflows = OpenAperture.ManagerApi.Workflow.list!(context[:api])
       assert workflows != nil
       assert length(workflows) == 2
       is_successful = Enum.reduce workflows, true, fn (workflow, is_successful) ->
@@ -111,7 +111,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "list! - failure", context do
     use_cassette "list_workflow_failure", custom: true do
-      workflows = CloudOS.ManagerAPI.Workflow.list!(context[:api])
+      workflows = OpenAperture.ManagerApi.Workflow.list!(context[:api])
       assert workflows == nil
     end
   end
@@ -121,7 +121,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "supervised get_workflow - success", _context do
     use_cassette "get_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.get_workflow(1)
+      response = OpenAperture.ManagerApi.Workflow.get_workflow(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -135,7 +135,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "get_workflow - success", context do
     use_cassette "get_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.get_workflow(context[:api], 1)
+      response = OpenAperture.ManagerApi.Workflow.get_workflow(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -149,7 +149,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "get_workflow - failure", context do
     use_cassette "get_workflow_failure", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.get_workflow(context[:api], 1)
+      response = OpenAperture.ManagerApi.Workflow.get_workflow(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -161,7 +161,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "get_workflow! - success", context do
     use_cassette "get_workflow", custom: true do
-      workflow = CloudOS.ManagerAPI.Workflow.get_workflow!(context[:api], 1)
+      workflow = OpenAperture.ManagerApi.Workflow.get_workflow!(context[:api], 1)
       assert workflow != nil
       assert workflow["id"] == "1"
       assert workflow["workflow_completed"] == true
@@ -170,7 +170,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "get_workflow! - failure", context do
     use_cassette "get_workflow_failure", custom: true do
-      workflow = CloudOS.ManagerAPI.Workflow.get_workflow!(context[:api], 1)
+      workflow = OpenAperture.ManagerApi.Workflow.get_workflow!(context[:api], 1)
       assert workflow == nil
     end
   end
@@ -180,7 +180,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "supervised create_workflow - success", _context do
     use_cassette "create_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.create_workflow(%{workflow_completed: true})
+      response = OpenAperture.ManagerApi.Workflow.create_workflow(%{workflow_completed: true})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -190,7 +190,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "create_workflow - success", context do
     use_cassette "create_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.create_workflow(context[:api], %{workflow_completed: true})
+      response = OpenAperture.ManagerApi.Workflow.create_workflow(context[:api], %{workflow_completed: true})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -200,7 +200,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "create_workflow - failure", context do
     use_cassette "create_workflow_failure", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.create_workflow(context[:api], %{workflow_completed: true})
+      response = OpenAperture.ManagerApi.Workflow.create_workflow(context[:api], %{workflow_completed: true})
       assert response != nil
       assert response.success? == false
       assert response.status == 400
@@ -212,7 +212,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "create_workflow! - success", context do
     use_cassette "create_workflow", custom: true do
-      workflow_id = CloudOS.ManagerAPI.Workflow.create_workflow!(context[:api], %{workflow_completed: true})
+      workflow_id = OpenAperture.ManagerApi.Workflow.create_workflow!(context[:api], %{workflow_completed: true})
       assert workflow_id != nil
       assert workflow_id == "1"
     end
@@ -220,7 +220,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "create_workflow! - failure", context do
     use_cassette "create_workflow_failure", custom: true do
-      workflow_id = CloudOS.ManagerAPI.Workflow.create_workflow!(context[:api], %{workflow_completed: true})
+      workflow_id = OpenAperture.ManagerApi.Workflow.create_workflow!(context[:api], %{workflow_completed: true})
       assert workflow_id == nil
     end
   end
@@ -230,7 +230,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "supervised update_workflow - success", _context do
     use_cassette "update_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.update_workflow(1, %{workflow_completed: true})
+      response = OpenAperture.ManagerApi.Workflow.update_workflow(1, %{workflow_completed: true})
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -240,7 +240,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "update_workflow - success", context do
     use_cassette "update_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.update_workflow(context[:api], 1, %{workflow_completed: true})
+      response = OpenAperture.ManagerApi.Workflow.update_workflow(context[:api], 1, %{workflow_completed: true})
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -250,7 +250,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "update_workflow - failure", context do
     use_cassette "update_workflow_failure", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.update_workflow(context[:api], "1", %{workflow_completed: true})
+      response = OpenAperture.ManagerApi.Workflow.update_workflow(context[:api], "1", %{workflow_completed: true})
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -262,7 +262,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "update_workflow! - success", context do
     use_cassette "update_workflow", custom: true do
-      workflow_id = CloudOS.ManagerAPI.Workflow.update_workflow!(context[:api], "1", %{workflow_completed: true})
+      workflow_id = OpenAperture.ManagerApi.Workflow.update_workflow!(context[:api], "1", %{workflow_completed: true})
       assert workflow_id != nil
       assert workflow_id == "1"
     end
@@ -270,7 +270,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "update_workflow! - failure", context do
     use_cassette "update_workflow_failure", custom: true do
-      workflow_id = CloudOS.ManagerAPI.Workflow.update_workflow!(context[:api], "1", %{workflow_completed: true})
+      workflow_id = OpenAperture.ManagerApi.Workflow.update_workflow!(context[:api], "1", %{workflow_completed: true})
       assert workflow_id == nil
     end
   end  
@@ -280,7 +280,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "supervised delete_workflow - success", _context do
     use_cassette "delete_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.delete_workflow("1")
+      response = OpenAperture.ManagerApi.Workflow.delete_workflow("1")
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -289,7 +289,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "delete_workflow - success", context do
     use_cassette "delete_workflow", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.delete_workflow(context[:api], "1")
+      response = OpenAperture.ManagerApi.Workflow.delete_workflow(context[:api], "1")
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -298,7 +298,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "delete_workflow - failure", context do
     use_cassette "delete_workflow_failure", custom: true do
-      response = CloudOS.ManagerAPI.Workflow.delete_workflow(context[:api], "1")
+      response = OpenAperture.ManagerApi.Workflow.delete_workflow(context[:api], "1")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -310,7 +310,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "delete_workflow! - success", context do
     use_cassette "delete_workflow", custom: true do
-      workflow_id = CloudOS.ManagerAPI.Workflow.delete_workflow!(context[:api], "1")
+      workflow_id = OpenAperture.ManagerApi.Workflow.delete_workflow!(context[:api], "1")
       assert workflow_id != nil
       assert workflow_id == true
     end
@@ -318,7 +318,7 @@ defmodule CloudOS.ManagerAPI.WorkflowTest do
 
   test "delete_workflow! - failure", context do
     use_cassette "delete_workflow_failure", custom: true do
-      workflow_id = CloudOS.ManagerAPI.Workflow.delete_workflow!(context[:api], "1")
+      workflow_id = OpenAperture.ManagerApi.Workflow.delete_workflow!(context[:api], "1")
       assert workflow_id == false
     end
   end  

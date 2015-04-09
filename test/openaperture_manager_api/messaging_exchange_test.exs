@@ -1,8 +1,8 @@
-defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
+defmodule OpenAperture.ManagerApi.MessagingExchangeTest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi.Response
 
   setup_all _context do
     :meck.new(CloudosAuth.Client, [:passthrough])
@@ -17,7 +17,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
   end
 
   setup do
-    api = CloudOS.ManagerAPI.create!(%{manager_url: "https://cloudos-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
+    api = OpenAperture.ManagerApi.create!(%{manager_url: "https://openaperture-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
 
     {:ok, [
       api: api
@@ -29,7 +29,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised list - success" do
     use_cassette "list_exchanges", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.list
+      response = OpenAperture.ManagerApi.MessagingExchange.list
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -54,7 +54,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "list - success", context do
     use_cassette "list_exchanges", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.list(context[:api])
+      response = OpenAperture.ManagerApi.MessagingExchange.list(context[:api])
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -79,7 +79,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "list - failure", context do
     use_cassette "list_exchanges_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.list(context[:api])
+      response = OpenAperture.ManagerApi.MessagingExchange.list(context[:api])
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -91,7 +91,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "list! - success", context do
     use_cassette "list_exchanges", custom: true do
-      exchanges = CloudOS.ManagerAPI.MessagingExchange.list!(context[:api])
+      exchanges = OpenAperture.ManagerApi.MessagingExchange.list!(context[:api])
       assert exchanges != nil
       assert length(exchanges) == 2
       is_successful = Enum.reduce exchanges, true, fn (exchange, is_successful) ->
@@ -111,7 +111,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "list! - failure", context do
     use_cassette "list_exchanges_failure", custom: true do
-      exchanges = CloudOS.ManagerAPI.MessagingExchange.list!(context[:api])
+      exchanges = OpenAperture.ManagerApi.MessagingExchange.list!(context[:api])
       assert exchanges == nil
     end
   end
@@ -121,7 +121,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised get_exchange - success" do
     use_cassette "get_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.get_exchange(1)
+      response = OpenAperture.ManagerApi.MessagingExchange.get_exchange(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -135,7 +135,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "get_exchange - success", context do
     use_cassette "get_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.get_exchange(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.get_exchange(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -149,7 +149,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "get_exchange - failure", context do
     use_cassette "get_exchange_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.get_exchange(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.get_exchange(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -161,7 +161,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "get_exchange! - success", context do
     use_cassette "get_exchange", custom: true do
-      exchange = CloudOS.ManagerAPI.MessagingExchange.get_exchange!(context[:api], 1)
+      exchange = OpenAperture.ManagerApi.MessagingExchange.get_exchange!(context[:api], 1)
       assert exchange != nil
       assert exchange["id"] == 1 
       assert exchange["name"] == "test exchange"
@@ -170,7 +170,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "get_exchange! - failure", context do
     use_cassette "get_exchange_failure", custom: true do
-      exchange = CloudOS.ManagerAPI.MessagingExchange.get_exchange!(context[:api], 1)
+      exchange = OpenAperture.ManagerApi.MessagingExchange.get_exchange!(context[:api], 1)
       assert exchange == nil
     end
   end
@@ -180,7 +180,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised create_exchange - success" do
     use_cassette "create_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.create_exchange(%{name: "test exchange"})
+      response = OpenAperture.ManagerApi.MessagingExchange.create_exchange(%{name: "test exchange"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -190,7 +190,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange - success", context do
     use_cassette "create_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.create_exchange(context[:api], %{name: "test exchange"})
+      response = OpenAperture.ManagerApi.MessagingExchange.create_exchange(context[:api], %{name: "test exchange"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -200,7 +200,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange - failure", context do
     use_cassette "create_exchange_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.create_exchange(context[:api], %{name: "test exchange"})
+      response = OpenAperture.ManagerApi.MessagingExchange.create_exchange(context[:api], %{name: "test exchange"})
       assert response != nil
       assert response.success? == false
       assert response.status == 400
@@ -212,7 +212,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange! - success", context do
     use_cassette "create_exchange", custom: true do
-      exchange_id = CloudOS.ManagerAPI.MessagingExchange.create_exchange!(context[:api], %{name: "test exchange"})
+      exchange_id = OpenAperture.ManagerApi.MessagingExchange.create_exchange!(context[:api], %{name: "test exchange"})
       assert exchange_id != nil
       assert exchange_id == "1"
     end
@@ -220,7 +220,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange! - failure", context do
     use_cassette "create_exchange_failure", custom: true do
-      exchange_id = CloudOS.ManagerAPI.MessagingExchange.create_exchange!(context[:api], %{name: "test exchange"})
+      exchange_id = OpenAperture.ManagerApi.MessagingExchange.create_exchange!(context[:api], %{name: "test exchange"})
       assert exchange_id == nil
     end
   end
@@ -230,7 +230,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised update_exchange - success" do
     use_cassette "update_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.update_exchange(1, %{name: "test exchange"})
+      response = OpenAperture.ManagerApi.MessagingExchange.update_exchange(1, %{name: "test exchange"})
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -240,7 +240,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "update_exchange - success", context do
     use_cassette "update_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.update_exchange(context[:api], 1, %{name: "test exchange"})
+      response = OpenAperture.ManagerApi.MessagingExchange.update_exchange(context[:api], 1, %{name: "test exchange"})
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -250,7 +250,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "update_exchange - failure", context do
     use_cassette "update_exchange_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.update_exchange(context[:api], 1, %{name: "test exchange"})
+      response = OpenAperture.ManagerApi.MessagingExchange.update_exchange(context[:api], 1, %{name: "test exchange"})
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -262,7 +262,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "update_exchange! - success", context do
     use_cassette "update_exchange", custom: true do
-      exchange_id = CloudOS.ManagerAPI.MessagingExchange.update_exchange!(context[:api], 1, %{name: "test exchange"})
+      exchange_id = OpenAperture.ManagerApi.MessagingExchange.update_exchange!(context[:api], 1, %{name: "test exchange"})
       assert exchange_id != nil
       assert exchange_id == "1"
     end
@@ -270,7 +270,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "update_exchange! - failure", context do
     use_cassette "update_exchange_failure", custom: true do
-      exchange_id = CloudOS.ManagerAPI.MessagingExchange.update_exchange!(context[:api], 1, %{name: "test exchange"})
+      exchange_id = OpenAperture.ManagerApi.MessagingExchange.update_exchange!(context[:api], 1, %{name: "test exchange"})
       assert exchange_id == nil
     end
   end
@@ -280,7 +280,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised delete_exchange - success" do
     use_cassette "delete_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange(1)
+      response = OpenAperture.ManagerApi.MessagingExchange.delete_exchange(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -289,7 +289,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange - success", context do
     use_cassette "delete_exchange", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.delete_exchange(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -298,7 +298,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange - failure", context do
     use_cassette "delete_exchange_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.delete_exchange(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -310,7 +310,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange! - success", context do
     use_cassette "delete_exchange", custom: true do
-      exchange_id = CloudOS.ManagerAPI.MessagingExchange.delete_exchange!(context[:api], 1)
+      exchange_id = OpenAperture.ManagerApi.MessagingExchange.delete_exchange!(context[:api], 1)
       assert exchange_id != nil
       assert exchange_id == true
     end
@@ -318,7 +318,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange! - failure", context do
     use_cassette "delete_exchange_failure", custom: true do
-      exchange_id = CloudOS.ManagerAPI.MessagingExchange.delete_exchange!(context[:api], 1)
+      exchange_id = OpenAperture.ManagerApi.MessagingExchange.delete_exchange!(context[:api], 1)
       assert exchange_id == false
     end
   end  
@@ -328,7 +328,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised create_exchange_brokers - success" do
     use_cassette "create_exchange_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.create_exchange_brokers(1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingExchange.create_exchange_brokers(1, %{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -337,7 +337,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange_brokers - success", context do
     use_cassette "create_exchange_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.create_exchange_brokers(context[:api], 1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingExchange.create_exchange_brokers(context[:api], 1, %{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -346,7 +346,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange_brokers - failure", context do
     use_cassette "create_exchange_brokers_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.create_exchange_brokers(context[:api], 1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingExchange.create_exchange_brokers(context[:api], 1, %{name: "test broker"})
       assert response != nil
       assert response.success? == false
       assert response.status == 400
@@ -358,7 +358,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange_brokers! - success", context do
     use_cassette "create_exchange_brokers", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingExchange.create_exchange_brokers!(context[:api], 1, %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingExchange.create_exchange_brokers!(context[:api], 1, %{name: "test broker"})
       assert broker_id != nil
       assert broker_id == true
     end
@@ -366,7 +366,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "create_exchange_brokers! - failure", context do
     use_cassette "create_exchange_brokers_failure", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingExchange.create_exchange_brokers!(context[:api], 1, %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingExchange.create_exchange_brokers!(context[:api], 1, %{name: "test broker"})
       assert broker_id == false
     end
   end
@@ -376,7 +376,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised exchange_brokers - success" do
     use_cassette "exchange_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.exchange_brokers(1)
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_brokers(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -401,7 +401,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_brokers - success", context do
     use_cassette "exchange_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.exchange_brokers(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_brokers(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -426,7 +426,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_brokers - failure", context do
     use_cassette "exchange_brokers_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.exchange_brokers(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_brokers(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -438,7 +438,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_brokers! - success", context do
     use_cassette "exchange_brokers", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingExchange.exchange_brokers!(context[:api], 1)
+      brokers = OpenAperture.ManagerApi.MessagingExchange.exchange_brokers!(context[:api], 1)
       assert brokers != nil
       assert length(brokers) == 2
       is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
@@ -458,7 +458,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_brokers! - failure", context do
     use_cassette "exchange_brokers_failure", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingExchange.exchange_brokers!(context[:api], 1)
+      brokers = OpenAperture.ManagerApi.MessagingExchange.exchange_brokers!(context[:api], 1)
       assert brokers == nil
     end
   end
@@ -468,7 +468,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised delete_exchange_brokers - success" do
     use_cassette "delete_exchange_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers(1)
+      response = OpenAperture.ManagerApi.MessagingExchange.delete_exchange_brokers(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -477,7 +477,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange_brokers - success", context do
     use_cassette "delete_exchange_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.delete_exchange_brokers(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -486,7 +486,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange_brokers - failure", context do
     use_cassette "delete_exchange_brokers_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.delete_exchange_brokers(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -498,7 +498,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange_brokers! - success", context do
     use_cassette "delete_exchange_brokers", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers!(context[:api], 1)
+      broker_id = OpenAperture.ManagerApi.MessagingExchange.delete_exchange_brokers!(context[:api], 1)
       assert broker_id != nil
       assert broker_id == true
     end
@@ -506,7 +506,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "delete_exchange_brokers! - failure", context do
     use_cassette "delete_exchange_brokers_failure", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingExchange.delete_exchange_brokers!(context[:api], 1)
+      broker_id = OpenAperture.ManagerApi.MessagingExchange.delete_exchange_brokers!(context[:api], 1)
       assert broker_id == false
     end
   end 
@@ -516,7 +516,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "supervised exchange_clusters - success" do
     use_cassette "exchange_clusters", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters(1)
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_clusters(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -541,7 +541,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_clusters - success", context do
     use_cassette "exchange_clusters", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_clusters(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -566,7 +566,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_clusters - failure", context do
     use_cassette "exchange_clusters_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_clusters(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -578,7 +578,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_clusters! - success", context do
     use_cassette "exchange_clusters", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters!(context[:api], 1)
+      brokers = OpenAperture.ManagerApi.MessagingExchange.exchange_clusters!(context[:api], 1)
       assert brokers != nil
       assert length(brokers) == 2
       is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
@@ -598,7 +598,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchangeTest do
 
   test "exchange_clusters! - failure", context do
     use_cassette "exchange_clusters_failure", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingExchange.exchange_clusters!(context[:api], 1)
+      brokers = OpenAperture.ManagerApi.MessagingExchange.exchange_clusters!(context[:api], 1)
       assert brokers == nil
     end
   end

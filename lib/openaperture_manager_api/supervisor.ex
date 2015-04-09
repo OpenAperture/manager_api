@@ -1,16 +1,16 @@
 #
 # == supervisor.ex
 #
-# This module contains the supervisor logic for the ManagerAPI (when run as an application).
+# This module contains the supervisor logic for the ManagerApi (when run as an application).
 #
 #
 require Logger
 
-defmodule CloudOS.ManagerAPI.Supervisor do
+defmodule OpenAperture.ManagerApi.Supervisor do
   use Supervisor
 
   @moduledoc """
-  This module contains the supervisor logic for the ManagerAPI (when run as an application).
+  This module contains the supervisor logic for the ManagerApi (when run as an application).
   """ 
 
   @doc """
@@ -31,7 +31,7 @@ defmodule CloudOS.ManagerAPI.Supervisor do
   """ 
   @spec start_link() :: {:ok, pid} | {:error, String.t()}
   def start_link do
-    Logger.info("Starting CloudOS.ManagerAPI.Supervisor...")
+    Logger.info("Starting OpenAperture.ManagerApi.Supervisor...")
     Supervisor.start_link(__MODULE__, [], name: __MODULE__)
   end
 
@@ -45,18 +45,18 @@ defmodule CloudOS.ManagerAPI.Supervisor do
   @spec init([]) :: {:ok, term} | {:error, String.t()}
   def init([]) do
     children = [
-      worker(CloudOS.ManagerAPI, [%{
-        manager_url: Application.get_env(:cloudos_manager_api, :manager_url, ""),
-        oauth_login_url: Application.get_env(:cloudos_manager_api, :oauth_login_url, ""),
-        oauth_client_id: Application.get_env(:cloudos_manager_api, :oauth_client_id, ""),
-        oauth_client_secret: Application.get_env(:cloudos_manager_api, :oauth_client_secret, "")}])
+      worker(OpenAperture.ManagerApi, [%{
+        manager_url: Application.get_env(:openaperture_manager_api, :manager_url, ""),
+        oauth_login_url: Application.get_env(:openaperture_manager_api, :oauth_login_url, ""),
+        oauth_client_id: Application.get_env(:openaperture_manager_api, :oauth_client_id, ""),
+        oauth_client_secret: Application.get_env(:openaperture_manager_api, :oauth_client_secret, "")}])
     ]
 
     supervise(children, strategy: :one_for_one)
   end
 
   @doc """
-  Method to return the global ManagerAPI instance, when ManagerAPI is started as an application.
+  Method to return the global ManagerApi instance, when ManagerApi is started as an application.
 
   ## Return values
 
@@ -66,7 +66,7 @@ defmodule CloudOS.ManagerAPI.Supervisor do
   def get_api do
     supervisor = Process.whereis(__MODULE__)
     if supervisor == nil do
-      Logger.error("Unable to retrieve supervised CloudOS.ManagerAPI because the supervisor is invalid!")
+      Logger.error("Unable to retrieve supervised OpenAperture.ManagerApi because the supervisor is invalid!")
       nil
     else
       children = Supervisor.which_children(supervisor)

@@ -9,7 +9,7 @@
     "SublimeLinter": {
         "linters": {
             "elixirc": {
-                "pa": ["${project}/_build/dev/lib/cloudos_manager_api/ebin"]
+                "pa": ["${project}/_build/dev/lib/manager_api/ebin"]
             }
         }
     }

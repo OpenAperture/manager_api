@@ -1,11 +1,11 @@
 #
 # == error.ex
 #
-# This module contains the standard error definition for CloudOS.ManagerAPI
+# This module contains the standard error definition for OpenAperture.ManagerApi
 #
-defmodule CloudOS.ManagerAPI.Error do
+defmodule OpenAperture.ManagerApi.Error do
   @moduledoc """
-  This module contains the standard error definition for CloudOS.ManagerAPI
+  This module contains the standard error definition for OpenAperture.ManagerApi
   """  
 
   defstruct stacktrace: nil, kind: nil, error: nil
@@ -20,7 +20,7 @@ defmodule CloudOS.ManagerAPI.Error do
 
   ## Return Values
 
-  CloudOS.ManagerAPI.Error
+  OpenAperture.ManagerApi.Error
   """
   @spec process(term, term) :: term
   def process(kind, error) do

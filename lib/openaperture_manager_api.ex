@@ -1,14 +1,14 @@
 #
-# == cloudos_manager_api.ex
+# == openaperture_manager_api.ex
 #
-# This module contains the the application definition as well as the create options for CloudOS.ManagerAPI.  This 
+# This module contains the the application definition as well as the create options for OpenAperture.ManagerApi.  This 
 # API library can be consumed either as an application (which can be supervised), or on a per-instance basis. 
 #
-defmodule CloudOS.ManagerAPI do
+defmodule OpenAperture.ManagerApi do
 	use Application
 
   @moduledoc """
-  This module contains the the application definition as well as the create options for CloudOS.ManagerAPI.  This 
+  This module contains the the application definition as well as the create options for OpenAperture.ManagerApi.  This 
   API library can be consumed either as an application (which can be supervised), or on a per-instance basis. 
   """ 
 
@@ -48,7 +48,7 @@ defmodule CloudOS.ManagerAPI do
     import Supervisor.Spec, warn: false
 
     children = [
-      supervisor(CloudOS.ManagerAPI.Supervisor, []),
+      supervisor(OpenAperture.ManagerApi.Supervisor, []),
     ]
 
     opts = [strategy: :one_for_one]
@@ -56,13 +56,13 @@ defmodule CloudOS.ManagerAPI do
   end
 
   @doc """
-  Method to start the ManagerAPI as a process tied to the current supervision tree (Required by the supervisor).
+  Method to start the ManagerApi as a process tied to the current supervision tree (Required by the supervisor).
 
   ## Return values
 
-  If the ManagerAPI is successfully created and initialized, the function returns
-  `{:ok, pid}`, where pid is the pid of the ManagerAPI. If there already exists a
-  process with the specified ManagerAPI name, the function returns
+  If the ManagerApi is successfully created and initialized, the function returns
+  `{:ok, pid}`, where pid is the pid of the ManagerApi. If there already exists a
+  process with the specified ManagerApi name, the function returns
   `{:error, {:already_started, pid}}` with the pid of that process.
 
   If the `init/1` callback fails with `reason`, the function returns
@@ -77,13 +77,13 @@ defmodule CloudOS.ManagerAPI do
 	end
 
   @doc """
-  Method to start the ManagerAPI as a process tied to the current supervision tree
+  Method to start the ManagerApi as a process tied to the current supervision tree
 
   ## Return values
 
-  If the ManagerAPI is successfully created and initialized, the function returns
-  `{:ok, pid}`, where pid is the pid of the ManagerAPI. If there already exists a
-  process with the specified ManagerAPI name, the function returns
+  If the ManagerApi is successfully created and initialized, the function returns
+  `{:ok, pid}`, where pid is the pid of the ManagerApi. If there already exists a
+  process with the specified ManagerApi name, the function returns
   `{:error, {:already_started, pid}}` with the pid of that process.
 
   If the `init/1` callback fails with `reason`, the function returns
@@ -98,7 +98,7 @@ defmodule CloudOS.ManagerAPI do
   end
 
   @doc """
-  Method to start the ManagerAPI as a process tied to the current supervision tree
+  Method to start the ManagerApi as a process tied to the current supervision tree
 
   ## Return values
 
@@ -108,12 +108,12 @@ defmodule CloudOS.ManagerAPI do
   def create!(opts) do
     case create(opts) do
     	{:ok, pid} -> pid
-    	{:error, reason} -> raise "Failed to start ManagerAPI:  #{inspect reason}"
+    	{:error, reason} -> raise "Failed to start ManagerApi:  #{inspect reason}"
     end
   end
 
   @doc """
-  Method to return the global ManagerAPI instance, when ManagerAPI is started as an application.
+  Method to return the global ManagerApi instance, when ManagerApi is started as an application.
 
   ## Return values
 
@@ -121,15 +121,15 @@ defmodule CloudOS.ManagerAPI do
   """	
 	@spec get_api() :: pid
   def get_api() do
-    CloudOS.ManagerAPI.Supervisor.get_api
+    OpenAperture.ManagerApi.Supervisor.get_api
   end  
 
   @doc """
-  Method to return options associated with a ManagerAPI instance
+  Method to return options associated with a ManagerApi instance
 
   ## Option Values
 
-  The `api` option defines the ManagerAPI instance pid
+  The `api` option defines the ManagerApi instance pid
 
   ## Return values
 

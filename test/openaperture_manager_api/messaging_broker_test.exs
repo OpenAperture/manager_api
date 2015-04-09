@@ -1,8 +1,8 @@
-defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
+defmodule OpenAperture.ManagerApi.MessagingBrokerTest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi.Response
 
   setup_all _context do
     :meck.new(CloudosAuth.Client, [:passthrough])
@@ -17,7 +17,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
   end
 
   setup do
-    api = CloudOS.ManagerAPI.create!(%{manager_url: "https://cloudos-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
+    api = OpenAperture.ManagerApi.create!(%{manager_url: "https://openaperture-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
 
     {:ok, [
       api: api
@@ -29,7 +29,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised list - success" do
     use_cassette "list_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.list
+      response = OpenAperture.ManagerApi.MessagingBroker.list
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -54,7 +54,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "list - success", context do
     use_cassette "list_brokers", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.list(context[:api])
+      response = OpenAperture.ManagerApi.MessagingBroker.list(context[:api])
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -79,7 +79,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "list - failure", context do
     use_cassette "list_brokers_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.list(context[:api])
+      response = OpenAperture.ManagerApi.MessagingBroker.list(context[:api])
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -91,7 +91,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "list! - success", context do
     use_cassette "list_brokers", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingBroker.list!(context[:api])
+      brokers = OpenAperture.ManagerApi.MessagingBroker.list!(context[:api])
       assert brokers != nil
       assert length(brokers) == 2
       is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
@@ -111,7 +111,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "list! - failure", context do
     use_cassette "list_brokers_failure", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingBroker.list!(context[:api])
+      brokers = OpenAperture.ManagerApi.MessagingBroker.list!(context[:api])
       assert brokers == nil
     end
   end
@@ -121,7 +121,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised get_broker - success" do
     use_cassette "get_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.get_broker(1)
+      response = OpenAperture.ManagerApi.MessagingBroker.get_broker(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -135,7 +135,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "get_broker - success", context do
     use_cassette "get_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.get_broker(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.get_broker(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -149,7 +149,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "get_broker - failure", context do
     use_cassette "get_broker_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.get_broker(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.get_broker(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -161,7 +161,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "get_broker! - success", context do
     use_cassette "get_broker", custom: true do
-      broker = CloudOS.ManagerAPI.MessagingBroker.get_broker!(context[:api], 1)
+      broker = OpenAperture.ManagerApi.MessagingBroker.get_broker!(context[:api], 1)
       assert broker != nil
       assert broker["id"] == 1 
       assert broker["name"] == "test broker"
@@ -170,7 +170,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "get_broker! - failure", context do
     use_cassette "get_broker_failure", custom: true do
-      broker = CloudOS.ManagerAPI.MessagingBroker.get_broker!(context[:api], 1)
+      broker = OpenAperture.ManagerApi.MessagingBroker.get_broker!(context[:api], 1)
       assert broker == nil
     end
   end
@@ -180,7 +180,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised create_broker - success" do
     use_cassette "create_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.create_broker(%{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.create_broker(%{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -190,7 +190,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker - success", context do
     use_cassette "create_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.create_broker(context[:api], %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.create_broker(context[:api], %{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -200,7 +200,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker - failure", context do
     use_cassette "create_broker_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.create_broker(context[:api], %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.create_broker(context[:api], %{name: "test broker"})
       assert response != nil
       assert response.success? == false
       assert response.status == 400
@@ -212,7 +212,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker! - success", context do
     use_cassette "create_broker", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.create_broker!(context[:api], %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.create_broker!(context[:api], %{name: "test broker"})
       assert broker_id != nil
       assert broker_id == "1"
     end
@@ -220,7 +220,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker! - failure", context do
     use_cassette "create_broker_failure", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.create_broker!(context[:api], %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.create_broker!(context[:api], %{name: "test broker"})
       assert broker_id == nil
     end
   end
@@ -230,7 +230,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised update_broker - success" do
     use_cassette "update_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.update_broker(1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.update_broker(1, %{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -240,7 +240,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "update_broker - success", context do
     use_cassette "update_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.update_broker(context[:api], 1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.update_broker(context[:api], 1, %{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -250,7 +250,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "update_broker - failure", context do
     use_cassette "update_broker_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.update_broker(context[:api], 1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.update_broker(context[:api], 1, %{name: "test broker"})
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -262,7 +262,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "update_broker! - success", context do
     use_cassette "update_broker", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.update_broker!(context[:api], 1, %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.update_broker!(context[:api], 1, %{name: "test broker"})
       assert broker_id != nil
       assert broker_id == "1"
     end
@@ -270,7 +270,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "update_broker! - failure", context do
     use_cassette "update_broker_failure", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.update_broker!(context[:api], 1, %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.update_broker!(context[:api], 1, %{name: "test broker"})
       assert broker_id == nil
     end
   end  
@@ -280,7 +280,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised delete_broker - success" do
     use_cassette "delete_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.delete_broker(1)
+      response = OpenAperture.ManagerApi.MessagingBroker.delete_broker(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -289,7 +289,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker - success", context do
     use_cassette "delete_broker", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.delete_broker(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.delete_broker(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -298,7 +298,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker - failure", context do
     use_cassette "delete_broker_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.delete_broker(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.delete_broker(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -310,7 +310,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker! - success", context do
     use_cassette "delete_broker", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.delete_broker!(context[:api], 1)
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.delete_broker!(context[:api], 1)
       assert broker_id != nil
       assert broker_id == true
     end
@@ -318,7 +318,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker! - failure", context do
     use_cassette "delete_broker_failure", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.delete_broker!(context[:api], 1)
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.delete_broker!(context[:api], 1)
       assert broker_id == false
     end
   end  
@@ -328,7 +328,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised create_broker_connection - success" do
     use_cassette "create_broker_connection", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection(1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.create_broker_connection(1, %{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -337,7 +337,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker_connection - success", context do
     use_cassette "create_broker_connection", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection(context[:api], 1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.create_broker_connection(context[:api], 1, %{name: "test broker"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -346,7 +346,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker_connection - failure", context do
     use_cassette "create_broker_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection(context[:api], 1, %{name: "test broker"})
+      response = OpenAperture.ManagerApi.MessagingBroker.create_broker_connection(context[:api], 1, %{name: "test broker"})
       assert response != nil
       assert response.success? == false
       assert response.status == 400
@@ -358,7 +358,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker_connection! - success", context do
     use_cassette "create_broker_connection", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection!(context[:api], 1, %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.create_broker_connection!(context[:api], 1, %{name: "test broker"})
       assert broker_id != nil
       assert broker_id == true
     end
@@ -366,7 +366,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "create_broker_connection! - failure", context do
     use_cassette "create_broker_failure", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.create_broker_connection!(context[:api], 1, %{name: "test broker"})
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.create_broker_connection!(context[:api], 1, %{name: "test broker"})
       assert broker_id == false
     end
   end
@@ -376,7 +376,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised broker_connections - success" do
     use_cassette "get_broker_connections", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.broker_connections(1)
+      response = OpenAperture.ManagerApi.MessagingBroker.broker_connections(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -401,7 +401,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "broker_connections - success", context do
     use_cassette "get_broker_connections", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.broker_connections(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.broker_connections(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -426,7 +426,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "broker_connections - failure", context do
     use_cassette "get_broker_connections_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.broker_connections(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.broker_connections(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -438,7 +438,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "broker_connections! - success", context do
     use_cassette "get_broker_connections", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingBroker.broker_connections!(context[:api], 1)
+      brokers = OpenAperture.ManagerApi.MessagingBroker.broker_connections!(context[:api], 1)
       assert brokers != nil
       assert length(brokers) == 2
       is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
@@ -458,7 +458,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "broker_connections! - failure", context do
     use_cassette "get_broker_connections_failure", custom: true do
-      brokers = CloudOS.ManagerAPI.MessagingBroker.broker_connections!(context[:api], 1)
+      brokers = OpenAperture.ManagerApi.MessagingBroker.broker_connections!(context[:api], 1)
       assert brokers == nil
     end
   end
@@ -468,7 +468,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "supervised delete_broker_connections - success" do
     use_cassette "delete_broker_connections", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections(1)
+      response = OpenAperture.ManagerApi.MessagingBroker.delete_broker_connections(1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -477,7 +477,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker_connections - success", context do
     use_cassette "delete_broker_connections", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.delete_broker_connections(context[:api], 1)
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -486,7 +486,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker_connections - failure", context do
     use_cassette "delete_broker_connections_failure", custom: true do
-      response = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections(context[:api], 1)
+      response = OpenAperture.ManagerApi.MessagingBroker.delete_broker_connections(context[:api], 1)
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -498,7 +498,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker_connections! - success", context do
     use_cassette "delete_broker_connections", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections!(context[:api], 1)
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.delete_broker_connections!(context[:api], 1)
       assert broker_id != nil
       assert broker_id == true
     end
@@ -506,7 +506,7 @@ defmodule CloudOS.ManagerAPI.MessagingBrokerTest do
 
   test "delete_broker_connections! - failure", context do
     use_cassette "delete_broker_connections_failure", custom: true do
-      broker_id = CloudOS.ManagerAPI.MessagingBroker.delete_broker_connections!(context[:api], 1)
+      broker_id = OpenAperture.ManagerApi.MessagingBroker.delete_broker_connections!(context[:api], 1)
       assert broker_id == false
     end
   end 

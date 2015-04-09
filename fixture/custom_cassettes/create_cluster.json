@@ -4,13 +4,13 @@
       "body": "",
       "headers": {
         "Accept": "application/json",
-        "User-Agent": "cloudos-manager-api"
+        "User-Agent": "openaperture-manager-api"
       },
       "method": "post",
       "options": {
         "connect_timeout": 5000
       },
-      "url": "https://cloudos-mgr.host.co/clusters"
+      "url": "https://openaperture-mgr.host.co/clusters"
     },
     "response": {
       "body": "",
@@ -18,7 +18,7 @@
         "Content-Type": "application/json",
         "Content-Length": "-1",
         "Connection": "keep-alive",
-        "Location": "https://cloudos-mgr.host.co/cluster/123abc"
+        "Location": "https://openaperture-mgr.host.co/cluster/123abc"
       },
       "status_code": ["HTTP/1.1", 201, "Created"],
       "type": "ok"

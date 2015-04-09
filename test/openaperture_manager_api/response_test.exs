@@ -1,7 +1,7 @@
 defmodule ResponseTest do
   use ExUnit.Case
 
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi.Response
 
   test "process a successful request" do
     api_response = {:ok, %{status_code: 200, headers: [{'Content-Type', 'application/json'}], body: "{\"cool\": \"a cool response\"}"}}
@@ -39,7 +39,7 @@ defmodule ResponseTest do
   # extract_identifier_from_location_header tests
 
   test "extract_identifier_from_location_header - absolute path" do
-    api_response = {:ok, %{status_code: 201, headers: [{'location', 'https://cloudos-mgr.host.co/messsaging/brokers/1'}], body: ""}}
+    api_response = {:ok, %{status_code: 201, headers: [{'location', 'https://openaperture-mgr.host.co/messsaging/brokers/1'}], body: ""}}
     response = Response.process(fn -> api_response end)
 
     assert Response.extract_identifier_from_location_header(response) == "1"

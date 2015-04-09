@@ -2,5 +2,5 @@
 /deps
 erl_crash.dump
 *.ez
-cloudos_manager_api.sublime-workspace
+manager_api.sublime-workspace
 mix.lock

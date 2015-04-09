@@ -7,11 +7,6 @@ use Mix.Config
 # file won't be loaded nor affect the parent project. For this reason,
 # if you want to provide default values for your application for third-
 # party users, it should be done in your mix.exs file.
-config :cloudos_manager_api, 
-	manager_url: System.get_env("CLOUDOS_MANAGER_URL"),
-	oauth_login_url: System.get_env("CLOUDOS_OAUTH_LOGIN_URL"),
-	oauth_client_id: System.get_env("CLOUDOS_OAUTH_CLIENT_ID"),
-	oauth_client_secret: System.get_env("CLOUDOS_OAUTH_CLIENT_SECRET")
 
 # Sample configuration:
 #

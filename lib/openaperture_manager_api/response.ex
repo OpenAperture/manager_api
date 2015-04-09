@@ -1,19 +1,19 @@
 #
 # == response.ex
 #
-# This module contains the ManagerAPI response struct and reusable methods for processing responses from the cloudos_manager.
+# This module contains the ManagerApi response struct and reusable methods for processing responses from the openaperture_manager.
 #
 require Logger
 
-defmodule CloudOS.ManagerAPI.Response do
+defmodule OpenAperture.ManagerApi.Response do
   defstruct body: nil, success?: nil, raw_body: nil, status: nil, headers: nil
 
   @moduledoc """
-  This module contains the ManagerAPI response struct and reusable methods for processing responses from the cloudos_manager.
+  This module contains the ManagerApi response struct and reusable methods for processing responses from the openaperture_manager.
   """ 
 
   @doc """
-  Method to process an incoming http response into a CloudOS.ManagerAPI.Response
+  Method to process an incoming http response into a OpenAperture.ManagerApi.Response
 
   ## Option Values
 
@@ -21,19 +21,19 @@ defmodule CloudOS.ManagerAPI.Response do
 
   ## Return values
 
-  CloudOS.ManagerAPI.Response
+  OpenAperture.ManagerApi.Response
   """ 
   @spec process(term) :: term
   def process(request) do
     try do
       process_response request.()
     catch
-      kind, error -> CloudOS.ManagerAPI.Error.process(kind, error)
+      kind, error -> OpenAperture.ManagerApi.Error.process(kind, error)
     end
   end
 
   @doc """
-  Method to process an incoming httpc response into a CloudOS.ManagerAPI.Response
+  Method to process an incoming httpc response into a OpenAperture.ManagerApi.Response
 
   ## Option Values
 
@@ -41,7 +41,7 @@ defmodule CloudOS.ManagerAPI.Response do
 
   ## Return values
 
-  CloudOS.ManagerAPI.Response
+  OpenAperture.ManagerApi.Response
   """ 
   @spec from_httpc_response(term) :: term
   def from_httpc_response(response) do
@@ -58,7 +58,7 @@ defmodule CloudOS.ManagerAPI.Response do
 
   ## Option Values
 
-  The `response` option defines the CloudOS.ManagerAPI.Response
+  The `response` option defines the OpenAperture.ManagerApi.Response
 
   ## Return values
 
@@ -82,7 +82,7 @@ defmodule CloudOS.ManagerAPI.Response do
 
   ## Option Values
 
-  The `response` option defines the CloudOS.ManagerAPI.Response
+  The `response` option defines the OpenAperture.ManagerApi.Response
 
   ## Return values
 
@@ -104,7 +104,7 @@ defmodule CloudOS.ManagerAPI.Response do
   end
 
   @doc false
-  # Method to process an incoming httpc :ok response into a CloudOS.ManagerAPI.Response
+  # Method to process an incoming httpc :ok response into a OpenAperture.ManagerApi.Response
   #
   ## Options
   #
@@ -112,7 +112,7 @@ defmodule CloudOS.ManagerAPI.Response do
   #
   ## Return Value
   #
-  # CloudOS.ManagerAPI.Response
+  # OpenAperture.ManagerApi.Response
   #
   @spec process_response({:ok, term}) :: term
   defp process_response({:ok, response}) do
@@ -126,7 +126,7 @@ defmodule CloudOS.ManagerAPI.Response do
   end
 
   @doc false
-  # Method to process an incoming httpc :error response into a CloudOS.ManagerAPI.Response
+  # Method to process an incoming httpc :error response into a OpenAperture.ManagerApi.Response
   #
   ## Options
   #
@@ -134,7 +134,7 @@ defmodule CloudOS.ManagerAPI.Response do
   #
   ## Return Value
   #
-  # CloudOS.ManagerAPI.Response
+  # OpenAperture.ManagerApi.Response
   #
   @spec process_response({:error, term}) :: term
   defp process_response({:error, response}) do
@@ -148,7 +148,7 @@ defmodule CloudOS.ManagerAPI.Response do
   end
 
   @doc false
-  # Method to parse out a JSON body for a CloudOS.ManagerAPI.Response
+  # Method to parse out a JSON body for a OpenAperture.ManagerApi.Response
   #
   ## Options
   #
@@ -165,7 +165,7 @@ defmodule CloudOS.ManagerAPI.Response do
         |> String.strip
         |> process_body
     rescue e in _ ->
-      Logger.debug "[CloudOS.ManagerAPI] An error occurred processing response body:  #{inspect e}"
+      Logger.debug "[OpenAperture.ManagerApi] An error occurred processing response body:  #{inspect e}"
       nil
     end    
   end

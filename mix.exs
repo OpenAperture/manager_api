@@ -1,8 +1,8 @@
-defmodule CloudOS.ManagerAPI.Mixfile do
+defmodule ManagerApi.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :cloudos_manager_api,
+    [app: :openaperture_manager_api,
      version: "0.0.1",
      elixir: "~> 1.0",
      deps: deps]
@@ -13,7 +13,7 @@ defmodule CloudOS.ManagerAPI.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [
-      mod: {CloudOS.ManagerAPI, []},
+      mod: {OpenAperture.ManagerApi, []},
       applications: [:logger, :cloudos_auth]
     ]
   end

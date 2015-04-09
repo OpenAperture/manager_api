@@ -1,8 +1,8 @@
-defmodule CloudOS.ManagerAPI.EtcdClusterTest do
+defmodule OpenAperture.ManagerApi.EtcdClusterTest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi.Response
 
   setup_all _context do
     :meck.new(CloudosAuth.Client, [:passthrough])
@@ -17,7 +17,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
   end
 
   setup do
-    api = CloudOS.ManagerAPI.create!(%{manager_url: "https://cloudos-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
+    api = OpenAperture.ManagerApi.create!(%{manager_url: "https://openaperture-mgr.host.co", oauth_login_url: "https://auth.host.co", oauth_client_id: "id", oauth_client_secret: "secret"})
 
     {:ok, [
       api: api
@@ -29,7 +29,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised list - success" do
     use_cassette "list_clusters", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.list
+      response = OpenAperture.ManagerApi.EtcdCluster.list
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -54,7 +54,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "list - success", context do
     use_cassette "list_clusters", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.list(context[:api])
+      response = OpenAperture.ManagerApi.EtcdCluster.list(context[:api])
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -79,7 +79,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "list - failure", context do
     use_cassette "list_clusters_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.list(context[:api])
+      response = OpenAperture.ManagerApi.EtcdCluster.list(context[:api])
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -91,7 +91,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "list! - success", context do
     use_cassette "list_clusters", custom: true do
-      brokers = CloudOS.ManagerAPI.EtcdCluster.list!(context[:api])
+      brokers = OpenAperture.ManagerApi.EtcdCluster.list!(context[:api])
       assert brokers != nil
       assert length(brokers) == 2
       is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
@@ -111,7 +111,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "list! - failure", context do
     use_cassette "list_clusters_failure", custom: true do
-      brokers = CloudOS.ManagerAPI.EtcdCluster.list!(context[:api])
+      brokers = OpenAperture.ManagerApi.EtcdCluster.list!(context[:api])
       assert brokers == nil
     end
   end
@@ -121,7 +121,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised get_cluster - success" do
     use_cassette "get_cluster", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster("123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster("123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -134,7 +134,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster - success", context do
     use_cassette "get_cluster", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster(context[:api], "123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -147,7 +147,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster - failure", context do
     use_cassette "get_cluster_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster(context[:api], "123abc")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -159,7 +159,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster! - success", context do
     use_cassette "get_cluster", custom: true do
-      broker = CloudOS.ManagerAPI.EtcdCluster.get_cluster!(context[:api], "123abc")
+      broker = OpenAperture.ManagerApi.EtcdCluster.get_cluster!(context[:api], "123abc")
       assert broker != nil
       assert broker["etcd_token"] == "123abc"
     end
@@ -167,7 +167,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster! - failure", context do
     use_cassette "get_cluster_failure", custom: true do
-      broker = CloudOS.ManagerAPI.EtcdCluster.get_cluster!(context[:api], "123abc")
+      broker = OpenAperture.ManagerApi.EtcdCluster.get_cluster!(context[:api], "123abc")
       assert broker == nil
     end
   end
@@ -177,7 +177,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised create_cluster - success" do
     use_cassette "create_cluster", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.create_cluster(%{etcd_token: "123abc"})
+      response = OpenAperture.ManagerApi.EtcdCluster.create_cluster(%{etcd_token: "123abc"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -187,7 +187,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "create_cluster - success", context do
     use_cassette "create_cluster", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.create_cluster(context[:api], %{etcd_token: "123abc"})
+      response = OpenAperture.ManagerApi.EtcdCluster.create_cluster(context[:api], %{etcd_token: "123abc"})
       assert response != nil
       assert response.success? == true
       assert response.status == 201
@@ -197,7 +197,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "create_cluster - failure", context do
     use_cassette "create_cluster_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.create_cluster(context[:api], %{etcd_token: "123abc"})
+      response = OpenAperture.ManagerApi.EtcdCluster.create_cluster(context[:api], %{etcd_token: "123abc"})
       assert response != nil
       assert response.success? == false
       assert response.status == 400
@@ -209,7 +209,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "create_cluster! - success", context do
     use_cassette "create_cluster", custom: true do
-      token = CloudOS.ManagerAPI.EtcdCluster.create_cluster!(context[:api], %{etcd_token: "123abc"})
+      token = OpenAperture.ManagerApi.EtcdCluster.create_cluster!(context[:api], %{etcd_token: "123abc"})
       assert token != nil
       assert token == "123abc"
     end
@@ -217,7 +217,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "create_cluster! - failure", context do
     use_cassette "create_cluster_failure", custom: true do
-      token = CloudOS.ManagerAPI.EtcdCluster.create_cluster!(context[:api], %{etcd_token: "123abc"})
+      token = OpenAperture.ManagerApi.EtcdCluster.create_cluster!(context[:api], %{etcd_token: "123abc"})
       assert token == nil
     end
   end
@@ -227,7 +227,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised delete_cluster - success" do
     use_cassette "delete_cluster", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.delete_cluster("123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.delete_cluster("123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -236,7 +236,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "delete_cluster - success", context do
     use_cassette "delete_cluster", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.delete_cluster(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.delete_cluster(context[:api], "123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 204
@@ -245,7 +245,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "delete_cluster - failure", context do
     use_cassette "delete_cluster_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.delete_cluster(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.delete_cluster(context[:api], "123abc")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -257,7 +257,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "delete_cluster! - success", context do
     use_cassette "delete_cluster", custom: true do
-      token = CloudOS.ManagerAPI.EtcdCluster.delete_cluster!(context[:api], "123abc")
+      token = OpenAperture.ManagerApi.EtcdCluster.delete_cluster!(context[:api], "123abc")
       assert token != nil
       assert token == true
     end
@@ -265,7 +265,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "delete_cluster! - failure", context do
     use_cassette "delete_cluster_failure", custom: true do
-      token = CloudOS.ManagerAPI.EtcdCluster.delete_cluster!(context[:api], "123abc")
+      token = OpenAperture.ManagerApi.EtcdCluster.delete_cluster!(context[:api], "123abc")
       assert token == false
     end
   end
@@ -275,7 +275,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised get_cluster_products - success" do
     use_cassette "get_cluster_products", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_products("123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_products("123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -300,7 +300,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_products - success", context do
     use_cassette "get_cluster_products", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_products(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_products(context[:api], "123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -325,7 +325,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_products - failure", context do
     use_cassette "get_cluster_products_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_products(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_products(context[:api], "123abc")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -337,7 +337,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_products! - success", context do
     use_cassette "get_cluster_products", custom: true do
-      products = CloudOS.ManagerAPI.EtcdCluster.get_cluster_products!(context[:api], "123abc")
+      products = OpenAperture.ManagerApi.EtcdCluster.get_cluster_products!(context[:api], "123abc")
       assert products != nil
       assert length(products) == 2
       is_successful = Enum.reduce products, true, fn (product, is_successful) ->
@@ -357,7 +357,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_products! - failure", context do
     use_cassette "get_cluster_products_failure", custom: true do
-      broker = CloudOS.ManagerAPI.EtcdCluster.get_cluster_products!(context[:api], "123abc")
+      broker = OpenAperture.ManagerApi.EtcdCluster.get_cluster_products!(context[:api], "123abc")
       assert broker == nil
     end
   end
@@ -367,7 +367,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised get_cluster_machines - success" do
     use_cassette "get_cluster_machines", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_machines("123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_machines("123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -392,7 +392,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_machines - success", context do
     use_cassette "get_cluster_machines", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_machines(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_machines(context[:api], "123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -417,7 +417,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_machines - failure", context do
     use_cassette "get_cluster_machines_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_machines(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_machines(context[:api], "123abc")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -429,7 +429,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_machines! - success", context do
     use_cassette "get_cluster_machines", custom: true do
-      machines = CloudOS.ManagerAPI.EtcdCluster.get_cluster_machines!(context[:api], "123abc")
+      machines = OpenAperture.ManagerApi.EtcdCluster.get_cluster_machines!(context[:api], "123abc")
       assert machines != nil
       assert length(machines) == 2
       is_successful = Enum.reduce machines, true, fn (machine, is_successful) ->
@@ -449,7 +449,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_machines! - failure", context do
     use_cassette "get_cluster_machines_failure", custom: true do
-      machines = CloudOS.ManagerAPI.EtcdCluster.get_cluster_machines!(context[:api], "123abc")
+      machines = OpenAperture.ManagerApi.EtcdCluster.get_cluster_machines!(context[:api], "123abc")
       assert machines == nil
     end
   end
@@ -459,7 +459,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised get_cluster_units - success" do
     use_cassette "get_cluster_units", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units("123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units("123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -484,7 +484,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units - success", context do
     use_cassette "get_cluster_units", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units(context[:api], "123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -509,7 +509,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units - failure", context do
     use_cassette "get_cluster_units_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units(context[:api], "123abc")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -521,7 +521,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units! - success", context do
     use_cassette "get_cluster_units", custom: true do
-      units = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units!(context[:api], "123abc")
+      units = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units!(context[:api], "123abc")
       assert units != nil
       assert length(units) == 2
       is_successful = Enum.reduce units, true, fn (unit, is_successful) ->
@@ -541,7 +541,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units! - failure", context do
     use_cassette "get_cluster_units_failure", custom: true do
-      machines = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units!(context[:api], "123abc")
+      machines = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units!(context[:api], "123abc")
       assert machines == nil
     end
   end
@@ -551,7 +551,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised get_cluster_units_state - success" do
     use_cassette "get_cluster_units_state", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units_state("123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units_state("123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -576,7 +576,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units_state - success", context do
     use_cassette "get_cluster_units_state", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units_state(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units_state(context[:api], "123abc")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -601,7 +601,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units_state - failure", context do
     use_cassette "get_cluster_units_state_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units_state(context[:api], "123abc")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units_state(context[:api], "123abc")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -613,7 +613,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units_state! - success", context do
     use_cassette "get_cluster_units_state", custom: true do
-      units = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units_state!(context[:api], "123abc")
+      units = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units_state!(context[:api], "123abc")
       assert units != nil
       assert length(units) == 2
       is_successful = Enum.reduce units, true, fn (unit, is_successful) ->
@@ -633,7 +633,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_units_state! - failure", context do
     use_cassette "get_cluster_units_state_failure", custom: true do
-      machines = CloudOS.ManagerAPI.EtcdCluster.get_cluster_units_state!(context[:api], "123abc")
+      machines = OpenAperture.ManagerApi.EtcdCluster.get_cluster_units_state!(context[:api], "123abc")
       assert machines == nil
     end
   end
@@ -643,7 +643,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "supervised get_cluster_unit_log - success" do
     use_cassette "get_cluster_unit_log", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log("123abc", 1, "testUnit")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_unit_log("123abc", 1, "testUnit")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -654,7 +654,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_unit_log - success", context do
     use_cassette "get_cluster_unit_log", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log(context[:api], "123abc", 1, "testUnit")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_unit_log(context[:api], "123abc", 1, "testUnit")
       assert response != nil
       assert response.success? == true
       assert response.status == 200
@@ -665,7 +665,7 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_unit_log - failure", context do
     use_cassette "get_cluster_unit_log_failure", custom: true do
-      response = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log(context[:api], "123abc", 1, "testUnit")
+      response = OpenAperture.ManagerApi.EtcdCluster.get_cluster_unit_log(context[:api], "123abc", 1, "testUnit")
       assert response != nil
       assert response.success? == false
       assert response.status == 401
@@ -677,14 +677,14 @@ defmodule CloudOS.ManagerAPI.EtcdClusterTest do
 
   test "get_cluster_unit_log! - success", context do
     use_cassette "get_cluster_unit_log", custom: true do
-      logs = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log!(context[:api], "123abc", 1, "testUnit")
+      logs = OpenAperture.ManagerApi.EtcdCluster.get_cluster_unit_log!(context[:api], "123abc", 1, "testUnit")
       assert logs == "this is the log file content\nwhat new log is now"
     end
   end
 
   test "get_cluster_unit_log! - failure", context do
     use_cassette "get_cluster_unit_log_failure", custom: true do
-      logs = CloudOS.ManagerAPI.EtcdCluster.get_cluster_unit_log!(context[:api], "123abc", 1, "testUnit")
+      logs = OpenAperture.ManagerApi.EtcdCluster.get_cluster_unit_log!(context[:api], "123abc", 1, "testUnit")
       assert logs == nil
     end
   end

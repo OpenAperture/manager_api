@@ -3,11 +3,11 @@
 #
 # This module contains the resources for managing MessagingExchanges
 #
-defmodule CloudOS.ManagerAPI.MessagingExchange do
-  import CloudOS.ManagerAPI.Resource
+defmodule OpenAperture.ManagerApi.MessagingExchange do
+  import OpenAperture.ManagerApi.Resource
 
-  alias CloudOS.ManagerAPI
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi
+  alias OpenAperture.ManagerApi.Response
 
   @moduledoc """
   This module contains the resources for managing MessagingExchanges
@@ -17,7 +17,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Retrieves the entire list of MessagingExchanges. 
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -27,10 +27,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec list(pid, Map, List, List) :: term
-  def list(api \\ ManagerAPI.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges", queryparams), headers, options)
   end
 
@@ -38,7 +38,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Retrieves the entire list of MessagingExchanges. 
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -51,7 +51,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Returns nil (if failure) or a list of Maps, each representing a MessagingExchanges.
   """
   @spec list(pid, Map, List, List) :: List[Map]
-  def list!(api \\ ManagerAPI.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
       response.body
@@ -64,7 +64,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Retrieves a specific MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -76,10 +76,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_exchange(pid, term, Map, List, List) :: term
-  def get_exchange(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_exchange(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{id}", queryparams), headers, options)
   end
 
@@ -87,7 +87,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Retrieves a specific MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -102,7 +102,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Map of the MessagingExchange
   """
   @spec get_exchange!(pid, term, Map, List, List) :: Map
-  def get_exchange!(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_exchange!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_exchange(api, id, queryparams, headers, options)
     if response.success? do
       response.body
@@ -115,7 +115,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Create a MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `exchange` option defines the MessagingExchange map.
 
@@ -127,10 +127,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec create_exchange(pid, Map, Map, List, List) :: term
-  def create_exchange(api \\ ManagerAPI.get_api, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_exchange(api \\ ManagerApi.get_api, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("messaging/exchanges", queryparams), exchange, headers, options)
   end
 
@@ -138,7 +138,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Create a MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `exchange` option defines the MessagingExchange map.
 
@@ -153,7 +153,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Integer of new exchange, or nil
   """
   @spec create_exchange!(pid, Map, Map, List, List) :: term
-  def create_exchange!(api \\ ManagerAPI.get_api, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_exchange!(api \\ ManagerApi.get_api, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_exchange(api, exchange, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
@@ -166,7 +166,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Update a MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `exchange` option defines the MessagingExchange map.
 
@@ -180,10 +180,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec update_exchange(pid, String.t(), Map, Map, List, List) :: term
-  def update_exchange(api \\ ManagerAPI.get_api, id, broker, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def update_exchange(api \\ ManagerApi.get_api, id, broker, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("messaging/exchanges/#{id}", queryparams), broker, headers, options)
   end
 
@@ -191,7 +191,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Update a MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `exchange` option defines the MessagingExchange map.
 
@@ -208,7 +208,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Integer of new exchange, or nil
   """
   @spec update_exchange!(pid, String.t(), Map, Map, List, List) :: term
-  def update_exchange!(api \\ ManagerAPI.get_api, id, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def update_exchange!(api \\ ManagerApi.get_api, id, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_exchange(api, id, exchange, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
@@ -223,7 +223,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Delete a MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -235,10 +235,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec delete_exchange(pid, String.t(), Map, List, List) :: term
-  def delete_exchange(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_exchange(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/exchanges/#{id}", queryparams), headers, options)
   end
 
@@ -246,7 +246,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Delete a MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -261,7 +261,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Boolean
   """
   @spec delete_exchange!(pid, String.t(),  Map, List, List) :: term
-  def delete_exchange!(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_exchange!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_exchange(api, id, queryparams, headers, options).success?
   end
 
@@ -269,7 +269,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Create a MessagingExchangeBrokers.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -283,10 +283,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec create_exchange_brokers(pid, String.t(), Map, Map, List, List) :: term
-  def create_exchange_brokers(api \\ ManagerAPI.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_exchange_brokers(api \\ ManagerApi.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("messaging/exchanges/#{id}/brokers", queryparams), connection, headers, options)
   end
 
@@ -294,7 +294,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Create a MessagingExchangeBroker.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -311,7 +311,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Boolean
   """
   @spec create_exchange_brokers!(pid, String.t(), Map, Map, List, List) :: term
-  def create_exchange_brokers!(api \\ ManagerAPI.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_exchange_brokers!(api \\ ManagerApi.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
     create_exchange_brokers(api, id, connection, queryparams, headers, options).success?
   end
 
@@ -319,7 +319,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Get MessagingExchangeBrokers.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -331,10 +331,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec exchange_brokers(pid, String.t(), List, List) :: term
-  def exchange_brokers(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def exchange_brokers(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{id}/brokers", queryparams), headers, options)
   end
 
@@ -342,7 +342,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Get MessagingExchangeBrokers.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -357,7 +357,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   List or nil
   """
   @spec exchange_brokers!(pid, String.t(), Map, List, List) :: List
-  def exchange_brokers!(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def exchange_brokers!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_brokers(api, id, queryparams, headers, options)
     if response.success? do
       response.body
@@ -370,7 +370,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Delete MessagingExchangeBrokers.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -382,10 +382,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec delete_exchange_brokers(pid, String.t(), Map, List, List) :: term
-  def delete_exchange_brokers(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_exchange_brokers(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/exchanges/#{id}/brokers", queryparams), headers, options)
   end
 
@@ -393,7 +393,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Delete a MessagingExchangeBrokers.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -408,7 +408,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Boolean
   """
   @spec delete_exchange_brokers!(pid, String.t(),  Map, List, List) :: term
-  def delete_exchange_brokers!(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_exchange_brokers!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_exchange_brokers(api, id, queryparams, headers, options).success?
   end
 
@@ -416,7 +416,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Get EtcdClusters associated with the MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -428,10 +428,10 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec exchange_clusters(pid, String.t(), List, List) :: term
-  def exchange_clusters(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def exchange_clusters(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{id}/clusters", queryparams), headers, options)
   end
 
@@ -439,7 +439,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   Get EtcdClusters associated with the MessagingExchange.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the MessagingExchange id.
 
@@ -454,7 +454,7 @@ defmodule CloudOS.ManagerAPI.MessagingExchange do
   List or nil
   """
   @spec exchange_clusters!(pid, String.t(), Map, List, List) :: List
-  def exchange_clusters!(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def exchange_clusters!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_clusters(api, id, queryparams, headers, options)
     if response.success? do
       response.body

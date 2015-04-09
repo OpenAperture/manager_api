@@ -15,8 +15,8 @@ use Mix.Config
 #       format: "$date $time [$level] $metadata$message\n",
 #       metadata: [:user_id]
 
-config :cloudos_manager_api, 
-	manager_url: "https://cloudos-mgr.host.co",
+config :openaperture_manager_api,
+	manager_url: "https://openaperture-mgr.host.co",
 	oauth_login_url: "https://auth.host.co",
 	oauth_client_id: "id",
 	oauth_client_secret: "secret"

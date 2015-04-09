@@ -15,11 +15,11 @@ use Mix.Config
 #       format: "$date $time [$level] $metadata$message\n",
 #       metadata: [:user_id]
 
-config :cloudos_manager_api,
-	manager_url: System.get_env("CLOUDOS_MANAGER_URL"),
-	oauth_login_url: System.get_env("CLOUDOS_OAUTH_LOGIN_URL"),
-	oauth_client_id: System.get_env("CLOUDOS_OAUTH_CLIENT_ID"),
-	oauth_client_secret: System.get_env("CLOUDOS_OAUTH_CLIENT_SECRET")
+config :openaperture_manager_api,
+	manager_url: System.get_env("OPENAPERTURE_MANAGER_URL"),
+	oauth_login_url: System.get_env("OPENAPERTURE_OAUTH_LOGIN_URL"),
+	oauth_client_id: System.get_env("OPENAPERTURE_OAUTH_CLIENT_ID"),
+	oauth_client_secret: System.get_env("OPENAPERTURE_OAUTH_CLIENT_SECRET")
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

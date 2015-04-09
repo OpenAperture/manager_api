@@ -1,16 +1,16 @@
 #
 # == resource.ex
 #
-# This module contains reusable methods for creating httpc requests to the cloudos_manager.
+# This module contains reusable methods for creating httpc requests to the openaperture_manager.
 #
 require Logger
 
-defmodule CloudOS.ManagerAPI.Resource do
-	alias CloudOS.ManagerAPI
-	alias CloudOS.ManagerAPI.Response
+defmodule OpenAperture.ManagerApi.Resource do
+	alias OpenAperture.ManagerApi
+	alias OpenAperture.ManagerApi.Response
 
   @moduledoc """
-  This module contains reusable methods for creating httpc requests to the cloudos_manager.
+  This module contains reusable methods for creating httpc requests to the openaperture_manager.
   """
 
   @doc """
@@ -18,7 +18,7 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Option Values
 
-  The `api` option defines the ManagerAPI pid
+  The `api` option defines the ManagerApi pid
 
   The `path` option represents the relative url path
 
@@ -28,12 +28,12 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Return values
 
-  CloudOS.ManagerAPI.Response
+  OpenAperture.ManagerApi.Response
   """ 
   @spec get(pid, String.t(), List, List) :: Response.t
   def get(api, path, headers, options) do
     url = get_url(api, path)
-    Logger.debug "[CloudOS.ManagerAPI] GET #{url}"
+    Logger.debug "[OpenAperture.ManagerApi] GET #{url}"
 
     execute_request(:get, {'#{url}', merge_headers(api, headers)}, merge_options(options))
       |> Response.from_httpc_response
@@ -49,7 +49,7 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Option Values
 
-  The `api` option defines the ManagerAPI pid
+  The `api` option defines the ManagerApi pid
 
   The `path` option represents the relative url path
 
@@ -61,12 +61,12 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Return values
 
-  CloudOS.ManagerAPI.Response
+  OpenAperture.ManagerApi.Response
   """ 
   @spec post(pid, String.t(), term, List, List) :: Response.t
   def post(api, path, object, headers, options) do
     url = get_url(api, path)
-    Logger.debug "[CloudOS.ManagerAPI] POST #{url}"
+    Logger.debug "[OpenAperture.ManagerApi] POST #{url}"
     execute_request(:post, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
       |> Response.from_httpc_response
   end
@@ -81,7 +81,7 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Option Values
 
-  The `api` option defines the ManagerAPI pid
+  The `api` option defines the ManagerApi pid
 
   The `path` option represents the relative url path
 
@@ -93,12 +93,12 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Return values
 
-  CloudOS.ManagerAPI.Response
+  OpenAperture.ManagerApi.Response
   """ 
   @spec put(pid, String.t(), term, List, List) :: Response.t
   def put(api, path, object, headers, options) do
     url = get_url(api, path)
-    Logger.debug "[CloudOS.ManagerAPI] PUT #{url}"
+    Logger.debug "[OpenAperture.ManagerApi] PUT #{url}"
     execute_request(:put, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
       |> Response.from_httpc_response
   end
@@ -113,7 +113,7 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Option Values
 
-  The `api` option defines the ManagerAPI pid
+  The `api` option defines the ManagerApi pid
 
   The `path` option represents the relative url path
 
@@ -123,12 +123,12 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   ## Return values
 
-  CloudOS.ManagerAPI.Response
+  OpenAperture.ManagerApi.Response
   """ 
   @spec delete(pid, String.t(), List, List) :: Response.t
   def delete(api, path, headers, options) do
     url = get_url(api, path)
-    Logger.debug "[CloudOS.ManagerAPI] DELETE #{url}"
+    Logger.debug "[OpenAperture.ManagerApi] DELETE #{url}"
     execute_request(:delete, {'#{url}', merge_headers(api, headers)}, merge_options(options))
       |> Response.from_httpc_response
   end
@@ -143,7 +143,7 @@ defmodule CloudOS.ManagerAPI.Resource do
 
   # ## Option Values
 
-  # The `api` option defines the ManagerAPI pid
+  # The `api` option defines the ManagerApi pid
 
   # The `path` option represents the relative url path
 
@@ -153,7 +153,7 @@ defmodule CloudOS.ManagerAPI.Resource do
   # """ 
   @spec get_url(pid, String.t()) :: String.t()
   defp get_url(api, path) do
-  	opts = ManagerAPI.get_options(api)
+  	opts = ManagerApi.get_options(api)
     path = Regex.replace(~r/^\//, path, "") # strip leading slash, if present
     opts[:manager_url] <> "/" <> path
   end
@@ -232,23 +232,23 @@ defmodule CloudOS.ManagerAPI.Resource do
   # Method to load the default headers
   @spec default_headers(pid) :: List
   defp default_headers(api) do
-    opts = ManagerAPI.get_options(api)
+    opts = ManagerApi.get_options(api)
 
     token = cond do
       opts[:oauth_login_url] == nil ->
-        Logger.error("[CloudOS.ManagerAPI] Unable to authenticate request - define :oauth_login_url in your options!")
+        Logger.error("[OpenAperture.ManagerApi] Unable to authenticate request - define :oauth_login_url in your options!")
         ""
       opts[:oauth_client_id] == nil ->
-        Logger.error("[CloudOS.ManagerAPI] Unable to authenticate request - define :oauth_client_id in your options!")
+        Logger.error("[OpenAperture.ManagerApi] Unable to authenticate request - define :oauth_client_id in your options!")
         ""
       opts[:oauth_client_secret] == nil ->
-        Logger.error("[CloudOS.ManagerAPI] Unable to authenticate request - define :oauth_client_secret in your options!")
+        Logger.error("[OpenAperture.ManagerApi] Unable to authenticate request - define :oauth_client_secret in your options!")
         ""
       true -> CloudosAuth.Client.get_token(opts[:oauth_login_url], opts[:oauth_client_id], opts[:oauth_client_secret])
     end
     
     [{'Accept', 'application/json'}, {'Content-Type', 'application/json'},
-     {'User-Agent','cloudos-manager-api'}, {'Authorization', 'Bearer access_token=#{token}'}]
+     {'User-Agent','openaperture-manager-api'}, {'Authorization', 'Bearer access_token=#{token}'}]
   end
 
   # Method to merge custom headers

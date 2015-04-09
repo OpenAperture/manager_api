@@ -45,7 +45,7 @@
       "headers": {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "User-Agent": "cloudos-manager-api",
+        "User-Agent": "openaperture-manager-api",
         "Authorization": "Bearer access_token=c031df189bbec4ce56d52dd19f4b591b226b33d01d5620e88e6849b85f724c79"
       },
       "method": "post",

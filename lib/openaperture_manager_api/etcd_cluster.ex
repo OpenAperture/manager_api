@@ -3,11 +3,11 @@
 #
 # This module contains the resources for managing EtcdClusters
 #
-defmodule CloudOS.ManagerAPI.EtcdCluster do
-  import CloudOS.ManagerAPI.Resource
+defmodule OpenAperture.ManagerApi.EtcdCluster do
+  import OpenAperture.ManagerApi.Resource
 
-  alias CloudOS.ManagerAPI
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi
+  alias OpenAperture.ManagerApi.Response
 
   @moduledoc """
   This module contains the resources for managing EtcdClusters
@@ -17,7 +17,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves the entire list of EtcdClusters. 
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -27,10 +27,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec list(pid, Map, List, List) :: term
-  def list(api \\ ManagerAPI.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters", queryparams), headers, options)
   end
 
@@ -38,7 +38,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves the entire list of EtcdClusters. 
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -51,7 +51,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Returns nil (if failure) or a list of Maps, each representing an EtcdCluster.
   """
   @spec list(pid, Map, List, List) :: List[Map]
-  def list!(api \\ ManagerAPI.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
       response.body
@@ -64,7 +64,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves a specific EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -76,10 +76,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_cluster(pid, term, Map, List, List) :: term
-  def get_cluster(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters/#{token}", queryparams), headers, options)
   end
 
@@ -87,7 +87,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves a specific EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -102,7 +102,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Map of the EtcdCluster
   """
   @spec get_cluster!(pid, term, Map, List, List) :: Map
-  def get_cluster!(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster(api, token, queryparams, headers, options)
     if response.success? do
       response.body
@@ -115,7 +115,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Create a EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `cluster` option defines the EtcdCluster map.
 
@@ -127,10 +127,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec create_cluster(pid, Map, Map, List, List) :: term
-  def create_cluster(api \\ ManagerAPI.get_api, cluster, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_cluster(api \\ ManagerApi.get_api, cluster, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("clusters", queryparams), cluster, headers, options)
   end
 
@@ -138,7 +138,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Create a EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `cluster` option defines the EtcdCluster map.
 
@@ -153,7 +153,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Integer of new cluster, or nil
   """
   @spec create_cluster!(pid, Map, Map, List, List) :: term
-  def create_cluster!(api \\ ManagerAPI.get_api, cluster, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_cluster!(api \\ ManagerApi.get_api, cluster, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_cluster(api, cluster, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
@@ -166,7 +166,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Delete a EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -178,10 +178,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec delete_cluster(pid, String.t(), Map, List, List) :: term
-  def delete_cluster(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_cluster(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("clusters/#{token}", queryparams), headers, options)
   end
 
@@ -189,7 +189,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Delete a EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -204,7 +204,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Boolean
   """
   @spec delete_cluster!(pid, String.t(),  Map, List, List) :: term
-  def delete_cluster!(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_cluster!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_cluster(api, token, queryparams, headers, options).success?
   end
 
@@ -212,7 +212,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves products associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -224,10 +224,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_cluster_products(pid, term, Map, List, List) :: term
-  def get_cluster_products(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_products(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters/#{token}/products", queryparams), headers, options)
   end
 
@@ -235,7 +235,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves products associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -250,7 +250,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Map of the EtcdCluster
   """
   @spec get_cluster_products!(pid, term, Map, List, List) :: Map
-  def get_cluster_products!(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_products!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_products(api, token, queryparams, headers, options)
     if response.success? do
       response.body
@@ -263,7 +263,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves machines associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -275,10 +275,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_cluster_machines(pid, term, Map, List, List) :: term
-  def get_cluster_machines(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_machines(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters/#{token}/machines", queryparams), headers, options)
   end
 
@@ -286,7 +286,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves machines associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -301,7 +301,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Map of the EtcdCluster
   """
   @spec get_cluster_machines!(pid, term, Map, List, List) :: Map
-  def get_cluster_machines!(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_machines!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_machines(api, token, queryparams, headers, options)
     if response.success? do
       response.body
@@ -314,7 +314,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves units associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -326,10 +326,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_cluster_units(pid, term, Map, List, List) :: term
-  def get_cluster_units(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_units(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters/#{token}/units", queryparams), headers, options)
   end
 
@@ -337,7 +337,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves units associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -352,7 +352,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Map of the EtcdCluster
   """
   @spec get_cluster_units!(pid, term, Map, List, List) :: Map
-  def get_cluster_units!(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_units!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_units(api, token, queryparams, headers, options)
     if response.success? do
       response.body
@@ -365,7 +365,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves units associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -377,10 +377,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_cluster_units_state(pid, term, Map, List, List) :: term
-  def get_cluster_units_state(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_units_state(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters/#{token}/state", queryparams), headers, options)
   end
 
@@ -388,7 +388,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves unit state associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -403,7 +403,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Map of the EtcdCluster
   """
   @spec get_cluster_units_state!(pid, term, Map, List, List) :: Map
-  def get_cluster_units_state!(api \\ ManagerAPI.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_units_state!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_units_state(api, token, queryparams, headers, options)
     if response.success? do
       response.body
@@ -416,7 +416,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves units associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -432,10 +432,10 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_cluster_units_state(pid, term, Map, List, List) :: term
-  def get_cluster_unit_log(api \\ ManagerAPI.get_api, token, machine_id, unit_name, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_unit_log(api \\ ManagerApi.get_api, token, machine_id, unit_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters/#{token}/machines/#{machine_id}/units/#{unit_name}/logs", queryparams), headers, options)
   end
 
@@ -443,7 +443,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Retrieves unit state associated with an EtcdCluster.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `token` option defines the EtcdCluster token.
 
@@ -462,7 +462,7 @@ defmodule CloudOS.ManagerAPI.EtcdCluster do
   Map of the EtcdCluster
   """
   @spec get_cluster_unit_log!(pid, term, Map, List, List) :: Map
-  def get_cluster_unit_log!(api \\ ManagerAPI.get_api, token, machine_id, unit_name, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_cluster_unit_log!(api \\ ManagerApi.get_api, token, machine_id, unit_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_unit_log(api, token, machine_id, unit_name, queryparams, headers, options)
     if response.success? do
       response.raw_body

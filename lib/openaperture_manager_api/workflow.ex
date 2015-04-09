@@ -3,11 +3,11 @@
 #
 # This module contains the resources for managing Workflows
 #
-defmodule CloudOS.ManagerAPI.Workflow do
-  import CloudOS.ManagerAPI.Resource
+defmodule OpenAperture.ManagerApi.Workflow do
+  import OpenAperture.ManagerApi.Resource
 
-  alias CloudOS.ManagerAPI
-  alias CloudOS.ManagerAPI.Response
+  alias OpenAperture.ManagerApi
+  alias OpenAperture.ManagerApi.Response
 
   @moduledoc """
   This module contains the resources for managing Workflows
@@ -17,7 +17,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Retrieves the entire list of Workflows. 
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -27,10 +27,10 @@ defmodule CloudOS.ManagerAPI.Workflow do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec list(pid, Map, List, List) :: term
-  def list(api \\ ManagerAPI.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("workflows", queryparams), headers, options)
   end
 
@@ -38,7 +38,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Retrieves the entire list of Workflows. 
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -51,7 +51,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Returns nil (if failure) or a list of Maps, each representing a Workflow.
   """
   @spec list(pid, Map, List, List) :: List[Map]
-  def list!(api \\ ManagerAPI.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
       response.body
@@ -64,7 +64,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Retrieves a specific Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the Workflow id.
 
@@ -76,10 +76,10 @@ defmodule CloudOS.ManagerAPI.Workflow do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec get_workflow(pid, term, Map, List, List) :: term
-  def get_workflow(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_workflow(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("workflows/#{id}", queryparams), headers, options)
   end
 
@@ -87,7 +87,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Retrieves a specific Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the Workflow id.
 
@@ -102,7 +102,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Map of the Workflow
   """
   @spec get_workflow!(pid, term, Map, List, List) :: Map
-  def get_workflow!(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def get_workflow!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_workflow(api, id, queryparams, headers, options)
     if response.success? do
       response.body
@@ -115,7 +115,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Create a Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `workflow` option defines the Workflow map.
 
@@ -127,10 +127,10 @@ defmodule CloudOS.ManagerAPI.Workflow do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec create_workflow(pid, Map, Map, List, List) :: term
-  def create_workflow(api \\ ManagerAPI.get_api, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_workflow(api \\ ManagerApi.get_api, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("workflows", queryparams), workflow, headers, options)
   end
 
@@ -138,7 +138,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Create a Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `workflow` option defines the Workflow map.
 
@@ -153,7 +153,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Integer of new workflow, or nil
   """
   @spec create_workflow!(pid, Map, Map, List, List) :: term
-  def create_workflow!(api \\ ManagerAPI.get_api, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def create_workflow!(api \\ ManagerApi.get_api, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_workflow(api, workflow, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
@@ -166,7 +166,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Update a Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `workflow` option defines the Workflow map.
 
@@ -180,10 +180,10 @@ defmodule CloudOS.ManagerAPI.Workflow do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec update_workflow(pid, String.t(), Map, Map, List, List) :: term
-  def update_workflow(api \\ ManagerAPI.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def update_workflow(api \\ ManagerApi.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("workflows/#{id}", queryparams), workflow, headers, options)
   end
 
@@ -191,7 +191,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Update a Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `workflow` option defines the Workflow map.
 
@@ -208,7 +208,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Integer of new workflow, or nil
   """
   @spec update_workflow!(pid, String.t(), Map, Map, List, List) :: term
-  def update_workflow!(api \\ ManagerAPI.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def update_workflow!(api \\ ManagerApi.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_workflow(api, id, workflow, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
@@ -221,7 +221,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Delete a Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the Workflow id.
 
@@ -233,10 +233,10 @@ defmodule CloudOS.ManagerAPI.Workflow do
 
   ## Return Values
 
-  Returns the CloudOS.ManagerAPI.Response struct.
+  Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec delete_workflow(pid, String.t(), Map, List, List) :: term
-  def delete_workflow(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_workflow(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("workflows/#{id}", queryparams), headers, options)
   end
 
@@ -244,7 +244,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Delete a Workflow.
 
   ## Options
-  The `api` option defines the CloudOS.ManagerAPI used for connection.
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `id` option defines the Workflow id.
 
@@ -259,7 +259,7 @@ defmodule CloudOS.ManagerAPI.Workflow do
   Boolean
   """
   @spec delete_workflow!(pid, String.t(),  Map, List, List) :: term
-  def delete_workflow!(api \\ ManagerAPI.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+  def delete_workflow!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_workflow(api, id, queryparams, headers, options).success?
   end
 end
