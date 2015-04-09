@@ -2,6 +2,8 @@
 
 This repository contains an Elixir API library for the OpenAperture Manager.
 
+[![Build Status](https://semaphoreci.com/api/v1/projects/21ae3b0c-3c31-4fbd-b0e2-7a4c737ada50/394630/badge.svg)](https://semaphoreci.com/perceptive/manager_api)
+
 ## Usage
 Add the following to your mix.exs dependencies:
 
