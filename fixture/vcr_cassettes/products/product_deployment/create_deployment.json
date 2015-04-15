@@ -1,0 +1,77 @@
+[
+  {
+    "request": {
+      "body": "{\"grant_type\":\"client_credentials\",\"client_secret\":\"test_secret\",\"client_id\":\"test_id\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "https://localhost/oauth/token"
+    },
+    "response": {
+      "body": "{\"access_token\":\"c031df189bbec4ce56d52dd19f4b591b226b33d01d5620e88e6849b85f724c79\",\"token_type\":\"bearer\",\"expires_in\":7200,\"scope\":\"public\"}",
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "keep-alive",
+        "date": "Tue, 07 Apr 2015 19:53:51 GMT",
+        "pragma": "no-cache",
+        "etag": "\"0b4e42d515662d33cd3473c23b2d0c7b\"",
+        "server": "nginx/1.2.1",
+        "content-length": "140",
+        "content-type": "application/json; charset=utf-8",
+        "status": "200 OK",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-request-id": "a458e33a-d489-4b35-8c76-edc3dc4bcf2a",
+        "x-runtime": "0.009504",
+        "x-xss-protection": "1; mode=block"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        200,
+        "OK"
+      ],
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"plan_name\":\"test_deployment_plan\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "openaperture-manager-api",
+        "Authorization": "Bearer access_token=c031df189bbec4ce56d52dd19f4b591b226b33d01d5620e88e6849b85f724c79"
+      },
+      "method": "post",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "http://localhost/products/jordans_test_product/deployments"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "cache-control": "max-age=0, private, must-revalidate",
+        "connection": "keep-alive",
+        "date": "Wed, 15 Apr 2015 15:01:16 GMT",
+        "location": "/products/jordans_test_product/deployments/1",
+        "server": "Cowboy",
+        "content-length": "0",
+        "x-request-id": "8TR3/kRmmBRD2yJfYtBH"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        201,
+        "Created"
+      ],
+      "type": "ok"
+    }
+  }
+]
