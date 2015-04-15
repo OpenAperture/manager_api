@@ -9,7 +9,7 @@ defmodule OpenAperture.ManagerApi.ProductComponent do
     get(api, get_path("products/#{product_name}/components"))
   end
 
-  @spec list!(pid, String.t) :: Response.t
+  @spec list!(pid, String.t) :: List.t | nil
   def list!(api \\ ManagerApi.get_api, product_name) do
     response = list(api, product_name)
     if response.success? do
@@ -75,7 +75,7 @@ defmodule OpenAperture.ManagerApi.ProductComponent do
     response.success?
   end
 
-   @spec delete_component(pid, String.t, String.t) :: Response.t
+  @spec delete_component(pid, String.t, String.t) :: Response.t
   def delete_component(api \\ ManagerApi.get_api, product_name, component_name) do
     delete(api, get_path("products/#{product_name}/components/#{component_name}"))
   end
