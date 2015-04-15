@@ -170,6 +170,33 @@ OpenAperture.ManagerApi.MessagingExchange.delete_exchange_brokers!(api, 1)
 clusters = OpenAperture.ManagerApi.MessagingExchange.exchange_clusters!(api, 1)
 ```
 
+* OpenAperture.ManagerApi.MessagingExchangeModule
+  * This module is used to interact with the MessagingExchangeModule resource (/messaging/exchanges/:id/modules) resource.
+  * Get All Modules
+    * list - returns a OpenAperture.ManagerApi.Response
+    * list! - returns a list of Maps, representing MessagingExchangeModules
+```elixir
+modules = OpenAperture.ManagerApi.MessagingExchangeModule.list!(api, 1, "123abc")
+```
+  * Get Module
+    * get_module - returns a OpenAperture.ManagerApi.Response
+    * get_module! - returns a Map, representing MessagingExchangeModule
+```elixir
+module = OpenAperture.ManagerApi.MessagingExchangeModule.get_module!(api, 1, "123abc")
+```
+  * Create an Module
+    * create_module - returns a OpenAperture.ManagerApi.Response
+    * create_module! - returns an identifier of the new module
+```elixir
+module_id = OpenAperture.ManagerApi.MessagingExchangeModule.create_module!(api, 1, "123abc", %{})
+```
+  * Delete an Module
+    * delete_module - returns a OpenAperture.ManagerApi.Response
+    * delete_module! - returns a boolean
+```elixir
+OpenAperture.ManagerApi.MessagingExchangeModule.delete_module!(api, 1, "123abc")
+```
+
 * OpenAperture.ManagerApi.EtcdCluster
   * This module is used to interact with the EtcdCluster resource (/clusters).
   * Get All Clusters
