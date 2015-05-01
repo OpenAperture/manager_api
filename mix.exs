@@ -33,7 +33,7 @@ defmodule ManagerApi.Mixfile do
       {:markdown, github: "devinus/markdown", only: [:test]},      
       {:json, "~>0.3.0"},
       {:uuid, "~> 0.1.5" },
-      {:openaperture_auth, git: "https://#{System.get_env("GITHUB_OAUTH_TOKEN")}:x-oauth-basic@github.com/OpenAperture/auth.git",
+      {:openaperture_auth, git: "https://github.com/OpenAperture/auth.git",
             ref: "0ded31f747cb0b781838b5799acadcda88dd7953"},
      
       #testing dependencies
