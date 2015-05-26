@@ -29,8 +29,8 @@ defmodule ManagerApi.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:ex_doc, github: "elixir-lang/ex_doc", only: [:test]},
-      {:markdown, github: "devinus/markdown", only: [:test]},      
+      {:ex_doc, "0.7.3", only: :test},
+      {:earmark, "0.1.17", only: :test},
       {:json, "~>0.3.0"},
       {:uuid, "~> 0.1.5" },
       {:openaperture_auth, git: "https://github.com/OpenAperture/auth.git",
