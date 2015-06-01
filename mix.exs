@@ -34,7 +34,7 @@ defmodule ManagerApi.Mixfile do
       {:json, "~>0.3.0"},
       {:uuid, "~> 0.1.5" },
       {:openaperture_auth, git: "https://github.com/OpenAperture/auth.git",
-            ref: "0ded31f747cb0b781838b5799acadcda88dd7953"},
+            ref: "227f10bc6108176523b96f016f2fc57adb472320"},
      
       #testing dependencies
       {:exvcr, "~> 0.3.3", only: :test},
