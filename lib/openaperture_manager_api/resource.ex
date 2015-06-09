@@ -66,8 +66,10 @@ defmodule OpenAperture.ManagerApi.Resource do
   @spec post(pid, String.t(), term, List, List) :: Response.t
   def post(api, path, object, headers, options) do
     url = get_url(api, path)
-    Logger.debug "[OpenAperture.ManagerApi] POST #{url}"
-    execute_request(:post, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
+    Logger.debug "[OpenAperture.ManagerApi] Encoding POST body..."
+    encoded_object = '#{Poison.encode!(object)}'
+    Logger.debug "[OpenAperture.ManagerApi] Executing POST #{url}"
+    execute_request(:post, {'#{url}', merge_headers(api, headers), 'application/json', encoded_object}, merge_options(options))
       |> Response.from_httpc_response
   end
 
@@ -98,8 +100,11 @@ defmodule OpenAperture.ManagerApi.Resource do
   @spec put(pid, String.t(), term, List, List) :: Response.t
   def put(api, path, object, headers, options) do
     url = get_url(api, path)
-    Logger.debug "[OpenAperture.ManagerApi] PUT #{url}"
-    execute_request(:put, {'#{url}', merge_headers(api, headers), 'application/json', '#{JSON.encode!(object)}'}, merge_options(options))
+    Logger.debug "[OpenAperture.ManagerApi] Encoding PUT body..."
+    encoded_object = '#{Poison.encode!(object)}'
+    Logger.debug "[OpenAperture.ManagerApi] Executing PUT #{url}"
+
+    execute_request(:put, {'#{url}', merge_headers(api, headers), 'application/json', encoded_object}, merge_options(options))
       |> Response.from_httpc_response
   end
 

@@ -183,7 +183,7 @@ defmodule OpenAperture.ManagerApi.Response do
   #
   @spec process_body(term) :: term
   defp process_body(body) when byte_size(body) == 0, do: %{}
-  defp process_body(body), do: JSON.decode!(body)
+  defp process_body(body), do: Poison.decode!(body)
 
   @doc false
   # Method to process the headers from an incoming httpc response into JSON
