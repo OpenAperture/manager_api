@@ -603,4 +603,18 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeTest do
     end
   end
 
+  test "exchange_has_modules_of_type - success", context do
+    use_cassette "list_modules_with_build", custom: true do
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_has_modules_of_type(context[:api], 1, "build")
+      assert response == :ok
+    end
+  end
+
+  test "exchange_has_modules_of_type - failure", context do
+    use_cassette "list_modules_without_build", custom: true do
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_has_modules_of_type(context[:api], 1, "build")
+      assert response == {:error, "No build modules available in exchange 1"}
+    end
+  end
+
 end
