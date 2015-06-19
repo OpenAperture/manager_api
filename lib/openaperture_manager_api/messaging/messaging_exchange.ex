@@ -8,6 +8,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   alias OpenAperture.ManagerApi
   alias OpenAperture.ManagerApi.Response
+  alias OpenAperture.ManagerApi.MessagingExchangeModule
 
   @moduledoc """
   This module contains the resources for managing MessagingExchanges
@@ -460,6 +461,16 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
       response.body
     else
       nil
+    end
+  end
+
+  @spec exchange_has_modules_of_type?(pid, String.t, String.t) :: {:error, String.t} | :ok
+  def exchange_has_modules_of_type?(api \\ ManagerApi.get_api, messaging_exchange_id, type) do
+    response = MessagingExchangeModule.list(api, messaging_exchange_id)
+    if !response.success? do
+      raise "Error querying manager for list of modules in exchange. Status: #{response.status}"
+    else
+      length(Enum.filter(response.body, fn module -> module["type"] == type end)) > 0
     end
   end
 end
