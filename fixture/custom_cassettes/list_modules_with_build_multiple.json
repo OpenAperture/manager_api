@@ -13,7 +13,7 @@
       "url": "https://openaperture-mgr.host.co/messaging/exchanges/1/modules"
     },
     "response": {
-      "body": "[{\"id\": \"1\",\"hostname\": \"123abc\", \"type\":\"builder\"},{\"id\": \"2\",\"hostname\": \"2345\"}]",
+      "body": "[{\"id\": \"1\",\"hostname\": \"123abc\", \"type\":\"builder\"},{\"id\": \"2\",\"hostname\": \"2345\"},{\"workload\": [],\"updated_at\": \"Tue, 23 Jun 2015 19:39:11 UTC\",\"type\": \"workflow_orchestrator\",\"status\":\"active\",\"source_repo_git_ref\":null,\"source_repo\": null,\"messaging_exchange_id\": 5,\"inserted_at\": \"Tue, 23 Jun 2015 19:39:11 UTC\",\"id\": 2799560,\"hostname\": \"007aaefbbcc9\",\"deployment_repo_git_ref\": null,\"deployment_repo\": null}]",
       "headers": {
         "Content-Type": "application/json",
         "Content-Length": "-1",
