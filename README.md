@@ -287,6 +287,72 @@ OpenAperture.ManagerApi.Workflow.delete_workflow!(api, 1)
 OpenAperture.ManagerApi.Workflow.delete_workflow!(api, 1)
 ```
 
+* OpenAperture.ManagerApi.SytemComponent
+  * This module is used to interact with the SytemComponent resource (/system_components).
+  * Get All SytemComponents
+    * list - returns a OpenAperture.ManagerApi.Response
+    * list! - returns a list of Maps, representing SytemComponent
+```elixir
+system_components = OpenAperture.ManagerApi.SytemComponent.list!(api)
+```
+  * Get SytemComponent
+    * get_system_component - returns a OpenAperture.ManagerApi.Response
+    * get_system_component! - returns a Map, representing SytemComponent
+```elixir
+system_component = OpenAperture.ManagerApi.SytemComponent.get_system_component!(api)
+```
+  * Create a SytemComponent
+    * create_system_component - returns a OpenAperture.ManagerApi.Response
+    * create_system_component! - returns the etcd_token of the new SytemComponent
+```elixir
+token = OpenAperture.ManagerApi.SytemComponent.create_system_component!(api, %{})
+```
+  * Update a SystemComponent
+    * update_system_component - returns a OpenAperture.ManagerApi.Response
+    * update_system_component! - returns an identifier of the updated SytemComponent
+```elixir
+OpenAperture.ManagerApi.SytemComponent.delete_system_component!(api, 1)
+```
+  * Delete a SytemComponent
+    * delete_system_component - returns a OpenAperture.ManagerApi.Response
+    * delete_system_component! - returns a boolean
+```elixir
+OpenAperture.ManagerApi.SytemComponent.delete_system_component!(api, 1)
+```
+
+* OpenAperture.ManagerApi.SytemComponentRef
+  * This module is used to interact with the SytemComponentRef resource (/system_component_refs).
+  * Get All SytemComponentRefs
+    * list - returns a OpenAperture.ManagerApi.Response
+    * list! - returns a list of Maps, representing SytemComponentRef
+```elixir
+system_components = OpenAperture.ManagerApi.SytemComponentRef.list!(api)
+```
+  * Get SytemComponentRef
+    * get_system_component_ref - returns a OpenAperture.ManagerApi.Response
+    * get_system_component_ref! - returns a Map, representing SytemComponentRef
+```elixir
+system_component = OpenAperture.ManagerApi.SytemComponentRef.get_system_component_ref!(api)
+```
+  * Create a SytemComponentRef
+    * create_system_component_ref - returns a OpenAperture.ManagerApi.Response
+    * create_system_component_ref! - returns the etcd_token of the new SytemComponentRef
+```elixir
+token = OpenAperture.ManagerApi.SytemComponentRef.create_system_component!(api, %{})
+```
+  * Update a SystemComponent
+    * update_system_component_ref - returns a OpenAperture.ManagerApi.Response
+    * update_system_component_ref! - returns an identifier of the updated SytemComponentRef
+```elixir
+OpenAperture.ManagerApi.SytemComponentRef.delete_system_component_ref!(api, 1)
+```
+  * Delete a SytemComponentRef
+    * delete_system_component - returns a OpenAperture.ManagerApi.Response
+    * delete_system_component! - returns a boolean
+```elixir
+OpenAperture.ManagerApi.SytemComponentRef.delete_system_component_ref!(api, 1)
+```
+
 ## Building & Testing
 
 To build:

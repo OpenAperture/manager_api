@@ -33,7 +33,7 @@ defmodule ManagerApi.Mixfile do
       {:earmark, "0.1.17", only: :test},
       {:poison, "~>1.4.0", override: true},
       {:uuid, "~> 0.1.5" },
-      {:openaperture_auth, git: "https://github.com/OpenAperture/auth.git", ref: "227f10bc6108176523b96f016f2fc57adb472320"},
+      {:openaperture_auth, git: "https://github.com/OpenAperture/auth.git", ref: "dc7a0813b335d3013dff60d271ae1f51fc4b5049"},
      
       #testing dependencies
       {:exvcr, "~> 0.3.3", only: :test},

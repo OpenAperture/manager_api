@@ -620,4 +620,96 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeTest do
       refute OpenAperture.ManagerApi.MessagingExchange.exchange_has_modules_of_type?(context[:api], 1, "builder")
     end
   end
+
+  # =============================
+  # exchange_components tests
+
+  test "supervised exchange_components - success" do
+    use_cassette "exchange_components", custom: true do
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_components(1)
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 200
+
+      brokers = response.body
+      assert brokers != nil
+      assert length(brokers) == 2
+      is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
+        if is_successful do
+          cond do
+            broker["id"] == 1-> true
+            broker["id"] == 2 -> true
+            true -> false
+          end
+        else
+          is_successful
+        end
+      end
+      assert is_successful == true
+    end
+  end
+
+  test "exchange_components - success", context do
+    use_cassette "exchange_components", custom: true do
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_components(context[:api], 1)
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 200
+
+      brokers = response.body
+      assert brokers != nil
+      assert length(brokers) == 2
+      is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
+        if is_successful do
+          cond do
+            broker["id"] == 1 -> true
+            broker["id"] == 2 -> true
+            true -> false
+          end
+        else
+          is_successful
+        end
+      end
+      assert is_successful == true
+    end
+  end
+
+  test "exchange_components - failure", context do
+    use_cassette "exchange_components_failure", custom: true do
+      response = OpenAperture.ManagerApi.MessagingExchange.exchange_components(context[:api], 1)
+      assert response != nil
+      assert response.success? == false
+      assert response.status == 401
+    end
+  end
+
+  # =============================
+  # exchange_components! tests
+
+  test "exchange_components! - success", context do
+    use_cassette "exchange_components", custom: true do
+      brokers = OpenAperture.ManagerApi.MessagingExchange.exchange_components!(context[:api], 1)
+      assert brokers != nil
+      assert length(brokers) == 2
+      is_successful = Enum.reduce brokers, true, fn (broker, is_successful) ->
+        if is_successful do
+          cond do
+            broker["id"] == 1 -> true
+            broker["id"] == 2 -> true
+            true -> false
+          end
+        else
+          is_successful
+        end
+      end
+      assert is_successful == true
+    end
+  end
+
+  test "exchange_components! - failure", context do
+    use_cassette "exchange_components_failure", custom: true do
+      brokers = OpenAperture.ManagerApi.MessagingExchange.exchange_components!(context[:api], 1)
+      assert brokers == nil
+    end
+  end  
 end
