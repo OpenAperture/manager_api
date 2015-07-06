@@ -262,4 +262,55 @@ defmodule OpenAperture.ManagerApi.Workflow do
   def delete_workflow!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_workflow(api, id, queryparams, headers, options).success?
   end
+
+  @doc """
+  Execute a Workflow.
+
+  ## Options
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
+
+  The `execute_options` option defines the execution options map.
+
+  The `id` option defines the Workflow id.
+
+  The `queryparams` option defines the query parameters (optional).
+
+  The `headers` option defines the header values (optional).
+
+  The `options` option defines any extra HTTP options (optional).
+
+  ## Return Values
+
+  Returns the OpenAperture.ManagerApi.Response struct.
+  """
+  @spec execute_workflow(pid, String.t(), Map, Map, List, List) :: term
+  def execute_workflow(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
+    post(api, get_path("workflows/#{id}/execute", queryparams), execute_options, headers, options)
+  end
+
+  @doc """
+  Execute a Workflow.
+
+  ## Options
+  The `api` option defines the OpenAperture.ManagerApi used for connection.
+
+  The `execute_options` option defines the execution options map.
+
+  The `id` option defines the Workflow id.
+
+  The `queryparams` option defines the query parameters (optional).
+
+  The `headers` option defines the header values (optional).
+
+  The `options` option defines any extra HTTP options (optional).
+
+  ## Return Values
+
+  Boolean, if execution was successful
+  """
+  @spec execute_workflow!(pid, String.t(), Map, Map, List, List) :: term
+  def execute_workflow!(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = execute_workflow(api, id, execute_options, queryparams, headers, options)
+    response.success?
+  end  
 end

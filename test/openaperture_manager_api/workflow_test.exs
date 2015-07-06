@@ -322,4 +322,59 @@ defmodule OpenAperture.ManagerApi.WorkflowTest do
       assert workflow_id == false
     end
   end  
+
+
+
+
+
+
+
+
+  # =============================
+  # execute_workflow tests
+
+  test "supervised execute_workflow - success", _context do
+    use_cassette "execute_workflow", custom: true do
+      response = OpenAperture.ManagerApi.Workflow.execute_workflow(1, %{workflow_completed: true})
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 204
+    end
+  end
+
+  test "execute_workflow - success", context do
+    use_cassette "execute_workflow", custom: true do
+      response = OpenAperture.ManagerApi.Workflow.execute_workflow(context[:api], 1, %{workflow_completed: true})
+      assert response != nil
+      assert response.success? == true
+      assert response.status == 204
+    end
+  end
+
+  test "execute_workflow - failure", context do
+    use_cassette "execute_workflow_failure", custom: true do
+      response = OpenAperture.ManagerApi.Workflow.execute_workflow(context[:api], "1", %{workflow_completed: true})
+      assert response != nil
+      assert response.success? == false
+      assert response.status == 401
+    end
+  end
+
+  # =============================
+  # execute_workflow! tests
+
+  test "execute_workflow! - success", context do
+    use_cassette "execute_workflow", custom: true do
+      workflow_id = OpenAperture.ManagerApi.Workflow.execute_workflow!(context[:api], "1", %{workflow_completed: true})
+      assert workflow_id == true
+    end
+  end
+
+  test "execute_workflow! - failure", context do
+    use_cassette "execute_workflow_failure", custom: true do
+      workflow_id = OpenAperture.ManagerApi.Workflow.execute_workflow!(context[:api], "1", %{workflow_completed: true})
+      assert workflow_id == false
+    end
+  end  
+
 end
