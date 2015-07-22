@@ -1,7 +1,7 @@
 #
-# == workflow.ex
+# == deployment.ex
 #
-# This module contains the resources for managing Workflows
+# This module contains the resources for managing deployments
 #
 defmodule OpenAperture.ManagerApi.Deployment do
   import OpenAperture.ManagerApi.Resource
@@ -10,11 +10,11 @@ defmodule OpenAperture.ManagerApi.Deployment do
   alias OpenAperture.ManagerApi.Response
 
   @moduledoc """
-  This module contains the resources for managing Workflows
+  This module contains the resources for managing deployments
   """  
 
   @doc """
-  Retrieves the entire list of Workflows. 
+  Retrieves the entire list of deployments. 
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -31,11 +31,11 @@ defmodule OpenAperture.ManagerApi.Deployment do
   """
   @spec list(pid, Map, List, List) :: term
   def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
-    get(api, get_path("workflows", queryparams), headers, options)
+    get(api, get_path("deployments", queryparams), headers, options)
   end
 
   @doc """
-  Retrieves the entire list of Workflows. 
+  Retrieves the entire list of deployments. 
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -48,7 +48,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   ## Return Values
 
-  Returns nil (if failure) or a list of Maps, each representing a Workflow.
+  Returns nil (if failure) or a list of Maps, each representing a deployment.
   """
   @spec list(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
@@ -61,12 +61,12 @@ defmodule OpenAperture.ManagerApi.Deployment do
   end
 
   @doc """
-  Retrieves a specific Workflow.
+  Retrieves a specific deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -80,16 +80,17 @@ defmodule OpenAperture.ManagerApi.Deployment do
   """
   @spec get_deployment(pid, term, Map, List, List) :: term
   def get_deployment(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+    IO.puts("products/#{product_name}/deployments/#{id}")
     get(api, get_path("products/#{product_name}/deployments/#{id}", queryparams), headers, options)
   end
 
   @doc """
-  Retrieves a specific Workflow.
+  Retrieves a specific deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -99,7 +100,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   ## Return Values
 
-  Map of the Workflow
+  Map of the deployment
   """
   @spec get_deployment!(pid, term, Map, List, List) :: Map
   def get_deployment!(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
@@ -112,12 +113,12 @@ defmodule OpenAperture.ManagerApi.Deployment do
   end
 
   @doc """
-  Create a Workflow.
+  Create a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `workflow` option defines the Workflow map.
+  The `deployment` option defines the deployment map.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -129,18 +130,18 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_workflow(pid, Map, Map, List, List) :: term
-  def create_workflow(api \\ ManagerApi.get_api, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
-    post(api, get_path("workflows", queryparams), workflow, headers, options)
+  @spec create_deployment(pid, Map, Map, List, List) :: term
+  def create_deployment(api \\ ManagerApi.get_api, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
+    post(api, get_path("deployments", queryparams), deployment, headers, options)
   end
 
   @doc """
-  Create a Workflow.
+  Create a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `workflow` option defines the Workflow map.
+  The `deployment` option defines the deployment map.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -150,11 +151,11 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   ## Return Values
 
-  Integer of new workflow, or nil
+  Integer of new deployment, or nil
   """
-  @spec create_workflow!(pid, Map, Map, List, List) :: term
-  def create_workflow!(api \\ ManagerApi.get_api, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
-    response = create_workflow(api, workflow, queryparams, headers, options)
+  @spec create_deployment!(pid, Map, Map, List, List) :: term
+  def create_deployment!(api \\ ManagerApi.get_api, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = create_deployment(api, deployment, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
     else
@@ -163,14 +164,14 @@ defmodule OpenAperture.ManagerApi.Deployment do
   end
 
   @doc """
-  Update a Workflow.
+  Update a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `workflow` option defines the Workflow map.
+  The `deployment` option defines the deployment map.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -182,20 +183,20 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_workflow(pid, String.t(), Map, Map, List, List) :: term
-  def update_workflow(api \\ ManagerApi.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
-    put(api, get_path("workflows/#{id}", queryparams), workflow, headers, options)
+  @spec update_deployment(pid, String.t(), Map, Map, List, List) :: term
+  def update_deployment(api \\ ManagerApi.get_api, product_name, id, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
+    put(api, get_path("products/#{product_name}/deployments/#{id}", queryparams), deployment, headers, options)
   end
 
   @doc """
-  Update a Workflow.
+  Update a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `workflow` option defines the Workflow map.
+  The `deployment` option defines the deployment map.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -205,11 +206,11 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   ## Return Values
 
-  Integer of new workflow, or nil
+  Integer of new deployment, or nil
   """
-  @spec update_workflow!(pid, String.t(), Map, Map, List, List) :: term
-  def update_workflow!(api \\ ManagerApi.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
-    response = update_workflow(api, id, workflow, queryparams, headers, options)
+  @spec update_deployment!(pid, String.t(), Map, Map, List, List) :: term
+  def update_deployment!(api \\ ManagerApi.get_api, id, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = update_deployment(api, id, deployment, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
     else
@@ -218,12 +219,12 @@ defmodule OpenAperture.ManagerApi.Deployment do
   end
 
   @doc """
-  Delete a Workflow.
+  Delete a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -235,18 +236,18 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_workflow(pid, String.t(), Map, List, List) :: term
-  def delete_workflow(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
-    delete(api, get_path("workflows/#{id}", queryparams), headers, options)
+  @spec delete_deployment(pid, String.t(), Map, List, List) :: term
+  def delete_deployment(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+    delete(api, get_path("deployments/#{id}", queryparams), headers, options)
   end
 
   @doc """
-  Delete a Workflow.
+  Delete a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -258,20 +259,20 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Boolean
   """
-  @spec delete_workflow!(pid, String.t(),  Map, List, List) :: term
-  def delete_workflow!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
-    delete_workflow(api, id, queryparams, headers, options).success?
+  @spec delete_deployment!(pid, String.t(),  Map, List, List) :: term
+  def delete_deployment!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+    delete_deployment(api, id, queryparams, headers, options).success?
   end
 
   @doc """
-  Execute a Workflow.
+  Execute a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `execute_options` option defines the execution options map.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -283,20 +284,20 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec execute_workflow(pid, String.t(), Map, Map, List, List) :: term
-  def execute_workflow(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
-    post(api, get_path("workflows/#{id}/execute", queryparams), execute_options, headers, options)
+  @spec execute_deployment(pid, String.t(), Map, Map, List, List) :: term
+  def execute_deployment(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
+    post(api, get_path("deployments/#{id}/execute", queryparams), execute_options, headers, options)
   end
 
   @doc """
-  Execute a Workflow.
+  Execute a deployment.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
 
   The `execute_options` option defines the execution options map.
 
-  The `id` option defines the Workflow id.
+  The `id` option defines the deployment id.
 
   The `queryparams` option defines the query parameters (optional).
 
@@ -308,9 +309,9 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Boolean, if execution was successful
   """
-  @spec execute_workflow!(pid, String.t(), Map, Map, List, List) :: term
-  def execute_workflow!(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
-    response = execute_workflow(api, id, execute_options, queryparams, headers, options)
+  @spec execute_deployment!(pid, String.t(), Map, Map, List, List) :: term
+  def execute_deployment!(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = execute_deployment(api, id, execute_options, queryparams, headers, options)
     response.success?
   end  
 end
