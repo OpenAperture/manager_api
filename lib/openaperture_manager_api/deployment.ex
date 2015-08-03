@@ -30,8 +30,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
   Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec list(pid, Map, List, List) :: term
-  def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
-    get(api, get_path("deployments", queryparams), headers, options)
+  def list(api \\ ManagerApi.get_api, product_name, queryparams \\ %{}, headers \\ [], options \\ []) do
+    get(api, get_path("products/#{product_name}/deployments", queryparams), headers, options)
   end
 
   @doc """
@@ -51,8 +51,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
   Returns nil (if failure) or a list of Maps, each representing a deployment.
   """
   @spec list(pid, Map, List, List) :: List[Map]
-  def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
-    response = list(api, queryparams, headers, options)
+  def list!(api \\ ManagerApi.get_api, product_name, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = list(api, product_name, queryparams, headers, options)
     if response.success? do
       response.body
     else
@@ -80,7 +80,6 @@ defmodule OpenAperture.ManagerApi.Deployment do
   """
   @spec get_deployment(pid, term, Map, List, List) :: term
   def get_deployment(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
-    IO.puts("products/#{product_name}/deployments/#{id}")
     get(api, get_path("products/#{product_name}/deployments/#{id}", queryparams), headers, options)
   end
 
@@ -131,8 +130,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
   Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec create_deployment(pid, Map, Map, List, List) :: term
-  def create_deployment(api \\ ManagerApi.get_api, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
-    post(api, get_path("deployments", queryparams), deployment, headers, options)
+  def create_deployment(api \\ ManagerApi.get_api, product_name, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
+    post(api, get_path("products/#{product_name}/deployments/", queryparams), deployment, headers, options)
   end
 
   @doc """
@@ -154,8 +153,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
   Integer of new deployment, or nil
   """
   @spec create_deployment!(pid, Map, Map, List, List) :: term
-  def create_deployment!(api \\ ManagerApi.get_api, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
-    response = create_deployment(api, deployment, queryparams, headers, options)
+  def create_deployment!(api \\ ManagerApi.get_api, product_name, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = create_deployment(api, product_name, deployment, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
     else
@@ -209,8 +208,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
   Integer of new deployment, or nil
   """
   @spec update_deployment!(pid, String.t(), Map, Map, List, List) :: term
-  def update_deployment!(api \\ ManagerApi.get_api, id, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
-    response = update_deployment(api, id, deployment, queryparams, headers, options)
+  def update_deployment!(api \\ ManagerApi.get_api, product_name, id, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = update_deployment(api, product_name, id, deployment, queryparams, headers, options)
     if response.success? do
       Response.extract_identifier_from_location_header(response)
     else
@@ -237,8 +236,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
   Returns the OpenAperture.ManagerApi.Response struct.
   """
   @spec delete_deployment(pid, String.t(), Map, List, List) :: term
-  def delete_deployment(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
-    delete(api, get_path("deployments/#{id}", queryparams), headers, options)
+  def delete_deployment(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+    delete(api, get_path("products/#{product_name}/deployments/#{id}", queryparams), headers, options)
   end
 
   @doc """
@@ -259,9 +258,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Boolean
   """
-  @spec delete_deployment!(pid, String.t(),  Map, List, List) :: term
-  def delete_deployment!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
-    delete_deployment(api, id, queryparams, headers, options).success?
+  def delete_deployment!(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+    delete_deployment(api, product_name, id, queryparams, headers, options).success?
   end
 
   @doc """
@@ -284,9 +282,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec execute_deployment(pid, String.t(), Map, Map, List, List) :: term
-  def execute_deployment(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
-    post(api, get_path("deployments/#{id}/execute", queryparams), execute_options, headers, options)
+  def execute_deployment(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+    post(api, get_path("products/#{product_name}/deployments/#{id}/execute", queryparams), %{}, headers, options)
   end
 
   @doc """
@@ -310,8 +307,8 @@ defmodule OpenAperture.ManagerApi.Deployment do
   Boolean, if execution was successful
   """
   @spec execute_deployment!(pid, String.t(), Map, Map, List, List) :: term
-  def execute_deployment!(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
-    response = execute_deployment(api, id, execute_options, queryparams, headers, options)
+  def execute_deployment!(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
+    response = execute_deployment(api, product_name, id, queryparams, headers, options)
     response.success?
   end  
 end
