@@ -7,7 +7,6 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
   import OpenAperture.ManagerApi.Resource
 
   alias OpenAperture.ManagerApi
-  alias OpenAperture.ManagerApi.Response
 
   @moduledoc """
   This module contains the resources for managing SystemEvents
