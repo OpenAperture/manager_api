@@ -54,7 +54,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingExchanges.
   """
-  @spec list!(pid, String.t, Map, List, List) :: List[Map]
+  @spec list!(pid, String.t, Map, List, List) :: List[Map] | nil
   def list!(api \\ ManagerApi.get_api, exchange_id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, exchange_id, queryparams, headers, options)
     if response.success? do
@@ -109,7 +109,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Map of the MessagingExchange
   """
-  @spec get_module!(pid, String.t, String.t, Map, List, List) :: Map
+  @spec get_module!(pid, String.t, String.t, Map, List, List) :: Map | nil
   def get_module!(api \\ ManagerApi.get_api, exchange_id, hostname, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_module(api, exchange_id, hostname, queryparams, headers, options)
     if response.success? do
@@ -164,7 +164,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Integer of new exchange, or nil
   """
-  @spec create_module!(pid, String.t, Map, Map, List, List) :: term
+  @spec create_module!(pid, String.t, Map, Map, List, List) :: term | nil
   def create_module!(api \\ ManagerApi.get_api, exchange_id, module, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_module(api, exchange_id, module, queryparams, headers, options)
     if response.success? do

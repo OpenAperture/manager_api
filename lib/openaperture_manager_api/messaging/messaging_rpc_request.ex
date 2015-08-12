@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingRpcRequest.
   """
-  @spec list!(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Map of the MessagingRpcRequest
   """
-  @spec get_request!(pid, term, Map, List, List) :: Map
+  @spec get_request!(pid, term, Map, List, List) :: Map | nil
   def get_request!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_request(api, id, queryparams, headers, options)
     if response.success? do
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Integer of new request, or nil
   """
-  @spec create_request!(pid, Map, Map, List, List) :: term
+  @spec create_request!(pid, Map, Map, List, List) :: term | nil
   def create_request!(api \\ ManagerApi.get_api, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_request(api, request, queryparams, headers, options)
     if response.success? do
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Integer of new request, or nil
   """
-  @spec update_request!(pid, String.t, Map, Map, List, List) :: term
+  @spec update_request!(pid, String.t, Map, Map, List, List) :: term | nil
   def update_request!(api \\ ManagerApi.get_api, id, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_request(api, id, request, queryparams, headers, options)
     if response.success? do

@@ -51,7 +51,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingExchanges.
   """
-  @spec list!(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -102,7 +102,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Map of the MessagingExchange
   """
-  @spec get_exchange!(pid, term, Map, List, List) :: Map
+  @spec get_exchange!(pid, term, Map, List, List) :: Map | nil
   def get_exchange!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_exchange(api, id, queryparams, headers, options)
     if response.success? do
@@ -153,7 +153,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Integer of new exchange, or nil
   """
-  @spec create_exchange!(pid, Map, Map, List, List) :: term
+  @spec create_exchange!(pid, Map, Map, List, List) :: term | nil
   def create_exchange!(api \\ ManagerApi.get_api, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_exchange(api, exchange, queryparams, headers, options)
     if response.success? do
@@ -208,7 +208,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Integer of new exchange, or nil
   """
-  @spec update_exchange!(pid, String.t, Map, Map, List, List) :: term
+  @spec update_exchange!(pid, String.t, Map, Map, List, List) :: term | nil
   def update_exchange!(api \\ ManagerApi.get_api, id, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_exchange(api, id, exchange, queryparams, headers, options)
     if response.success? do
@@ -357,7 +357,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   List or nil
   """
-  @spec exchange_brokers!(pid, String.t, Map, List, List) :: List
+  @spec exchange_brokers!(pid, String.t, Map, List, List) :: List | nil
   def exchange_brokers!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_brokers(api, id, queryparams, headers, options)
     if response.success? do
@@ -454,7 +454,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   List or nil
   """
-  @spec exchange_clusters!(pid, String.t, Map, List, List) :: List
+  @spec exchange_clusters!(pid, String.t, Map, List, List) :: List | nil
   def exchange_clusters!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_clusters(api, id, queryparams, headers, options)
     if response.success? do
@@ -533,7 +533,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   List or nil
   """
-  @spec exchange_components!(pid, String.t, Map, List, List) :: List
+  @spec exchange_components!(pid, String.t, Map, List, List) :: List | nil
   def exchange_components!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_components(api, id, queryparams, headers, options)
     if response.success? do

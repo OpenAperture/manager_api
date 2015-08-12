@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Returns nil (if failure) or a list of Maps, each representing a SystemComponentRef.
   """
-  @spec list!(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Map of the SystemComponentRef
   """
-  @spec get_system_component_ref!(pid, term, Map, List, List) :: Map
+  @spec get_system_component_ref!(pid, term, Map, List, List) :: Map | nil
   def get_system_component_ref!(api \\ ManagerApi.get_api, type, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_system_component_ref(api, type, queryparams, headers, options)
     if response.success? do
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Integer of new SystemComponentRef, or nil
   """
-  @spec create_system_component_ref!(pid, Map, Map, List, List) :: term
+  @spec create_system_component_ref!(pid, Map, Map, List, List) :: term | nil
   def create_system_component_ref!(api \\ ManagerApi.get_api, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_system_component_ref(api, component, queryparams, headers, options)
     if response.success? do
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Integer of new component, or nil
   """
-  @spec update_system_component_ref!(pid, String.t, Map, Map, List, List) :: term
+  @spec update_system_component_ref!(pid, String.t, Map, Map, List, List) :: term | nil
   def update_system_component_ref!(api \\ ManagerApi.get_api, type, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_system_component_ref(api, type, component, queryparams, headers, options)
     if response.success? do

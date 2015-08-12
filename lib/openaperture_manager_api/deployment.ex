@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns nil (if failure) or a list of Maps, each representing a deployment.
   """
-  @spec list!(pid, String.t, Map, List, List) :: List[Map]
+  @spec list!(pid, String.t, Map, List, List) :: List[Map] | nil
   def list!(api \\ ManagerApi.get_api, product_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, product_name, queryparams, headers, options)
     if response.success? do
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Map of the deployment
   """
-  @spec get_deployment!(pid, term, Map, List, List) :: Map
+  @spec get_deployment!(pid, term, Map, List, List) :: Map | nil
   def get_deployment!(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_deployment(api, product_name, id, queryparams, headers, options)
     if response.success? do
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Integer of new deployment, or nil
   """
-  @spec create_deployment!(pid, Map, Map, List, List) :: term
+  @spec create_deployment!(pid, Map, Map, List, List) :: term | nil
   def create_deployment!(api \\ ManagerApi.get_api, product_name, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_deployment(api, product_name, deployment, queryparams, headers, options)
     if response.success? do
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Integer of new deployment, or nil
   """
-  @spec update_deployment!(pid, String.t, Map, Map, List, List) :: term
+  @spec update_deployment!(pid, String.t, Map, Map, List, List) :: term | nil
   def update_deployment!(api \\ ManagerApi.get_api, product_name, id, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_deployment(api, product_name, id, deployment, queryparams, headers, options)
     if response.success? do

@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingBroker.
   """
-  @spec list!(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Map of the MessagingBroker
   """
-  @spec get_broker!(pid, term, Map, List, List) :: Map
+  @spec get_broker!(pid, term, Map, List, List) :: Map | nil
   def get_broker!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_broker(api, id, queryparams, headers, options)
     if response.success? do
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Integer of new broker, or nil
   """
-  @spec create_broker!(pid, Map, Map, List, List) :: term
+  @spec create_broker!(pid, Map, Map, List, List) :: term | nil
   def create_broker!(api \\ ManagerApi.get_api, broker, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_broker(api, broker, queryparams, headers, options)
     if response.success? do
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Integer of new broker, or nil
   """
-  @spec update_broker!(pid, String.t, Map, Map, List, List) :: term
+  @spec update_broker!(pid, String.t, Map, Map, List, List) :: term | nil
   def update_broker!(api \\ ManagerApi.get_api, id, broker, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_broker(api, id, broker, queryparams, headers, options)
     if response.success? do
@@ -354,7 +354,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   List or nil
   """
-  @spec broker_connections!(pid, String.t, Map, List, List) :: List
+  @spec broker_connections!(pid, String.t, Map, List, List) :: List | nil
   def broker_connections!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = broker_connections(api, id, queryparams, headers, options)
     if response.success? do

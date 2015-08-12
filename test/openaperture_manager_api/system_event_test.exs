@@ -2,8 +2,6 @@ defmodule OpenAperture.ManagerApi.SystemEventTest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
-  alias OpenAperture.ManagerApi.Response
-
   setup_all _context do
     :meck.new(OpenAperture.Auth.Client, [:passthrough])
     :meck.expect(OpenAperture.Auth.Client, :get_token, fn _, _, _ -> "abc" end)

@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Integer of new cluster, or nil
   """
-  @spec create_cluster!(pid, Map, Map, List, List) :: term
+  @spec create_cluster!(pid, Map, Map, List, List) :: term | nil
   def create_cluster!(api \\ ManagerApi.get_api, cluster, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_cluster(api, cluster, queryparams, headers, options)
     if response.success? do
@@ -249,7 +249,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Map of the EtcdCluster
   """
-  @spec get_cluster_products!(pid, term, Map, List, List) :: Map
+  @spec get_cluster_products!(pid, term, Map, List, List) :: Map | nil
   def get_cluster_products!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_products(api, token, queryparams, headers, options)
     if response.success? do
@@ -300,7 +300,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Map of the EtcdCluster
   """
-  @spec get_cluster_machines!(pid, term, Map, List, List) :: Map
+  @spec get_cluster_machines!(pid, term, Map, List, List) :: Map | nil
   def get_cluster_machines!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_machines(api, token, queryparams, headers, options)
     if response.success? do
@@ -351,7 +351,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Map of the EtcdCluster
   """
-  @spec get_cluster_units!(pid, term, Map, List, List) :: Map
+  @spec get_cluster_units!(pid, term, Map, List, List) :: Map | nil
   def get_cluster_units!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_units(api, token, queryparams, headers, options)
     if response.success? do
@@ -402,7 +402,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Map of the EtcdCluster
   """
-  @spec get_cluster_units_state!(pid, term, Map, List, List) :: Map
+  @spec get_cluster_units_state!(pid, term, Map, List, List) :: Map | nil
   def get_cluster_units_state!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_units_state(api, token, queryparams, headers, options)
     if response.success? do
@@ -461,7 +461,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Map of the EtcdCluster
   """
-  @spec get_cluster_unit_log!(pid, String, String, String, Map, List, List) :: Map
+  @spec get_cluster_unit_log!(pid, String, String, String, Map, List, List) :: Map | nil
   def get_cluster_unit_log!(api \\ ManagerApi.get_api, token, machine_id, unit_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_unit_log(api, token, machine_id, unit_name, queryparams, headers, options)
     if response.success? do

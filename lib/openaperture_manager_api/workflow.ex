@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Returns nil (if failure) or a list of Maps, each representing a Workflow.
   """
-  @spec list!(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Map of the Workflow
   """
-  @spec get_workflow!(pid, term, Map, List, List) :: Map
+  @spec get_workflow!(pid, term, Map, List, List) :: Map | nil
   def get_workflow!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_workflow(api, id, queryparams, headers, options)
     if response.success? do
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Integer of new workflow, or nil
   """
-  @spec create_workflow!(pid, Map, Map, List, List) :: term
+  @spec create_workflow!(pid, Map, Map, List, List) :: term | nil
   def create_workflow!(api \\ ManagerApi.get_api, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_workflow(api, workflow, queryparams, headers, options)
     if response.success? do
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Integer of new workflow, or nil
   """
-  @spec update_workflow!(pid, String.t, Map, Map, List, List) :: term
+  @spec update_workflow!(pid, String.t, Map, Map, List, List) :: term | nil
   def update_workflow!(api \\ ManagerApi.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_workflow(api, id, workflow, queryparams, headers, options)
     if response.success? do
