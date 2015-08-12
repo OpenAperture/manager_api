@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Returns nil (if failure) or a list of Maps, each representing an EtcdCluster.
   """
-  @spec list(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -180,7 +180,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_cluster(pid, String.t(), Map, List, List) :: term
+  @spec delete_cluster(pid, String.t, Map, List, List) :: term
   def delete_cluster(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("clusters/#{token}", queryparams), headers, options)
   end
@@ -203,7 +203,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Boolean
   """
-  @spec delete_cluster!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_cluster!(pid, String.t,  Map, List, List) :: term
   def delete_cluster!(api \\ ManagerApi.get_api, token, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_cluster(api, token, queryparams, headers, options).success?
   end
@@ -434,7 +434,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec get_cluster_units_state(pid, term, Map, List, List) :: term
+  @spec get_cluster_unit_log(pid, String, String, String, Map, List, List) :: term
   def get_cluster_unit_log(api \\ ManagerApi.get_api, token, machine_id, unit_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("clusters/#{token}/machines/#{machine_id}/units/#{unit_name}/logs", queryparams), headers, options)
   end
@@ -461,7 +461,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   Map of the EtcdCluster
   """
-  @spec get_cluster_unit_log!(pid, term, Map, List, List) :: Map
+  @spec get_cluster_unit_log!(pid, String, String, String, Map, List, List) :: Map
   def get_cluster_unit_log!(api \\ ManagerApi.get_api, token, machine_id, unit_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_cluster_unit_log(api, token, machine_id, unit_name, queryparams, headers, options)
     if response.success? do

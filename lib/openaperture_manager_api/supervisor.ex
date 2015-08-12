@@ -29,7 +29,7 @@ defmodule OpenAperture.ManagerApi.Supervisor do
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
   """ 
-  @spec start_link() :: {:ok, pid} | {:error, String.t()}
+  @spec start_link() :: Supervisor.on_start
   def start_link do
     Logger.info("Starting OpenAperture.ManagerApi.Supervisor...")
     Supervisor.start_link(__MODULE__, [], name: __MODULE__)
@@ -42,7 +42,7 @@ defmodule OpenAperture.ManagerApi.Supervisor do
 
   {:ok, state} | {:error, reason}
   """   
-  @spec init([]) :: {:ok, term} | {:error, String.t()}
+  @spec init([]) :: {:ok, term} | {:error, String.t}
   def init([]) do
     children = [
       worker(OpenAperture.ManagerApi, [%{

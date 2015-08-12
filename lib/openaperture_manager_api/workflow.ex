@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Returns nil (if failure) or a list of Maps, each representing a Workflow.
   """
-  @spec list(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_workflow(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_workflow(pid, String.t, Map, Map, List, List) :: term
   def update_workflow(api \\ ManagerApi.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("workflows/#{id}", queryparams), workflow, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Integer of new workflow, or nil
   """
-  @spec update_workflow!(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_workflow!(pid, String.t, Map, Map, List, List) :: term
   def update_workflow!(api \\ ManagerApi.get_api, id, workflow, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_workflow(api, id, workflow, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_workflow(pid, String.t(), Map, List, List) :: term
+  @spec delete_workflow(pid, String.t, Map, List, List) :: term
   def delete_workflow(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("workflows/#{id}", queryparams), headers, options)
   end
@@ -258,7 +258,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Boolean
   """
-  @spec delete_workflow!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_workflow!(pid, String.t,  Map, List, List) :: term
   def delete_workflow!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_workflow(api, id, queryparams, headers, options).success?
   end
@@ -283,7 +283,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec execute_workflow(pid, String.t(), Map, Map, List, List) :: term
+  @spec execute_workflow(pid, String.t, Map, Map, List, List) :: term
   def execute_workflow(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("workflows/#{id}/execute", queryparams), execute_options, headers, options)
   end
@@ -308,7 +308,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   Boolean, if execution was successful
   """
-  @spec execute_workflow!(pid, String.t(), Map, Map, List, List) :: term
+  @spec execute_workflow!(pid, String.t, Map, Map, List, List) :: term
   def execute_workflow!(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = execute_workflow(api, id, execute_options, queryparams, headers, options)
     response.success?

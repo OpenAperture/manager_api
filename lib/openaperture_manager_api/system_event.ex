@@ -49,7 +49,7 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
 
   Returns nil (if failure) or a list of Maps, each representing a SystemEvent.
   """
-  @spec list(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do

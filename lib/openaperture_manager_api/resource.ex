@@ -30,7 +30,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """ 
-  @spec get(pid, String.t(), List, List) :: Response.t
+  @spec get(pid, String.t, List, List) :: Response.t
   def get(api, path, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] GET #{url}"
@@ -63,7 +63,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """ 
-  @spec post(pid, String.t(), term, List, List) :: Response.t
+  @spec post(pid, String.t, term, List, List) :: Response.t
   def post(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] Encoding POST body..."
@@ -97,7 +97,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """ 
-  @spec put(pid, String.t(), term, List, List) :: Response.t
+  @spec put(pid, String.t, term, List, List) :: Response.t
   def put(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] Encoding PUT body..."
@@ -130,7 +130,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """ 
-  @spec delete(pid, String.t(), List, List) :: Response.t
+  @spec delete(pid, String.t, List, List) :: Response.t
   def delete(api, path, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] DELETE #{url}"
@@ -156,7 +156,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   # Absolute URL
   # """ 
-  @spec get_url(pid, String.t()) :: String.t()
+  @spec get_url(pid, String.t) :: String.t
   defp get_url(api, path) do
   	opts = ManagerApi.get_options(api)
     path = Regex.replace(~r/^\//, path, "") # strip leading slash, if present
@@ -176,7 +176,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   Absolute URL
   """ 
-  @spec get_path(pid, Map) :: String.t()
+  @spec get_path(pid, Map) :: String.t
   def get_path(default_path, query_params) do
     case build_query_string_from_params(query_params) do
       "" ->
@@ -202,7 +202,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   Query string
   """ 
-  @spec build_query_string_from_params(Map) :: String.t()
+  @spec build_query_string_from_params(Map) :: String.t
   def build_query_string_from_params(query_params) do
     Enum.reduce(
       Map.keys(query_params),
@@ -289,7 +289,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   #
   # httpc response tuple
   #
-  @spec execute_request(term, term, List) :: term
+  @spec execute_request(term, term, term) :: term
   defp execute_request(method, request, http_options) do
     httpc_options = []
     :httpc.request(method, request, http_options, httpc_options)

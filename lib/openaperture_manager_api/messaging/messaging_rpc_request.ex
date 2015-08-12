@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingRpcRequest.
   """
-  @spec list(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_request(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_request(pid, String.t, Map, Map, List, List) :: term
   def update_request(api \\ ManagerApi.get_api, id, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("messaging/rpc_requests/#{id}", queryparams), request, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Integer of new request, or nil
   """
-  @spec update_request!(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_request!(pid, String.t, Map, Map, List, List) :: term
   def update_request!(api \\ ManagerApi.get_api, id, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_request(api, id, request, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_request(pid, String.t(), Map, List, List) :: term
+  @spec delete_request(pid, String.t, Map, List, List) :: term
   def delete_request(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/rpc_requests/#{id}", queryparams), headers, options)
   end
@@ -258,7 +258,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Boolean
   """
-  @spec delete_request!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_request!(pid, String.t,  Map, List, List) :: term
   def delete_request!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_request(api, id, queryparams, headers, options).success?
   end

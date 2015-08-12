@@ -6,6 +6,9 @@
 require Logger
 
 defmodule OpenAperture.ManagerApi.Response do
+
+  @type t :: %{success?: boolean, headers: List, body: term}
+
   defstruct body: nil, success?: nil, raw_body: nil, status: nil, headers: nil
 
   @moduledoc """
@@ -64,7 +67,7 @@ defmodule OpenAperture.ManagerApi.Response do
 
   String identifier
   """ 
-  @spec extract_identifier_from_location_header(term) :: String.t()
+  @spec extract_identifier_from_location_header(term) :: String.t
   def extract_identifier_from_location_header(response) do
     case extract_location_header(response) do
       nil -> ""
@@ -88,7 +91,7 @@ defmodule OpenAperture.ManagerApi.Response do
 
   String
   """ 
-  @spec extract_location_header(term) :: String.t()
+  @spec extract_location_header(term) :: String.t | nil
   def extract_location_header(response) do
     if response.headers == nil || length(response.headers) == 0 do
       ""

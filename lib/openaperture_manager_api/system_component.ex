@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns nil (if failure) or a list of Maps, each representing a SystemComponent.
   """
-  @spec list(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_system_component(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_system_component(pid, String.t, Map, Map, List, List) :: term
   def update_system_component(api \\ ManagerApi.get_api, id, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("system_components/#{id}", queryparams), component, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Integer of new component, or nil
   """
-  @spec update_system_component!(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_system_component!(pid, String.t, Map, Map, List, List) :: term
   def update_system_component!(api \\ ManagerApi.get_api, id, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_system_component(api, id, component, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_system_component(pid, String.t(), Map, List, List) :: term
+  @spec delete_system_component(pid, String.t, Map, List, List) :: term
   def delete_system_component(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("system_components/#{id}", queryparams), headers, options)
   end
@@ -258,7 +258,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Boolean
   """
-  @spec delete_system_component!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_system_component!(pid, String.t,  Map, List, List) :: term
   def delete_system_component!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_system_component(api, id, queryparams, headers, options).success?
   end

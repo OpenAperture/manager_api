@@ -9,7 +9,7 @@ defmodule OpenAperture.ManagerApi.ProductEnvironment do
     get(api, get_path("products/#{product_name}/environments"))
   end
 
-  @spec list!(pid, String.t) :: List.t | nil
+  @spec list!(pid, String.t) :: List | nil
   def list!(api \\ ManagerApi.get_api, product_name) do
     response = get(api, get_path("products/#{product_name}/environments"))
     if response.success? do
@@ -24,7 +24,7 @@ defmodule OpenAperture.ManagerApi.ProductEnvironment do
     get(api, get_path("products/#{product_name}/environments/#{environment_name}"))
   end
 
-  @spec get_environment!(pid, String.t, String.t) :: Map.t | nil
+  @spec get_environment!(pid, String.t, String.t) :: Map | nil
   def get_environment!(api \\ ManagerApi.get_api, product_name, environment_name) do
     response = get_environment(api, product_name, environment_name)
     if response.success? do
@@ -34,12 +34,12 @@ defmodule OpenAperture.ManagerApi.ProductEnvironment do
     end
   end
 
-  @spec create_environment(pid, String.t, Map.t) :: Response.t
+  @spec create_environment(pid, String.t, Map) :: Response.t
   def create_environment(api \\ ManagerApi.get_api, product_name, environment) do
     post(api, get_path("products/#{product_name}/environments"), environment)
   end
 
-  @spec create_environment!(pid, String.t, Map.t) :: String.t | nil
+  @spec create_environment!(pid, String.t, Map) :: String.t | nil
   def create_environment!(api \\ ManagerApi.get_api, product_name, environment) do
     response = create_environment(api, product_name, environment)
     if response.success? do
@@ -60,12 +60,12 @@ defmodule OpenAperture.ManagerApi.ProductEnvironment do
     response.success?
   end
 
-  @spec update_environment(pid, String.t, String.t, Map.t) :: Response.t
+  @spec update_environment(pid, String.t, String.t, Map) :: Response.t
   def update_environment(api \\ ManagerApi.get_api, product_name, environment_name, environment) do
     put(api, get_path("products/#{product_name}/environments/#{environment_name}"), environment)
   end
 
-  @spec update_environment!(pid, String.t, String.t, Map.t) :: String.t | nil
+  @spec update_environment!(pid, String.t, String.t, Map) :: String.t | nil
   def update_environment!(api \\ ManagerApi.get_api, product_name, environment_name, environment) do
     response = update_environment(api, product_name, environment_name, environment)
     if response.success? do

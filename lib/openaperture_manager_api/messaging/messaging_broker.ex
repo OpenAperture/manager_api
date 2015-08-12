@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingBroker.
   """
-  @spec list(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_broker(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_broker(pid, String.t, Map, Map, List, List) :: term
   def update_broker(api \\ ManagerApi.get_api, id, broker, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("messaging/brokers/#{id}", queryparams), broker, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Integer of new broker, or nil
   """
-  @spec update_broker!(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_broker!(pid, String.t, Map, Map, List, List) :: term
   def update_broker!(api \\ ManagerApi.get_api, id, broker, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_broker(api, id, broker, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_broker(pid, String.t(), Map, List, List) :: term
+  @spec delete_broker(pid, String.t, Map, List, List) :: term
   def delete_broker(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/brokers/#{id}", queryparams), headers, options)
   end
@@ -258,7 +258,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Boolean
   """
-  @spec delete_broker!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_broker!(pid, String.t,  Map, List, List) :: term
   def delete_broker!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_broker(api, id, queryparams, headers, options).success?
   end
@@ -283,7 +283,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_broker_connection(pid, String.t(), Map, Map, List, List) :: term
+  @spec create_broker_connection(pid, String.t, Map, Map, List, List) :: term
   def create_broker_connection(api \\ ManagerApi.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("messaging/brokers/#{id}/connections", queryparams), connection, headers, options)
   end
@@ -308,7 +308,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Boolean
   """
-  @spec create_broker_connection!(pid, String.t(), Map, Map, List, List) :: term
+  @spec create_broker_connection!(pid, String.t, Map, Map, List, List) :: term
   def create_broker_connection!(api \\ ManagerApi.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
     create_broker_connection(api, id, connection, queryparams, headers, options).success?
   end
@@ -331,7 +331,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec broker_connections(pid, String.t(), List, List) :: term
+  @spec broker_connections(pid, String.t, List, List) :: term
   def broker_connections(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/brokers/#{id}/connections", queryparams), headers, options)
   end
@@ -354,7 +354,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   List or nil
   """
-  @spec broker_connections!(pid, String.t(), Map, List, List) :: List
+  @spec broker_connections!(pid, String.t, Map, List, List) :: List
   def broker_connections!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = broker_connections(api, id, queryparams, headers, options)
     if response.success? do
@@ -382,7 +382,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_broker_connections(pid, String.t(), Map, List, List) :: term
+  @spec delete_broker_connections(pid, String.t, Map, List, List) :: term
   def delete_broker_connections(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/brokers/#{id}/connections", queryparams), headers, options)
   end
@@ -405,7 +405,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   Boolean
   """
-  @spec delete_broker_connections!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_broker_connections!(pid, String.t,  Map, List, List) :: term
   def delete_broker_connections!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_broker_connections(api, id, queryparams, headers, options).success?
   end

@@ -51,7 +51,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingExchanges.
   """
-  @spec list(pid, Map, List, List) :: List[Map]
+  @spec list!(pid, Map, List, List) :: List[Map]
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -183,7 +183,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_exchange(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_exchange(pid, String.t, Map, Map, List, List) :: term
   def update_exchange(api \\ ManagerApi.get_api, id, broker, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("messaging/exchanges/#{id}", queryparams), broker, headers, options)
   end
@@ -208,7 +208,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Integer of new exchange, or nil
   """
-  @spec update_exchange!(pid, String.t(), Map, Map, List, List) :: term
+  @spec update_exchange!(pid, String.t, Map, Map, List, List) :: term
   def update_exchange!(api \\ ManagerApi.get_api, id, exchange, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_exchange(api, id, exchange, queryparams, headers, options)
     if response.success? do
@@ -238,7 +238,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_exchange(pid, String.t(), Map, List, List) :: term
+  @spec delete_exchange(pid, String.t, Map, List, List) :: term
   def delete_exchange(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/exchanges/#{id}", queryparams), headers, options)
   end
@@ -261,7 +261,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Boolean
   """
-  @spec delete_exchange!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_exchange!(pid, String.t,  Map, List, List) :: term
   def delete_exchange!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_exchange(api, id, queryparams, headers, options).success?
   end
@@ -286,7 +286,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_exchange_brokers(pid, String.t(), Map, Map, List, List) :: term
+  @spec create_exchange_brokers(pid, String.t, Map, Map, List, List) :: term
   def create_exchange_brokers(api \\ ManagerApi.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("messaging/exchanges/#{id}/brokers", queryparams), connection, headers, options)
   end
@@ -311,7 +311,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Boolean
   """
-  @spec create_exchange_brokers!(pid, String.t(), Map, Map, List, List) :: term
+  @spec create_exchange_brokers!(pid, String.t, Map, Map, List, List) :: term
   def create_exchange_brokers!(api \\ ManagerApi.get_api, id, connection, queryparams \\ %{}, headers \\ [], options \\ []) do
     create_exchange_brokers(api, id, connection, queryparams, headers, options).success?
   end
@@ -334,7 +334,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec exchange_brokers(pid, String.t(), List, List) :: term
+  @spec exchange_brokers(pid, String.t, List, List) :: term
   def exchange_brokers(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{id}/brokers", queryparams), headers, options)
   end
@@ -357,7 +357,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   List or nil
   """
-  @spec exchange_brokers!(pid, String.t(), Map, List, List) :: List
+  @spec exchange_brokers!(pid, String.t, Map, List, List) :: List
   def exchange_brokers!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_brokers(api, id, queryparams, headers, options)
     if response.success? do
@@ -385,7 +385,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_exchange_brokers(pid, String.t(), Map, List, List) :: term
+  @spec delete_exchange_brokers(pid, String.t, Map, List, List) :: term
   def delete_exchange_brokers(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/exchanges/#{id}/brokers", queryparams), headers, options)
   end
@@ -408,7 +408,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Boolean
   """
-  @spec delete_exchange_brokers!(pid, String.t(),  Map, List, List) :: term
+  @spec delete_exchange_brokers!(pid, String.t,  Map, List, List) :: term
   def delete_exchange_brokers!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_exchange_brokers(api, id, queryparams, headers, options).success?
   end
@@ -431,7 +431,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec exchange_clusters(pid, String.t(), List, List) :: term
+  @spec exchange_clusters(pid, String.t, List, List) :: term
   def exchange_clusters(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{id}/clusters", queryparams), headers, options)
   end
@@ -454,7 +454,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   List or nil
   """
-  @spec exchange_clusters!(pid, String.t(), Map, List, List) :: List
+  @spec exchange_clusters!(pid, String.t, Map, List, List) :: List
   def exchange_clusters!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_clusters(api, id, queryparams, headers, options)
     if response.success? do
@@ -510,7 +510,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec exchange_components(pid, String.t(), List, List) :: term
+  @spec exchange_components(pid, String.t, List, List) :: term
   def exchange_components(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{id}/system_components", queryparams), headers, options)
   end
@@ -533,7 +533,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   List or nil
   """
-  @spec exchange_components!(pid, String.t(), Map, List, List) :: List
+  @spec exchange_components!(pid, String.t, Map, List, List) :: List
   def exchange_components!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = exchange_components(api, id, queryparams, headers, options)
     if response.success? do

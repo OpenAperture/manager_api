@@ -9,7 +9,7 @@ defmodule OpenAperture.ManagerApi.Product do
     get(api, get_path("products"))
   end
 
-  @spec list!(pid) :: List.t | nil
+  @spec list!(pid) :: List | nil
   def list!(api \\ ManagerApi.get_api) do
     response = list(api)
     if response.success? do
@@ -24,7 +24,7 @@ defmodule OpenAperture.ManagerApi.Product do
     get(api, get_path("products/#{product_name}"))
   end
 
-  @spec get_product!(pid, String.t) :: Map.t | nil
+  @spec get_product!(pid, String.t) :: Map | nil
   def get_product!(api \\ ManagerApi.get_api, product_name) do
     response = get_product(api, product_name)
     if response.success? do
@@ -34,12 +34,12 @@ defmodule OpenAperture.ManagerApi.Product do
     end
   end
 
-  @spec create_product(pid, Map.t) :: Response.t
+  @spec create_product(pid, Map) :: Response.t
   def create_product(api \\ ManagerApi.get_api, product) do
     post(api, get_path("products"), product)
   end
 
-  @spec create_product!(pid, Map.t) :: String.t | nil
+  @spec create_product!(pid, Map) :: String.t | nil
   def create_product!(api \\ ManagerApi.get_api, product) do
     response = create_product(api, product)
     if response.success? do
@@ -60,12 +60,12 @@ defmodule OpenAperture.ManagerApi.Product do
     response.success?
   end
 
-  @spec update_product(pid, String.t, Map.t) :: Response.t
+  @spec update_product(pid, String.t, Map) :: Response.t
   def update_product(api \\ ManagerApi.get_api, product_name, product) do
     put(api, get_path("products/#{product_name}"), product)
   end
 
-  @spec update_product(pid, String.t, Map.t) :: String.t | nil
+  @spec update_product!(pid, String.t, Map) :: String.t | nil
   def update_product!(api \\ ManagerApi.get_api, product_name, product) do
     response = update_product(api, product_name, product)
     if response.success? do

@@ -43,7 +43,7 @@ defmodule OpenAperture.ManagerApi do
   Note also that the `:transient` type is of little practical use, since when a
   supervision tree terminates, the reason is set to `:shutdown`, not `:normal`.
   """
-  @spec start(atom, [any]) :: :ok | {:error, String.t()}
+  @spec start(atom, [any]) :: Supervisor.on_start
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
@@ -71,7 +71,7 @@ defmodule OpenAperture.ManagerApi do
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
   """	
-	@spec start_link(Map) :: {:ok, pid} | {:error, String.t()}
+	@spec start_link(Map) :: {:ok, pid} | {:error, String.t}
 	def start_link(opts) do
 		create(opts)
 	end
@@ -92,7 +92,7 @@ defmodule OpenAperture.ManagerApi do
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
   """	
-	@spec create(Map) :: {:ok, pid} | {:error, String.t()}
+	@spec create(Map) :: {:ok, pid} | {:error, String.t}
   def create(opts) do
     Agent.start_link(fn -> opts end)
   end
