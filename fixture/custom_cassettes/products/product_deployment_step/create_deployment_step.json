@@ -1,0 +1,27 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json",
+        "User-Agent": "openaperture-manager-api"
+      },
+      "method": "post",
+      "options": {
+        "connect_timeout": 5000
+      },
+      "url": "https://openaperture-mgr.host.co/products/product1/deployments/1/steps"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "-1",
+        "Connection": "keep-alive",
+        "location": "https://openaperture-mgr.host.co/products/product1/deployments/1/steps/1"
+      },
+      "status_code": ["HTTP/1.1", 201, "Created"],
+      "type": "ok"
+    }
+  }
+]
