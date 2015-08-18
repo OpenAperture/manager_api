@@ -1,4 +1,4 @@
-defmodule OpenAperture.ManagerApi.ProductDeploymentPlanStep.Test do
+defmodule OpenAperture.ManagerApi.ProductDeploymentStep.Test do
   use ExUnit.Case, async: false
   use ExVCR.Mock, adapter: ExVCR.Adapter.Httpc, options: [clear_mock: true]
 
