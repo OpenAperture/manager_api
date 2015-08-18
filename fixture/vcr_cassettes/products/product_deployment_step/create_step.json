@@ -1,0 +1,46 @@
+[
+  {
+    "request": {
+      "body": "{\"grant_type\":\"client_credentials\",\"client_secret\":\"test_secret\",\"client_id\":\"test_id\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "https://localhost/oauth/token"
+    },
+    "response": {
+      "body": "failed_connect",
+      "headers": [],
+      "status_code": null,
+      "type": "error"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"completed\":false}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "openaperture-manager-api",
+        "Authorization": "Bearer access_token="
+      },
+      "method": "post",
+      "options": {
+        "httpc_options": [],
+        "http_options": []
+      },
+      "url": "http://localhost/products/test_product/deployment_plans//steps"
+    },
+    "response": {
+      "body": "failed_connect",
+      "headers": [],
+      "status_code": null,
+      "type": "error"
+    }
+  }
+]
