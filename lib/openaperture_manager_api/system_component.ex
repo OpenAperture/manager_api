@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   @moduledoc """
   This module contains the resources for managing SystemComponents
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of SystemComponents. 
+  Retrieves the entire list of SystemComponents.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -35,7 +35,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
   end
 
   @doc """
-  Retrieves the entire list of SystemComponents. 
+  Retrieves the entire list of SystemComponents.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.

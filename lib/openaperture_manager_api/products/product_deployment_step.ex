@@ -58,5 +58,5 @@ defmodule OpenAperture.ManagerApi.ProductDeploymentStep do
   def delete_step!(api \\ ManagerApi.get_api, product_name, deployment_id, step_id) do
     response = delete_step(api, product_name, deployment_id, step_id)
     response.success?
-  end  
+  end
 end

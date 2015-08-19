@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   @moduledoc """
   This module contains the resources for managing deployments
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of deployments. 
+  Retrieves the entire list of deployments.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -35,7 +35,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
   end
 
   @doc """
-  Retrieves the entire list of deployments. 
+  Retrieves the entire list of deployments.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -310,5 +310,5 @@ defmodule OpenAperture.ManagerApi.Deployment do
   def execute_deployment!(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = execute_deployment(api, product_name, id, queryparams, headers, options)
     response.success?
-  end  
+  end
 end

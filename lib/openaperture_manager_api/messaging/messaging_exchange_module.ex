@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   @moduledoc """
   This module contains the resources for managing MessagingExchangeModules
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of MessagingExchangeModules. 
+  Retrieves the entire list of MessagingExchangeModules.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -37,7 +37,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
   end
 
   @doc """
-  Retrieves the entire list of MessagingExchanges. 
+  Retrieves the entire list of MessagingExchanges.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -117,7 +117,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
     else
       nil
     end
-  end  
+  end
 
   @doc """
   Create a MessagingExchangeModule.
@@ -222,5 +222,5 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
   @spec delete_module!(pid, String.t,  String.t, Map, List, List) :: term
   def delete_module!(api \\ ManagerApi.get_api, exchange_id, hostname, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_module(api, exchange_id, hostname, queryparams, headers, options).success?
-  end  
+  end
 end

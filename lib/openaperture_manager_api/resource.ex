@@ -29,7 +29,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   ## Return values
 
   OpenAperture.ManagerApi.Response
-  """ 
+  """
   @spec get(pid, String.t, List, List) :: Response.t
   def get(api, path, headers, options) do
     url = get_url(api, path)
@@ -62,7 +62,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   ## Return values
 
   OpenAperture.ManagerApi.Response
-  """ 
+  """
   @spec post(pid, String.t, term, List, List) :: Response.t
   def post(api, path, object, headers, options) do
     url = get_url(api, path)
@@ -96,7 +96,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   ## Return values
 
   OpenAperture.ManagerApi.Response
-  """ 
+  """
   @spec put(pid, String.t, term, List, List) :: Response.t
   def put(api, path, object, headers, options) do
     url = get_url(api, path)
@@ -129,7 +129,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   ## Return values
 
   OpenAperture.ManagerApi.Response
-  """ 
+  """
   @spec delete(pid, String.t, List, List) :: Response.t
   def delete(api, path, headers, options) do
     url = get_url(api, path)
@@ -155,7 +155,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   # ## Return values
 
   # Absolute URL
-  # """ 
+  # """
   @spec get_url(pid, String.t) :: String.t
   defp get_url(api, path) do
   	opts = ManagerApi.get_options(api)
@@ -175,7 +175,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   ## Return values
 
   Absolute URL
-  """ 
+  """
   @spec get_path(pid, Map) :: String.t
   def get_path(default_path, query_params) do
     case build_query_string_from_params(query_params) do
@@ -201,7 +201,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   ## Return values
 
   Query string
-  """ 
+  """
   @spec build_query_string_from_params(Map) :: String.t
   def build_query_string_from_params(query_params) do
     Enum.reduce(
@@ -251,7 +251,7 @@ defmodule OpenAperture.ManagerApi.Resource do
         ""
       true -> OpenAperture.Auth.Client.get_token(opts[:oauth_login_url], opts[:oauth_client_id], opts[:oauth_client_secret])
     end
-    
+
     [{'Accept', 'application/json'}, {'Content-Type', 'application/json'},
      {'User-Agent','openaperture-manager-api'}, {'Authorization', 'Bearer access_token=#{token}'}]
   end
@@ -293,5 +293,5 @@ defmodule OpenAperture.ManagerApi.Resource do
   defp execute_request(method, request, http_options) do
     httpc_options = []
     :httpc.request(method, request, http_options, httpc_options)
-  end  
+  end
 end

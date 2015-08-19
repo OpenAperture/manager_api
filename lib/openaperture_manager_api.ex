@@ -1,16 +1,16 @@
 #
 # == openaperture_manager_api.ex
 #
-# This module contains the the application definition as well as the create options for OpenAperture.ManagerApi.  This 
-# API library can be consumed either as an application (which can be supervised), or on a per-instance basis. 
+# This module contains the the application definition as well as the create options for OpenAperture.ManagerApi.  This
+# API library can be consumed either as an application (which can be supervised), or on a per-instance basis.
 #
 defmodule OpenAperture.ManagerApi do
 	use Application
 
   @moduledoc """
-  This module contains the the application definition as well as the create options for OpenAperture.ManagerApi.  This 
-  API library can be consumed either as an application (which can be supervised), or on a per-instance basis. 
-  """ 
+  This module contains the the application definition as well as the create options for OpenAperture.ManagerApi.  This
+  API library can be consumed either as an application (which can be supervised), or on a per-instance basis.
+  """
 
   @doc """
   Starts the application as a given `_type`.
@@ -35,11 +35,11 @@ defmodule OpenAperture.ManagerApi do
       also terminated.
     * `:temporary` - if `_type` terminates, it is reported but no other
       applications are terminated (the default).
-  
+
   Note that it is always possible to stop an application explicitly by calling
   `stop/1`. Regardless of the type of the application, no other applications will
   be affected.
-  
+
   Note also that the `:transient` type is of little practical use, since when a
   supervision tree terminates, the reason is set to `:shutdown`, not `:normal`.
   """
@@ -70,7 +70,7 @@ defmodule OpenAperture.ManagerApi do
 
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
-  """	
+  """
 	@spec start_link(Map) :: {:ok, pid} | {:error, String.t}
 	def start_link(opts) do
 		create(opts)
@@ -88,10 +88,10 @@ defmodule OpenAperture.ManagerApi do
 
   If the `init/1` callback fails with `reason`, the function returns
   `{:error, reason}`. Otherwise, if it returns `{:stop, reason}`
-  
+
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
-  """	
+  """
 	@spec create(Map) :: {:ok, pid} | {:error, String.t}
   def create(opts) do
     Agent.start_link(fn -> opts end)
@@ -103,7 +103,7 @@ defmodule OpenAperture.ManagerApi do
   ## Return values
 
   pid or raises error
-  """	
+  """
 	@spec create!(Map) :: pid
   def create!(opts) do
     case create(opts) do
@@ -118,11 +118,11 @@ defmodule OpenAperture.ManagerApi do
   ## Return values
 
   pid
-  """	
+  """
 	@spec get_api() :: pid
   def get_api() do
     OpenAperture.ManagerApi.Supervisor.get_api
-  end  
+  end
 
   @doc """
   Method to return options associated with a ManagerApi instance
@@ -134,7 +134,7 @@ defmodule OpenAperture.ManagerApi do
   ## Return values
 
   Map
-  """	
+  """
 	@spec get_options(pid) :: Map
   def get_options(api) do
   	Agent.get(api, fn opts -> opts end)

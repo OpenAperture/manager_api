@@ -12,10 +12,10 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
 
   @moduledoc """
   This module contains the resources for managing MessagingExchanges
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of MessagingExchanges. 
+  Retrieves the entire list of MessagingExchanges.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -36,7 +36,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchange do
   end
 
   @doc """
-  Retrieves the entire list of MessagingExchanges. 
+  Retrieves the entire list of MessagingExchanges.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.

@@ -84,5 +84,5 @@ defmodule OpenAperture.ManagerApi.ProductDeploymentPlan do
   def delete_deployment_plan!(api \\ ManagerApi.get_api, product_name, deployment_plan_name) do
     response = delete_deployment_plan(api, product_name, deployment_plan_name)
     response.success?
-  end  
+  end
 end

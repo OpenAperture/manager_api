@@ -11,7 +11,7 @@ defmodule OpenAperture.ManagerApi.Supervisor do
 
   @moduledoc """
   This module contains the supervisor logic for the ManagerApi (when run as an application).
-  """ 
+  """
 
   @doc """
   Method to start the supervisor as a process tied to the current supervision tree
@@ -28,7 +28,7 @@ defmodule OpenAperture.ManagerApi.Supervisor do
 
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
-  """ 
+  """
   @spec start_link() :: Supervisor.on_start
   def start_link do
     Logger.info("Starting OpenAperture.ManagerApi.Supervisor...")
@@ -41,7 +41,7 @@ defmodule OpenAperture.ManagerApi.Supervisor do
   ## Return values
 
   {:ok, state} | {:error, reason}
-  """   
+  """
   @spec init([]) :: {:ok, term} | {:error, String.t}
   def init([]) do
     children = [
@@ -61,7 +61,7 @@ defmodule OpenAperture.ManagerApi.Supervisor do
   ## Return values
 
   pid
-  """ 
+  """
   @spec get_api() :: pid
   def get_api do
     supervisor = Process.whereis(__MODULE__)

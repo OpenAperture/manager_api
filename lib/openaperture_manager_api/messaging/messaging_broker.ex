@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
 
   @moduledoc """
   This module contains the resources for managing MessagingBrokers
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of MessagingBrokers. 
+  Retrieves the entire list of MessagingBrokers.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -35,7 +35,7 @@ defmodule OpenAperture.ManagerApi.MessagingBroker do
   end
 
   @doc """
-  Retrieves the entire list of MessagingBrokers. 
+  Retrieves the entire list of MessagingBrokers.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.

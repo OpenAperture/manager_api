@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.Workflow do
 
   @moduledoc """
   This module contains the resources for managing Workflows
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of Workflows. 
+  Retrieves the entire list of Workflows.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -35,7 +35,7 @@ defmodule OpenAperture.ManagerApi.Workflow do
   end
 
   @doc """
-  Retrieves the entire list of Workflows. 
+  Retrieves the entire list of Workflows.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -312,5 +312,5 @@ defmodule OpenAperture.ManagerApi.Workflow do
   def execute_workflow!(api \\ ManagerApi.get_api, id, execute_options, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = execute_workflow(api, id, execute_options, queryparams, headers, options)
     response.success?
-  end  
+  end
 end

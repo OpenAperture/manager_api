@@ -42,5 +42,5 @@ defmodule OpenAperture.ManagerApi.ProductCluster do
     response = delete_clusters(api, product_name)
     response.success?
   end
-  
+
 end

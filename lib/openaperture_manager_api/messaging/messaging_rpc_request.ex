@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   @moduledoc """
   This module contains the resources for managing MessagingRpcRequests
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of MessagingRpcRequests. 
+  Retrieves the entire list of MessagingRpcRequests.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -35,7 +35,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
   end
 
   @doc """
-  Retrieves the entire list of MessagingRpcRequests. 
+  Retrieves the entire list of MessagingRpcRequests.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.

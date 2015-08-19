@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
 
   @moduledoc """
   This module contains the resources for managing EtcdClusters
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of EtcdClusters. 
+  Retrieves the entire list of EtcdClusters.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -35,7 +35,7 @@ defmodule OpenAperture.ManagerApi.EtcdCluster do
   end
 
   @doc """
-  Retrieves the entire list of EtcdClusters. 
+  Retrieves the entire list of EtcdClusters.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.

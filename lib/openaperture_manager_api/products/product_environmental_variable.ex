@@ -157,5 +157,5 @@ defmodule OpenAperture.ManagerApi.ProductEnvironmentalVariable do
     response = delete_product_variable(api, product_name, variable_name)
     response.success?
   end
-  
+
 end

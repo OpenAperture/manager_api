@@ -10,10 +10,10 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
 
   @moduledoc """
   This module contains the resources for managing SystemEvents
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of SystemEvents. 
+  Retrieves the entire list of SystemEvents.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -34,7 +34,7 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
   end
 
   @doc """
-  Retrieves the entire list of SystemEvents. 
+  Retrieves the entire list of SystemEvents.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
