@@ -6,7 +6,7 @@
 defmodule OpenAperture.ManagerApi.Error do
   @moduledoc """
   This module contains the standard error definition for OpenAperture.ManagerApi
-  """  
+  """
 
   defstruct stacktrace: nil, kind: nil, error: nil
 

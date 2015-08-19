@@ -13,7 +13,7 @@ defmodule OpenAperture.ManagerApi.Response do
 
   @moduledoc """
   This module contains the ManagerApi response struct and reusable methods for processing responses from the openaperture_manager.
-  """ 
+  """
 
   @doc """
   Method to process an incoming http response into a OpenAperture.ManagerApi.Response
@@ -25,7 +25,7 @@ defmodule OpenAperture.ManagerApi.Response do
   ## Return values
 
   OpenAperture.ManagerApi.Response
-  """ 
+  """
   @spec process(term) :: term
   def process(request) do
     try do
@@ -45,13 +45,13 @@ defmodule OpenAperture.ManagerApi.Response do
   ## Return values
 
   OpenAperture.ManagerApi.Response
-  """ 
+  """
   @spec from_httpc_response(term) :: term
   def from_httpc_response(response) do
     case response do
-      {:ok, {{_http_ver,return_code, _return_code_desc}, headers, body}} -> 
+      {:ok, {{_http_ver,return_code, _return_code_desc}, headers, body}} ->
         process_response({:ok, %{status_code: return_code, headers: headers, body: "#{body}"}})
-      {:error, {failure_reason, _}} -> 
+      {:error, {failure_reason, _}} ->
         process_response({:error, %{reason: "#{inspect failure_reason}"}})
     end
   end
@@ -66,7 +66,7 @@ defmodule OpenAperture.ManagerApi.Response do
   ## Return values
 
   String identifier
-  """ 
+  """
   @spec extract_identifier_from_location_header(term) :: String.t
   def extract_identifier_from_location_header(response) do
     case extract_location_header(response) do
@@ -90,7 +90,7 @@ defmodule OpenAperture.ManagerApi.Response do
   ## Return values
 
   String
-  """ 
+  """
   @spec extract_location_header(term) :: String.t | nil
   def extract_location_header(response) do
     if response.headers == nil || length(response.headers) == 0 do
@@ -103,7 +103,7 @@ defmodule OpenAperture.ManagerApi.Response do
           location_header
         end
       end
-    end    
+    end
   end
 
   @doc false
@@ -147,7 +147,7 @@ defmodule OpenAperture.ManagerApi.Response do
       status: 0,
       headers: process_headers(response[:headers]),
       raw_body: nil
-    }    
+    }
   end
 
   @doc false
@@ -170,7 +170,7 @@ defmodule OpenAperture.ManagerApi.Response do
     rescue e in _ ->
       Logger.debug "[OpenAperture.ManagerApi] An error occurred processing response body:  #{inspect e}"
       nil
-    end    
+    end
   end
 
   @doc false
@@ -206,7 +206,7 @@ defmodule OpenAperture.ManagerApi.Response do
     else
       Enum.reduce headers, [], fn(header, new_headers) ->
         new_headers ++ [{"#{elem(header, 0)}", "#{elem(header, 1)}"}]
-      end  
+      end
     end
   end
 end

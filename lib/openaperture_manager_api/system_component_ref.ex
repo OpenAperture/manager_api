@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   @moduledoc """
   This module contains the resources for managing SystemComponentRefs
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of SystemComponentRefs. 
+  Retrieves the entire list of SystemComponentRefs.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -29,13 +29,13 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec list(pid, Map, List, List) :: term
+  @spec list(pid, map, list, list) :: term
   def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("system_component_refs", queryparams), headers, options)
   end
 
   @doc """
-  Retrieves the entire list of SystemComponentRefs. 
+  Retrieves the entire list of SystemComponentRefs.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Returns nil (if failure) or a list of Maps, each representing a SystemComponentRef.
   """
-  @spec list!(pid, Map, List, List) :: List[Map] | nil
+  @spec list!(pid, map, list, list) :: list[map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -78,7 +78,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec get_system_component_ref(pid, term, Map, List, List) :: term
+  @spec get_system_component_ref(pid, term, map, list, list) :: term
   def get_system_component_ref(api \\ ManagerApi.get_api, type, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("system_component_refs/#{type}", queryparams), headers, options)
   end
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Map of the SystemComponentRef
   """
-  @spec get_system_component_ref!(pid, term, Map, List, List) :: Map | nil
+  @spec get_system_component_ref!(pid, term, map, list, list) :: map | nil
   def get_system_component_ref!(api \\ ManagerApi.get_api, type, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_system_component_ref(api, type, queryparams, headers, options)
     if response.success? do
@@ -129,7 +129,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_system_component_ref(pid, Map, Map, List, List) :: term
+  @spec create_system_component_ref(pid, map, map, list, list) :: term
   def create_system_component_ref(api \\ ManagerApi.get_api, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("system_component_refs", queryparams), component, headers, options)
   end
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Integer of new SystemComponentRef, or nil
   """
-  @spec create_system_component_ref!(pid, Map, Map, List, List) :: term | nil
+  @spec create_system_component_ref!(pid, map, map, list, list) :: term | nil
   def create_system_component_ref!(api \\ ManagerApi.get_api, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_system_component_ref(api, component, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_system_component_ref(pid, String.t, Map, Map, List, List) :: term
+  @spec update_system_component_ref(pid, String.t, map, map, list, list) :: term
   def update_system_component_ref(api \\ ManagerApi.get_api, type, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("system_component_refs/#{type}", queryparams), component, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Integer of new component, or nil
   """
-  @spec update_system_component_ref!(pid, String.t, Map, Map, List, List) :: term | nil
+  @spec update_system_component_ref!(pid, String.t, map, map, list, list) :: term | nil
   def update_system_component_ref!(api \\ ManagerApi.get_api, type, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_system_component_ref(api, type, component, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_system_component_ref(pid, String.t, Map, List, List) :: term
+  @spec delete_system_component_ref(pid, String.t, map, list, list) :: term
   def delete_system_component_ref(api \\ ManagerApi.get_api, type, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("system_component_refs/#{type}", queryparams), headers, options)
   end
@@ -258,7 +258,7 @@ defmodule OpenAperture.ManagerApi.SystemComponentRef do
 
   Boolean
   """
-  @spec delete_system_component_ref!(pid, String.t,  Map, List, List) :: term
+  @spec delete_system_component_ref!(pid, String.t,  map, list, list) :: term
   def delete_system_component_ref!(api \\ ManagerApi.get_api, type, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_system_component_ref(api, type, queryparams, headers, options).success?
   end
