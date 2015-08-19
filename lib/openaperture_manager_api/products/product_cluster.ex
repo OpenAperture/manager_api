@@ -4,14 +4,14 @@ defmodule OpenAperture.ManagerApi.ProductCluster do
   alias OpenAperture.ManagerApi
   alias OpenAperture.ManagerApi.Response
 
-  @type etcd_cluster :: Map
+  @type etcd_cluster :: map
 
   @spec list(pid, String) :: Response.t
   def list(api \\ ManagerApi.get_api, product_name) do
     get(api, get_path("products/#{product_name}/clusters"))
   end
 
-  @spec list!(pid, String.t) :: [Map] | nil
+  @spec list!(pid, String.t) :: [map] | nil
   def list!(api \\ ManagerApi.get_api, product_name) do
     response = list(api, product_name)
     if response.success? do

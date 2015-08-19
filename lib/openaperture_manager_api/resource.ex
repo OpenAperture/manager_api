@@ -30,7 +30,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """
-  @spec get(pid, String.t, List, List) :: Response.t
+  @spec get(pid, String.t, list, list) :: Response.t
   def get(api, path, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] GET #{url}"
@@ -63,7 +63,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """
-  @spec post(pid, String.t, term, List, List) :: Response.t
+  @spec post(pid, String.t, term, list, list) :: Response.t
   def post(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] Encoding POST body..."
@@ -97,7 +97,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """
-  @spec put(pid, String.t, term, List, List) :: Response.t
+  @spec put(pid, String.t, term, list, list) :: Response.t
   def put(api, path, object, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] Encoding PUT body..."
@@ -130,7 +130,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   OpenAperture.ManagerApi.Response
   """
-  @spec delete(pid, String.t, List, List) :: Response.t
+  @spec delete(pid, String.t, list, list) :: Response.t
   def delete(api, path, headers, options) do
     url = get_url(api, path)
     Logger.debug "[OpenAperture.ManagerApi] DELETE #{url}"
@@ -176,7 +176,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   Absolute URL
   """
-  @spec get_path(pid, Map) :: String.t
+  @spec get_path(pid, map) :: String.t
   def get_path(default_path, query_params) do
     case build_query_string_from_params(query_params) do
       "" ->
@@ -202,7 +202,7 @@ defmodule OpenAperture.ManagerApi.Resource do
 
   Query string
   """
-  @spec build_query_string_from_params(Map) :: String.t
+  @spec build_query_string_from_params(map) :: String.t
   def build_query_string_from_params(query_params) do
     Enum.reduce(
       Map.keys(query_params),
@@ -229,13 +229,13 @@ defmodule OpenAperture.ManagerApi.Resource do
   #
   # List
   #
-  @spec merge_options(List) :: List
+  @spec merge_options(list) :: list
   defp merge_options(options) do
     options ++ []
   end
 
   # Method to load the default headers
-  @spec default_headers(pid) :: List
+  @spec default_headers(pid) :: list
   defp default_headers(api) do
     opts = ManagerApi.get_options(api)
 
@@ -257,7 +257,7 @@ defmodule OpenAperture.ManagerApi.Resource do
   end
 
   # Method to merge custom headers
-  @spec merge_headers(pid, List) :: List
+  @spec merge_headers(pid, list) :: list
   defp merge_headers(api, headers) do
     if headers != nil && length(headers) > 0 do
       default_headers_map = Enum.reduce default_headers(api), %{}, fn (header, default_headers_map) ->

@@ -24,7 +24,7 @@ defmodule OpenAperture.ManagerApi.ProductDeploymentPlan do
     get(api, get_path("products/#{product_name}/deployment_plans/#{deployment_plan_name}"))
   end
 
-  @spec get_deployment_plan!(pid, String.t, String.t) :: Map | nil
+  @spec get_deployment_plan!(pid, String.t, String.t) :: map | nil
   def get_deployment_plan!(api \\ ManagerApi.get_api, product_name, deployment_plan_name) do
     response = get_deployment_plan(api, product_name, deployment_plan_name)
     if response.success? do
@@ -34,12 +34,12 @@ defmodule OpenAperture.ManagerApi.ProductDeploymentPlan do
     end
   end
 
-  @spec create_deployment_plan(pid, String.t, Map) :: Response.t
+  @spec create_deployment_plan(pid, String.t, map) :: Response.t
   def create_deployment_plan(api \\ ManagerApi.get_api, product_name, deployment_plan) do
     post(api, get_path("products/#{product_name}/deployment_plans"), deployment_plan)
   end
 
-  @spec create_deployment_plan!(pid, String.t, Map) :: String.t | nil
+  @spec create_deployment_plan!(pid, String.t, map) :: String.t | nil
   def create_deployment_plan!(api \\ ManagerApi.get_api, product_name, deployment_plan) do
     response = create_deployment_plan(api, product_name, deployment_plan)
     if response.success? do
@@ -49,12 +49,12 @@ defmodule OpenAperture.ManagerApi.ProductDeploymentPlan do
     end
   end
 
-  @spec update_deployment_plan(pid, String.t, String.t, Map) :: Response.t
+  @spec update_deployment_plan(pid, String.t, String.t, map) :: Response.t
   def update_deployment_plan(api \\ ManagerApi.get_api, product_name, deployment_plan_name, updated_deployment_plan) do
     put(api, get_path("products/#{product_name}/deployment_plans/#{deployment_plan_name}"), updated_deployment_plan)
   end
 
-  @spec update_deployment_plan!(pid, String.t, String.t, Map) :: String.t | nil
+  @spec update_deployment_plan!(pid, String.t, String.t, map) :: String.t | nil
   def update_deployment_plan!(api \\ ManagerApi.get_api, product_name, deployment_plan_name, updated_deployment_plan) do
     response = update_deployment_plan(api, product_name, deployment_plan_name, updated_deployment_plan)
     if response.success? do

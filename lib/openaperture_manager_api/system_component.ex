@@ -29,7 +29,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec list(pid, Map, List, List) :: term
+  @spec list(pid, map, list, list) :: term
   def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("system_components", queryparams), headers, options)
   end
@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns nil (if failure) or a list of Maps, each representing a SystemComponent.
   """
-  @spec list!(pid, Map, List, List) :: List[Map] | nil
+  @spec list!(pid, map, list, list) :: list[map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -78,7 +78,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec get_system_component(pid, term, Map, List, List) :: term
+  @spec get_system_component(pid, term, map, list, list) :: term
   def get_system_component(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("system_components/#{id}", queryparams), headers, options)
   end
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Map of the SystemComponent
   """
-  @spec get_system_component!(pid, term, Map, List, List) :: Map | nil
+  @spec get_system_component!(pid, term, map, list, list) :: map | nil
   def get_system_component!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_system_component(api, id, queryparams, headers, options)
     if response.success? do
@@ -129,7 +129,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_system_component(pid, Map, Map, List, List) :: term
+  @spec create_system_component(pid, map, map, list, list) :: term
   def create_system_component(api \\ ManagerApi.get_api, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("system_components", queryparams), component, headers, options)
   end
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Integer of new SystemComponent, or nil
   """
-  @spec create_system_component!(pid, Map, Map, List, List) :: term | nil
+  @spec create_system_component!(pid, map, map, list, list) :: term | nil
   def create_system_component!(api \\ ManagerApi.get_api, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_system_component(api, component, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_system_component(pid, String.t, Map, Map, List, List) :: term
+  @spec update_system_component(pid, String.t, map, map, list, list) :: term
   def update_system_component(api \\ ManagerApi.get_api, id, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("system_components/#{id}", queryparams), component, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Integer of new component, or nil
   """
-  @spec update_system_component!(pid, String.t, Map, Map, List, List) :: term | nil
+  @spec update_system_component!(pid, String.t, map, map, list, list) :: term | nil
   def update_system_component!(api \\ ManagerApi.get_api, id, component, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_system_component(api, id, component, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_system_component(pid, String.t, Map, List, List) :: term
+  @spec delete_system_component(pid, String.t, map, list, list) :: term
   def delete_system_component(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("system_components/#{id}", queryparams), headers, options)
   end
@@ -258,7 +258,7 @@ defmodule OpenAperture.ManagerApi.SystemComponent do
 
   Boolean
   """
-  @spec delete_system_component!(pid, String.t,  Map, List, List) :: term
+  @spec delete_system_component!(pid, String.t,  map, list, list) :: term
   def delete_system_component!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_system_component(api, id, queryparams, headers, options).success?
   end

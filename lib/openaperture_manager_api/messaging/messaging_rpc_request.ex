@@ -29,7 +29,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec list(pid, Map, List, List) :: term
+  @spec list(pid, map, list, list) :: term
   def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/rpc_requests", queryparams), headers, options)
   end
@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingRpcRequest.
   """
-  @spec list!(pid, Map, List, List) :: List[Map] | nil
+  @spec list!(pid, map, list, list) :: list[map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -78,7 +78,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec get_request(pid, term, Map, List, List) :: term
+  @spec get_request(pid, term, map, list, list) :: term
   def get_request(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/rpc_requests/#{id}", queryparams), headers, options)
   end
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Map of the MessagingRpcRequest
   """
-  @spec get_request!(pid, term, Map, List, List) :: Map | nil
+  @spec get_request!(pid, term, map, list, list) :: map | nil
   def get_request!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_request(api, id, queryparams, headers, options)
     if response.success? do
@@ -129,7 +129,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_request(pid, Map, Map, List, List) :: term
+  @spec create_request(pid, map, map, list, list) :: term
   def create_request(api \\ ManagerApi.get_api, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("messaging/rpc_requests", queryparams), request, headers, options)
   end
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Integer of new request, or nil
   """
-  @spec create_request!(pid, Map, Map, List, List) :: term | nil
+  @spec create_request!(pid, map, map, list, list) :: term | nil
   def create_request!(api \\ ManagerApi.get_api, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_request(api, request, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_request(pid, String.t, Map, Map, List, List) :: term
+  @spec update_request(pid, String.t, map, map, list, list) :: term
   def update_request(api \\ ManagerApi.get_api, id, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("messaging/rpc_requests/#{id}", queryparams), request, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Integer of new request, or nil
   """
-  @spec update_request!(pid, String.t, Map, Map, List, List) :: term | nil
+  @spec update_request!(pid, String.t, map, map, list, list) :: term | nil
   def update_request!(api \\ ManagerApi.get_api, id, request, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_request(api, id, request, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_request(pid, String.t, Map, List, List) :: term
+  @spec delete_request(pid, String.t, map, list, list) :: term
   def delete_request(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/rpc_requests/#{id}", queryparams), headers, options)
   end
@@ -258,7 +258,7 @@ defmodule OpenAperture.ManagerApi.MessagingRpcRequest do
 
   Boolean
   """
-  @spec delete_request!(pid, String.t,  Map, List, List) :: term
+  @spec delete_request!(pid, String.t,  map, list, list) :: term
   def delete_request!(api \\ ManagerApi.get_api, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_request(api, id, queryparams, headers, options).success?
   end

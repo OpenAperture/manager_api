@@ -29,7 +29,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec list(pid, String.t, Map, List, List) :: Response.t
+  @spec list(pid, String.t, map, list, list) :: Response.t
   def list(api \\ ManagerApi.get_api, product_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("products/#{product_name}/deployments", queryparams), headers, options)
   end
@@ -50,7 +50,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns nil (if failure) or a list of Maps, each representing a deployment.
   """
-  @spec list!(pid, String.t, Map, List, List) :: List[Map] | nil
+  @spec list!(pid, String.t, map, list, list) :: list[map] | nil
   def list!(api \\ ManagerApi.get_api, product_name, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, product_name, queryparams, headers, options)
     if response.success? do
@@ -78,7 +78,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec get_deployment(pid, term, Map, List, List) :: term
+  @spec get_deployment(pid, term, map, list, list) :: term
   def get_deployment(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("products/#{product_name}/deployments/#{id}", queryparams), headers, options)
   end
@@ -101,7 +101,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Map of the deployment
   """
-  @spec get_deployment!(pid, term, Map, List, List) :: Map | nil
+  @spec get_deployment!(pid, term, map, list, list) :: map | nil
   def get_deployment!(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_deployment(api, product_name, id, queryparams, headers, options)
     if response.success? do
@@ -129,7 +129,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_deployment(pid, Map, Map, List, List) :: term
+  @spec create_deployment(pid, map, map, list, list) :: term
   def create_deployment(api \\ ManagerApi.get_api, product_name, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("products/#{product_name}/deployments/", queryparams), deployment, headers, options)
   end
@@ -152,7 +152,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Integer of new deployment, or nil
   """
-  @spec create_deployment!(pid, Map, Map, List, List) :: term | nil
+  @spec create_deployment!(pid, map, map, list, list) :: term | nil
   def create_deployment!(api \\ ManagerApi.get_api, product_name, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_deployment(api, product_name, deployment, queryparams, headers, options)
     if response.success? do
@@ -182,7 +182,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec update_deployment(pid, String.t, Map, Map, List, List) :: term
+  @spec update_deployment(pid, String.t, map, map, list, list) :: term
   def update_deployment(api \\ ManagerApi.get_api, product_name, id, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
     put(api, get_path("products/#{product_name}/deployments/#{id}", queryparams), deployment, headers, options)
   end
@@ -207,7 +207,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Integer of new deployment, or nil
   """
-  @spec update_deployment!(pid, String.t, Map, Map, List, List) :: term | nil
+  @spec update_deployment!(pid, String.t, map, map, list, list) :: term | nil
   def update_deployment!(api \\ ManagerApi.get_api, product_name, id, deployment, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = update_deployment(api, product_name, id, deployment, queryparams, headers, options)
     if response.success? do
@@ -235,7 +235,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_deployment(pid, String.t, Map, List, List) :: term
+  @spec delete_deployment(pid, String.t, map, list, list) :: term
   def delete_deployment(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("products/#{product_name}/deployments/#{id}", queryparams), headers, options)
   end
@@ -306,7 +306,7 @@ defmodule OpenAperture.ManagerApi.Deployment do
 
   Boolean, if execution was successful
   """
-  @spec execute_deployment!(pid, String.t, Map, Map, List, List) :: term
+  @spec execute_deployment!(pid, String.t, map, map, list, list) :: term
   def execute_deployment!(api \\ ManagerApi.get_api, product_name, id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = execute_deployment(api, product_name, id, queryparams, headers, options)
     response.success?

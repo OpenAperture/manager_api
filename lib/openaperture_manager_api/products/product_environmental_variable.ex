@@ -45,7 +45,7 @@ defmodule OpenAperture.ManagerApi.ProductEnvironmentalVariable do
     get(api, get_path("products/#{product_name}/environments/#{environment_name}/variables/#{variable_name}"))
   end
 
-  @spec get_environment_variable!(pid, String.t, String.t, String.t) :: Map | nil
+  @spec get_environment_variable!(pid, String.t, String.t, String.t) :: map | nil
   def get_environment_variable!(api \\ ManagerApi.get_api, product_name, environment_name, variable_name) do
     response = get_environment_variable(api, product_name, environment_name, variable_name)
     if response.success? do
@@ -76,12 +76,12 @@ defmodule OpenAperture.ManagerApi.ProductEnvironmentalVariable do
     end
   end
 
-  @spec create_environment_variable(pid, String.t, String.t, Map) :: Response.t
+  @spec create_environment_variable(pid, String.t, String.t, map) :: Response.t
   def create_environment_variable(api \\ ManagerApi.get_api, product_name, environment_name, variable) do
     post(api, get_path("products/#{product_name}/environments/#{environment_name}/variables"), variable)
   end
 
-  @spec create_environment_variable!(pid, String.t, String.t, Map) :: String.t | nil
+  @spec create_environment_variable!(pid, String.t, String.t, map) :: String.t | nil
   def create_environment_variable!(api \\ ManagerApi.get_api, product_name, environment_name, variable) do
     response = create_environment_variable(api, product_name, environment_name, variable)
     if response.success? do
@@ -91,12 +91,12 @@ defmodule OpenAperture.ManagerApi.ProductEnvironmentalVariable do
     end
   end
 
-  @spec create_product_variable(pid, String.t, Map) :: Response.t
+  @spec create_product_variable(pid, String.t, map) :: Response.t
   def create_product_variable(api \\ ManagerApi.get_api, product_name, variable) do
     post(api, get_path("products/#{product_name}/environmental_variables"), variable)
   end
 
-  @spec create_product_variable!(pid, String.t, Map) :: String.t | nil
+  @spec create_product_variable!(pid, String.t, map) :: String.t | nil
   def create_product_variable!(api \\ ManagerApi.get_api, product_name, variable) do
     response = create_product_variable(api, product_name, variable)
     if response.success? do
@@ -106,12 +106,12 @@ defmodule OpenAperture.ManagerApi.ProductEnvironmentalVariable do
     end
   end
 
-  @spec update_environment_variable(pid, String.t, String.t, String.t, Map) :: Response.t
+  @spec update_environment_variable(pid, String.t, String.t, String.t, map) :: Response.t
   def update_environment_variable(api \\ ManagerApi.get_api, product_name, environment_name, variable_name, variable) do
     put(api, get_path("products/#{product_name}/environments/#{environment_name}/variables/#{variable_name}"), variable)
   end
 
-  @spec update_environment_variable!(pid, String.t, String.t, String.t, Map) :: String.t | nil
+  @spec update_environment_variable!(pid, String.t, String.t, String.t, map) :: String.t | nil
   def update_environment_variable!(api \\ ManagerApi.get_api, product_name, environment_name, variable_name, variable) do
     response = update_environment_variable(api, product_name, environment_name, variable_name, variable)
     if response.success? do
@@ -121,12 +121,12 @@ defmodule OpenAperture.ManagerApi.ProductEnvironmentalVariable do
     end
   end
 
-  @spec update_product_variable(pid, String.t, String.t, Map) :: Response.t
+  @spec update_product_variable(pid, String.t, String.t, map) :: Response.t
   def update_product_variable(api \\ ManagerApi.get_api, product_name, variable_name, variable) do
     put(api, get_path("products/#{product_name}/environmental_variables/#{variable_name}"), variable)
   end
 
-  @spec update_product_variable!(pid, String.t, String.t, Map) :: String.t | nil
+  @spec update_product_variable!(pid, String.t, String.t, map) :: String.t | nil
   def update_product_variable!(api \\ ManagerApi.get_api, product_name, variable_name, variable) do
     response = update_product_variable(api, product_name, variable_name, variable)
     if response.success? do

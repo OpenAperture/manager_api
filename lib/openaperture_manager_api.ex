@@ -71,7 +71,7 @@ defmodule OpenAperture.ManagerApi do
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
   """
-	@spec start_link(Map) :: {:ok, pid} | {:error, String.t}
+	@spec start_link(map) :: {:ok, pid} | {:error, String.t}
 	def start_link(opts) do
 		create(opts)
 	end
@@ -92,7 +92,7 @@ defmodule OpenAperture.ManagerApi do
   or `:ignore`, the process is terminated and the function returns
   `{:error, reason}` or `:ignore`, respectively.
   """
-	@spec create(Map) :: {:ok, pid} | {:error, String.t}
+	@spec create(map) :: {:ok, pid} | {:error, String.t}
   def create(opts) do
     Agent.start_link(fn -> opts end)
   end
@@ -104,7 +104,7 @@ defmodule OpenAperture.ManagerApi do
 
   pid or raises error
   """
-	@spec create!(Map) :: pid
+	@spec create!(map) :: pid
   def create!(opts) do
     case create(opts) do
     	{:ok, pid} -> pid
@@ -135,7 +135,7 @@ defmodule OpenAperture.ManagerApi do
 
   Map
   """
-	@spec get_options(pid) :: Map
+	@spec get_options(pid) :: map
   def get_options(api) do
   	Agent.get(api, fn opts -> opts end)
   end

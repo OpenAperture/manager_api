@@ -28,7 +28,7 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec list(pid, Map, List, List) :: term
+  @spec list(pid, map, list, list) :: term
   def list(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("system_events", queryparams), headers, options)
   end
@@ -49,7 +49,7 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
 
   Returns nil (if failure) or a list of Maps, each representing a SystemEvent.
   """
-  @spec list!(pid, Map, List, List) :: List[Map] | nil
+  @spec list!(pid, map, list, list) :: list[map] | nil
   def list!(api \\ ManagerApi.get_api, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, queryparams, headers, options)
     if response.success? do
@@ -77,7 +77,7 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_system_event(pid, Map, Map, List, List) :: term
+  @spec create_system_event(pid, map, map, list, list) :: term
   def create_system_event(api \\ ManagerApi.get_api, event, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("system_events", queryparams), event, headers, options)
   end
@@ -100,7 +100,7 @@ defmodule OpenAperture.ManagerApi.SystemEvent do
 
   Boolean
   """
-  @spec create_system_event!(pid, Map, Map, List, List) :: term
+  @spec create_system_event!(pid, map, map, list, list) :: term
   def create_system_event!(api \\ ManagerApi.get_api, event, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_system_event(api, event, queryparams, headers, options)
     response.success?
