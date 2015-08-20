@@ -48,6 +48,22 @@ defmodule OpenAperture.ManagerApi.ProductDeploymentStep.Test do
     end
   end
 
+  test "get step", context do
+    use_cassette "products/product_deployment_step/get_deployment_step", custom: true do
+      response = OpenAperture.ManagerApi.ProductDeploymentStep.get_step(context[:api], context[:product], context[:deployment], 1)
+
+      assert response.status == 200
+    end
+  end
+
+  test "get! step", context do
+    use_cassette "products/product_deployment_step/get_deployment_step", custom: true do
+      response = OpenAperture.ManagerApi.ProductDeploymentStep.get_step!(context[:api], context[:product], context[:deployment], 1)
+
+      assert response == "1"
+    end
+  end
+
   test "list steps", context do
     use_cassette "products/product_deployment_step/list_deployment_step", custom: true do
       response = OpenAperture.ManagerApi.ProductDeploymentStep.list(context[:api], context[:product], context[:deployment])
