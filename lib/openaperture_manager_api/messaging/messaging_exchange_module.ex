@@ -11,10 +11,10 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   @moduledoc """
   This module contains the resources for managing MessagingExchangeModules
-  """  
+  """
 
   @doc """
-  Retrieves the entire list of MessagingExchangeModules. 
+  Retrieves the entire list of MessagingExchangeModules.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -31,13 +31,13 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec list(pid, String.t, Map, List, List) :: term
+  @spec list(pid, String.t, map, list, list) :: term
   def list(api \\ ManagerApi.get_api, exchange_id, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{exchange_id}/modules", queryparams), headers, options)
   end
 
   @doc """
-  Retrieves the entire list of MessagingExchanges. 
+  Retrieves the entire list of MessagingExchanges.
 
   ## Options
   The `api` option defines the OpenAperture.ManagerApi used for connection.
@@ -54,7 +54,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Returns nil (if failure) or a list of Maps, each representing a MessagingExchanges.
   """
-  @spec list!(pid, String.t, Map, List, List) :: List[Map] | nil
+  @spec list!(pid, String.t, map, list, list) :: list[map] | nil
   def list!(api \\ ManagerApi.get_api, exchange_id, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = list(api, exchange_id, queryparams, headers, options)
     if response.success? do
@@ -84,7 +84,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec get_module(pid, String.t, String.t, Map, List, List) :: term
+  @spec get_module(pid, String.t, String.t, map, list, list) :: term
   def get_module(api \\ ManagerApi.get_api, exchange_id, hostname, queryparams \\ %{}, headers \\ [], options \\ []) do
     get(api, get_path("messaging/exchanges/#{exchange_id}/modules/#{hostname}", queryparams), headers, options)
   end
@@ -109,7 +109,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Map of the MessagingExchange
   """
-  @spec get_module!(pid, String.t, String.t, Map, List, List) :: Map | nil
+  @spec get_module!(pid, String.t, String.t, map, list, list) :: map | nil
   def get_module!(api \\ ManagerApi.get_api, exchange_id, hostname, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = get_module(api, exchange_id, hostname, queryparams, headers, options)
     if response.success? do
@@ -117,7 +117,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
     else
       nil
     end
-  end  
+  end
 
   @doc """
   Create a MessagingExchangeModule.
@@ -139,7 +139,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec create_module(pid, String.t, Map, Map, List, List) :: term
+  @spec create_module(pid, String.t, map, map, list, list) :: term
   def create_module(api \\ ManagerApi.get_api, exchange_id, module, queryparams \\ %{}, headers \\ [], options \\ []) do
     post(api, get_path("messaging/exchanges/#{exchange_id}/modules", queryparams), module, headers, options)
   end
@@ -164,7 +164,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Integer of new exchange, or nil
   """
-  @spec create_module!(pid, String.t, Map, Map, List, List) :: term | nil
+  @spec create_module!(pid, String.t, map, map, list, list) :: term | nil
   def create_module!(api \\ ManagerApi.get_api, exchange_id, module, queryparams \\ %{}, headers \\ [], options \\ []) do
     response = create_module(api, exchange_id, module, queryparams, headers, options)
     if response.success? do
@@ -194,7 +194,7 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Returns the OpenAperture.ManagerApi.Response struct.
   """
-  @spec delete_module(pid, String.t, String.t, Map, List, List) :: term
+  @spec delete_module(pid, String.t, String.t, map, list, list) :: term
   def delete_module(api \\ ManagerApi.get_api, exchange_id, hostname, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete(api, get_path("messaging/exchanges/#{exchange_id}/modules/#{hostname}", queryparams), headers, options)
   end
@@ -219,8 +219,8 @@ defmodule OpenAperture.ManagerApi.MessagingExchangeModule do
 
   Boolean
   """
-  @spec delete_module!(pid, String.t,  String.t, Map, List, List) :: term
+  @spec delete_module!(pid, String.t,  String.t, map, list, list) :: term
   def delete_module!(api \\ ManagerApi.get_api, exchange_id, hostname, queryparams \\ %{}, headers \\ [], options \\ []) do
     delete_module(api, exchange_id, hostname, queryparams, headers, options).success?
-  end  
+  end
 end
