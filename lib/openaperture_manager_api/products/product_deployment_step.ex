@@ -19,6 +19,21 @@ defmodule OpenAperture.ManagerApi.ProductDeploymentStep do
     end
   end
 
+  @spec get_step(pid, String.t, String.t, String.t) :: Response.t
+  def get_step(api \\ ManagerApi.get_api, product_name, deployment_id, step_id) do
+    get(api, get_path("products/#{product_name}/deployments/#{deployment_id}/steps/#{step_id}"))
+  end
+
+  @spec get_step!(pid, String.t, String.t, String.t) :: String.t | nil
+  def get_step!(api \\ ManagerApi.get_api, product_name, deployment_id, step_id) do
+    response = get_step(api, product_name, deployment_id, step_id)
+    if response.success? do
+      Response.extract_identifier_from_location_header(response)
+    else
+      nil
+    end
+  end
+
   @spec create_step(pid, String.t, String.t) :: Response.t
   def create_step(api \\ ManagerApi.get_api, product_name, deployment_id, step) do
     post(api, get_path("products/#{product_name}/deployments/#{deployment_id}/steps"), step)
