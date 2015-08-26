@@ -4,3 +4,4 @@ erl_crash.dump
 *.ez
 manager_api.sublime-workspace
 doc/
+.DS_Store
